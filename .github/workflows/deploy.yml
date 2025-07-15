@@ -30,18 +30,61 @@ jobs:
       with:
         node-version: '18'
         
-    - name: Inject API Keys into Config
+    - name: Check GitHub Secrets
       run: |
-        # Replace placeholders with actual API keys from GitHub Secrets
-        sed -i "s/{{GEMINI_EMBEDDING_API_KEY}}/${{ secrets.GEMINI_EMBEDDING_API_KEY }}/g" config.js
-        sed -i "s/{{GEMINI_GENERATION_API_KEY}}/${{ secrets.GEMINI_GENERATION_API_KEY }}/g" config.js
+        echo "🔍 Checking if GitHub Secrets are configured..."
+        if [ -z "${{ secrets.GEMINI_EMBEDDING_API_KEY }}" ]; then
+          echo "❌ GEMINI_EMBEDDING_API_KEY secret not found"
+        else
+          echo "✅ GEMINI_EMBEDDING_API_KEY secret found"
+        fi
+        
+        if [ -z "${{ secrets.GEMINI_GENERATION_API_KEY }}" ]; then
+          echo "❌ GEMINI_GENERATION_API_KEY secret not found"
+        else
+          echo "✅ GEMINI_GENERATION_API_KEY secret found"
+        fi
+        
+    - name: Inject API Keys into Config
+      env:
+        GEMINI_EMBEDDING_API_KEY: ${{ secrets.GEMINI_EMBEDDING_API_KEY }}
+        GEMINI_GENERATION_API_KEY: ${{ secrets.GEMINI_GENERATION_API_KEY }}
+      run: |
+        # Check if secrets are available
+        if [ -z "$GEMINI_EMBEDDING_API_KEY" ] || [ -z "$GEMINI_GENERATION_API_KEY" ]; then
+          echo "❌ Error: GitHub Secrets not configured!"
+          echo ""
+          echo "📋 To fix this:"
+          echo "1. Go to: https://github.com/${{ github.repository }}/settings/secrets/actions"
+          echo "2. Click 'New repository secret'"
+          echo "3. Add these two secrets:"
+          echo "   - Name: GEMINI_EMBEDDING_API_KEY"
+          echo "   - Name: GEMINI_GENERATION_API_KEY"
+          echo "4. Re-run this workflow"
+          echo ""
+          echo "🔗 GitHub Secrets Documentation:"
+          echo "https://docs.github.com/en/actions/security-guides/encrypted-secrets"
+          exit 1
+        fi
+        
+        # Show config before replacement (masked)
+        echo "🔍 Config before replacement:"
+        head -15 config.js
+        
+        # Replace placeholders with actual API keys using environment variables
+        sed -i "s/{{GEMINI_EMBEDDING_API_KEY}}/$GEMINI_EMBEDDING_API_KEY/g" config.js
+        sed -i "s/{{GEMINI_GENERATION_API_KEY}}/$GEMINI_GENERATION_API_KEY/g" config.js
         
         # Verify keys were injected (without showing the actual keys)
-        if grep -q "{{" config.js; then
-          echo "❌ Error: API key placeholders were not replaced"
+        if grep -q "{{.*}}" config.js; then
+          echo "❌ Error: Some placeholders were not replaced"
+          echo "Remaining placeholders:"
+          grep "{{.*}}" config.js || true
           exit 1
         else
           echo "✅ API keys successfully injected"
+          echo "🔍 Config after replacement (first 15 lines):"
+          head -15 config.js | sed 's/AIza[^'"'"']*/[MASKED_API_KEY]/g'
         fi
         
     - name: Setup Pages
