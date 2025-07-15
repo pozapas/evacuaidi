@@ -1,0 +1,57 @@
+name: Deploy to GitHub Pages with Secure API Keys
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Inject API Keys into Config
+      run: |
+        # Replace placeholders with actual API keys from GitHub Secrets
+        sed -i "s/{{GEMINI_EMBEDDING_API_KEY}}/${{ secrets.GEMINI_EMBEDDING_API_KEY }}/g" config.js
+        sed -i "s/{{GEMINI_GENERATION_API_KEY}}/${{ secrets.GEMINI_GENERATION_API_KEY }}/g" config.js
+        
+        # Verify keys were injected (without showing the actual keys)
+        if grep -q "{{" config.js; then
+          echo "❌ Error: API key placeholders were not replaced"
+          exit 1
+        else
+          echo "✅ API keys successfully injected"
+        fi
+        
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+      
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: '.'
+        
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4

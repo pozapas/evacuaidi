@@ -35,9 +35,26 @@ This dissertation addresses critical gaps in evacuation science through four int
 
 ## ⚙️ Setup & Configuration
 
-### For GitHub Pages Deployment (Current Setup)
+### For GitHub Pages Deployment (Secure Method)
 
-The site is configured to work automatically on GitHub Pages with API keys in `config.js`. No additional setup required for the live demo.
+The site uses GitHub Secrets to inject API keys securely during deployment. Follow these steps:
+
+1. **Go to your GitHub repository settings**:
+   - Navigate to `https://github.com/pozapas/evacuaidi-presentation/settings/secrets/actions`
+
+2. **Add Repository Secrets**:
+   - Click "New repository secret"
+   - Add these two secrets:
+     - Name: `GEMINI_EMBEDDING_API_KEY`, Value: [Your Gemini embedding API key]
+     - Name: `GEMINI_GENERATION_API_KEY`, Value: [Your Gemini generation API key]
+
+3. **Enable GitHub Pages**:
+   - Go to Settings → Pages
+   - Set Source to "GitHub Actions"
+
+4. **Deploy**:
+   - Push to main branch or manually trigger the "Deploy to GitHub Pages" workflow
+   - The workflow will inject your API keys securely during build
 
 ### For Local Development
 
@@ -49,7 +66,16 @@ The site is configured to work automatically on GitHub Pages with API keys in `c
 
 2. **Configure API Keys** (Choose one method):
 
-   **Method A: Environment File (Recommended)**
+   **Method A: Local Config File (Recommended)**
+   ```bash
+   # Copy the example config
+   cp config.local.example.js config.local.js
+   
+   # Edit config.local.js and add your Google Gemini API keys
+   # This file is git-ignored for security
+   ```
+
+   **Method B: Environment File**
    ```bash
    # Copy the example environment file
    cp .env.example .env
@@ -57,15 +83,6 @@ The site is configured to work automatically on GitHub Pages with API keys in `c
    # Edit .env and add your Google Gemini API keys
    GEMINI_EMBEDDING_API_KEY=your_embedding_api_key_here
    GEMINI_GENERATION_API_KEY=your_generation_api_key_here
-   ```
-
-   **Method B: Config File**
-   ```javascript
-   // Edit config.js and update the API keys
-   window.APP_CONFIG = {
-       GEMINI_EMBEDDING_API_KEY: 'your_embedding_api_key_here',
-       GEMINI_GENERATION_API_KEY: 'your_generation_api_key_here'
-   };
    ```
 
 3. **Get Google Gemini API Keys**

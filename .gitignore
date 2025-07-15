@@ -2,6 +2,6 @@
 .env
 
 # Local development configuration (may contain API keys)
-config.js
+config.local.js
 
 

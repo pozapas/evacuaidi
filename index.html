@@ -933,6 +933,21 @@
 
 <!-- Load Environment Configuration -->
 <script src="config.js"></script>
+<script>
+// For local development, try to load local config if available
+if (window.location.protocol === 'file:' || 
+    window.location.hostname === 'localhost' || 
+    window.location.hostname === '127.0.0.1') {
+    
+    // Try to load local development config
+    const script = document.createElement('script');
+    script.src = 'config.local.js';
+    script.onerror = function() {
+        console.log('Local config not found - using .env or default config');
+    };
+    document.head.appendChild(script);
+}
+</script>
 <script src="env-config.js"></script>
 
 <script>
