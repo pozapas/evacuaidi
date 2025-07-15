@@ -6,10 +6,18 @@ class EnvConfig {
         this.loaded = false;
     }
 
-    // Simple .env file parser (for client-side use)
+    // Load environment configuration
     async loadEnv() {
         try {
-            // Try to fetch the .env file
+            // For GitHub Pages, always use APP_CONFIG fallback
+            if (window.location.hostname === 'pozapas.github.io' || 
+                window.location.hostname.includes('github.io')) {
+                console.log('GitHub Pages detected - using config.js settings');
+                this.loadFromAppConfig();
+                return;
+            }
+            
+            // Try to fetch the .env file (for local development)
             const response = await fetch('./.env');
             
             // Check if the response is successful
@@ -48,23 +56,25 @@ class EnvConfig {
                 throw new Error('No valid key=value pairs found in .env file');
             }
             
-            console.log(`Successfully loaded ${keyCount} environment variables`);
+            console.log(`Successfully loaded ${keyCount} environment variables from .env`);
             this.loaded = true;
         } catch (error) {
-            console.error('Error loading environment configuration:', error);
-            console.warn('Falling back to default configuration...');
-            console.warn('Please ensure .env file exists and is properly formatted.');
-            console.warn('See .env.example for the expected format.');
-            console.warn('Or configure API keys in config.js for local development.');
+            console.warn('Could not load .env file:', error.message);
+            console.log('Falling back to config.js configuration...');
+            this.loadFromAppConfig();
+        }
+    }
+    
+    // Load from APP_CONFIG fallback
+    loadFromAppConfig() {
+        if (window.APP_CONFIG && window.APP_CONFIG.hasKeys()) {
+            console.log('Using configuration from config.js');
+            this.config['GEMINI_EMBEDDING_API_KEY'] = window.APP_CONFIG.get('GEMINI_EMBEDDING_API_KEY');
+            this.config['GEMINI_GENERATION_API_KEY'] = window.APP_CONFIG.get('GEMINI_GENERATION_API_KEY');
+            this.loaded = true;
+        } else {
+            console.error('No valid configuration found in config.js');
             this.loaded = false;
-            
-            // Try fallback to APP_CONFIG if available
-            if (window.APP_CONFIG && window.APP_CONFIG.hasKeys()) {
-                console.log('Using fallback configuration from config.js');
-                this.config['GEMINI_EMBEDDING_API_KEY'] = window.APP_CONFIG.get('GEMINI_EMBEDDING_API_KEY');
-                this.config['GEMINI_GENERATION_API_KEY'] = window.APP_CONFIG.get('GEMINI_GENERATION_API_KEY');
-                this.loaded = true;
-            }
         }
     }
 

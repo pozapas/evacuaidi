@@ -29,9 +29,83 @@ This dissertation addresses critical gaps in evacuation science through four int
 ## 🛠 Technology Stack
 
 - HTML5/CSS3 with Tailwind CSS
-- Vanilla JavaScript
-- Responsive design
-- Interactive plot modals
+- Vanilla JavaScript with RAG-based AI chat
+- Google Gemini API for dissertation Q&A
+- Responsive design with interactive plot modals
+
+## ⚙️ Setup & Configuration
+
+### For GitHub Pages Deployment (Current Setup)
+
+The site is configured to work automatically on GitHub Pages with API keys in `config.js`. No additional setup required for the live demo.
+
+### For Local Development
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/pozapas/evacuaidi-presentation.git
+   cd evacuaidi-presentation
+   ```
+
+2. **Configure API Keys** (Choose one method):
+
+   **Method A: Environment File (Recommended)**
+   ```bash
+   # Copy the example environment file
+   cp .env.example .env
+   
+   # Edit .env and add your Google Gemini API keys
+   GEMINI_EMBEDDING_API_KEY=your_embedding_api_key_here
+   GEMINI_GENERATION_API_KEY=your_generation_api_key_here
+   ```
+
+   **Method B: Config File**
+   ```javascript
+   // Edit config.js and update the API keys
+   window.APP_CONFIG = {
+       GEMINI_EMBEDDING_API_KEY: 'your_embedding_api_key_here',
+       GEMINI_GENERATION_API_KEY: 'your_generation_api_key_here'
+   };
+   ```
+
+3. **Get Google Gemini API Keys**
+   - Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
+   - Create a new API key
+   - You need both embedding and generation capabilities
+
+4. **Serve the site locally**
+   ```bash
+   # Using Python
+   python -m http.server 8000
+   
+   # Using Node.js
+   npx serve .
+   
+   # Using PHP
+   php -S localhost:8000
+   ```
+
+5. **Open in browser**: `http://localhost:8000`
+
+## 🤖 AI Chat Feature
+
+The site includes an AI research assistant that can answer questions about the dissertation:
+
+- **RAG-based search**: Uses semantic embeddings to find relevant dissertation content
+- **Context-aware responses**: Provides specific data and findings from the research
+- **Interactive Q&A**: Ask about methodology, findings, implications, and technical details
+
+### Sample Questions
+- "What are the main research contributions of EvacuAIDi?"
+- "How much does AI guidance improve evacuation times?"
+- "What are the benefits for people with disabilities?"
+- "Explain the DiSFM-GS model and its validation"
+
+## 🔒 Security Considerations
+
+- **API Keys**: For production use, consider implementing a backend proxy to hide API keys
+- **Rate Limiting**: Google Gemini API has usage limits
+- **CORS**: Current setup works for client-side only applications
 
 ## 📧 Contact
 
