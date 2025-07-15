@@ -8,10 +8,10 @@ window.EVACUAIDI_CONFIG = {
 };
 
 window.APP_CONFIG = {
-    // API keys will be injected during build process for security
-    // Do not commit actual API keys to this file
-    GEMINI_EMBEDDING_API_KEY: '{{GEMINI_EMBEDDING_API_KEY}}',
-    GEMINI_GENERATION_API_KEY: '{{GEMINI_GENERATION_API_KEY}}',
+    // API keys configuration for GitHub Pages
+    // Note: For security, consider using a backend service for production
+    GEMINI_EMBEDDING_API_KEY: 'AIzaSyA72CsBj8MS9_KoG6ibXdBpv_Y5YMLpn3w',
+    GEMINI_GENERATION_API_KEY: 'AIzaSyAlUCTBXfBKz2GTAd_CGhkm00Oh7UXBsrQ',
     
     // Environment detection
     isDevelopment: window.location.protocol === 'file:' || 
@@ -27,10 +27,6 @@ window.APP_CONFIG = {
     
     // Check if keys are configured
     hasKeys() {
-        const embeddingKey = this.GEMINI_EMBEDDING_API_KEY;
-        const generationKey = this.GEMINI_GENERATION_API_KEY;
-        return !!(embeddingKey && generationKey && 
-                  !embeddingKey.includes('{{') && 
-                  !generationKey.includes('{{'));
+        return !!(this.GEMINI_EMBEDDING_API_KEY && this.GEMINI_GENERATION_API_KEY);
     }
 };
