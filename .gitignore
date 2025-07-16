@@ -4,4 +4,7 @@
 # Local development configuration (may contain API keys)
 config.local.js
 
+# Secure API key loader (contains actual keys)
+keys.js
+
 

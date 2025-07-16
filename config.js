@@ -8,10 +8,10 @@ window.EVACUAIDI_CONFIG = {
 };
 
 window.APP_CONFIG = {
-    // API keys configuration for GitHub Pages
-    // Note: For security, consider using a backend service for production
-    GEMINI_EMBEDDING_API_KEY: 'AIzaSyA72CsBj8MS9_KoG6ibXdBpv_Y5YMLpn3w',
-    GEMINI_GENERATION_API_KEY: 'AIzaSyAlUCTBXfBKz2GTAd_CGhkm00Oh7UXBsrQ',
+    // API keys are loaded dynamically for security
+    // Actual keys are not stored in this public repository
+    GEMINI_EMBEDDING_API_KEY: '',
+    GEMINI_GENERATION_API_KEY: '',
     
     // Environment detection
     isDevelopment: window.location.protocol === 'file:' || 
@@ -28,5 +28,11 @@ window.APP_CONFIG = {
     // Check if keys are configured
     hasKeys() {
         return !!(this.GEMINI_EMBEDDING_API_KEY && this.GEMINI_GENERATION_API_KEY);
+    },
+    
+    // Load API keys securely (called from external source)
+    loadKeys(embeddingKey, generationKey) {
+        this.GEMINI_EMBEDDING_API_KEY = embeddingKey;
+        this.GEMINI_GENERATION_API_KEY = generationKey;
     }
 };
