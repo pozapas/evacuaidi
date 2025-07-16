@@ -10,31 +10,6 @@ This is the presentation website for the PhD dissertation "EvacuAIDi: An AI-Driv
 
 Visit the live presentation: [https://pozapas.github.io/evacuaidi-presentation/](https://pozapas.github.io/evacuaidi-presentation/)
 
-## 🤖 AI Chat Feature
-
-The website includes an interactive AI research assistant that can answer questions about the dissertation. The AI uses:
-
-- **RAG (Retrieval-Augmented Generation)** for accurate, context-aware responses
-- **Google Gemini API** for embeddings and text generation
-- **Secure backend proxy** to protect API keys from users
-
-### 🔧 Deployment Options
-
-#### For GitHub Pages (Secure - Recommended)
-1. **Deploy backend to Vercel** (keeps API keys secure)
-2. **See [DEPLOYMENT.md](./DEPLOYMENT.md)** for complete step-by-step guide
-3. **Benefits:** API keys protected, free hosting, professional setup
-
-#### For Local Development Only
-1. **Update `api-config.js`** with your API keys
-2. **Open `index.html`** in browser
-3. **Warning:** Never commit API keys to public repositories
-
-### 🔒 Security Notes
-
-- **GitHub Pages Version:** Uses secure backend proxy (API keys hidden)
-- **Local Development:** API keys visible in code (development only)
-- **Production Ready:** Secure deployment protects your API usage and costs
 
 ## �🔬 Research Overview
 
