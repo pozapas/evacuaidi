@@ -4,10 +4,24 @@ class EnvConfig {
     constructor() {
         this.config = {};
         this.loaded = false;
+        
+        // Check if we're in the production environment with directly injected variables
+        // This happens when GitHub Actions injects the environment variables during build
+        if (typeof this.config.GEMINI_EMBEDDING_API_KEY === 'string' && 
+            typeof this.config.GEMINI_GENERATION_API_KEY === 'string') {
+            console.log('Production environment detected with pre-injected API keys');
+            this.loaded = true;
+        }
     }
 
     // Load environment configuration
     async loadEnv() {
+        // If already loaded with injected variables, don't try to load again
+        if (this.loaded && Object.keys(this.config).length > 0) {
+            console.log('Environment already loaded with injected variables');
+            return;
+        }
+        
         try {
             // For GitHub Pages, always use APP_CONFIG fallback
             if (window.location.hostname === 'pozapas.github.io' || 

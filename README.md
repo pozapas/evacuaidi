@@ -10,7 +10,7 @@ This is the presentation website for the PhD dissertation "EvacuAIDi: An AI-Driv
 
 Visit the live presentation: [https://pozapas.github.io/evacuaidi-presentation/](https://pozapas.github.io/evacuaidi-presentation/)
 
-## 🔬 Research Overview
+## �🔬 Research Overview
 
 This dissertation addresses critical gaps in evacuation science through four interconnected research contributions:
 

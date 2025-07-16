@@ -1,0 +1,76 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Create env-config.js with API keys
+        env:
+          GEMINI_EMBEDDING_API_KEY: ${{ secrets.GEMINI_EMBEDDING_API_KEY }}
+          GEMINI_GENERATION_API_KEY: ${{ secrets.GEMINI_GENERATION_API_KEY }}
+        run: |
+          echo "// Environment Configuration Loader - Generated during build" > env-config.js
+          echo "class EnvConfig {" >> env-config.js
+          echo "    constructor() {" >> env-config.js
+          echo "        this.config = {" >> env-config.js
+          echo "            GEMINI_EMBEDDING_API_KEY: \"$GEMINI_EMBEDDING_API_KEY\"," >> env-config.js
+          echo "            GEMINI_GENERATION_API_KEY: \"$GEMINI_GENERATION_API_KEY\"" >> env-config.js
+          echo "        };" >> env-config.js
+          echo "        this.loaded = true;" >> env-config.js
+          echo "    }" >> env-config.js
+          echo "" >> env-config.js
+          echo "    // Load environment configuration (minimal in production)" >> env-config.js
+          echo "    async loadEnv() {" >> env-config.js
+          echo "        // In production, already loaded with environment variables" >> env-config.js
+          echo "        // No additional loading required" >> env-config.js
+          echo "        console.log('EnvConfig: Production environment loaded');" >> env-config.js
+          echo "    }" >> env-config.js
+          echo "    " >> env-config.js
+          echo "    // Get environment variable" >> env-config.js
+          echo "    get(key) {" >> env-config.js
+          echo "        return this.config[key] || null;" >> env-config.js
+          echo "    }" >> env-config.js
+          echo "" >> env-config.js
+          echo "    // Check if environment is loaded" >> env-config.js
+          echo "    isLoaded() {" >> env-config.js
+          echo "        return this.loaded;" >> env-config.js
+          echo "    }" >> env-config.js
+          echo "    " >> env-config.js
+          echo "    // Check if required API keys are present" >> env-config.js
+          echo "    hasRequiredKeys() {" >> env-config.js
+          echo "        const embedding = this.get('GEMINI_EMBEDDING_API_KEY');" >> env-config.js
+          echo "        const generation = this.get('GEMINI_GENERATION_API_KEY');" >> env-config.js
+          echo "        return !!(embedding && generation);" >> env-config.js
+          echo "    }" >> env-config.js
+          echo "    " >> env-config.js
+          echo "    // Get missing keys for debugging" >> env-config.js
+          echo "    getMissingKeys() {" >> env-config.js
+          echo "        const missing = [];" >> env-config.js
+          echo "        if (!this.get('GEMINI_EMBEDDING_API_KEY')) missing.push('GEMINI_EMBEDDING_API_KEY');" >> env-config.js
+          echo "        if (!this.get('GEMINI_GENERATION_API_KEY')) missing.push('GEMINI_GENERATION_API_KEY');" >> env-config.js
+          echo "        return missing;" >> env-config.js
+          echo "    }" >> env-config.js
+          echo "}" >> env-config.js
+          echo "" >> env-config.js
+          echo "// Export for use in main application" >> env-config.js
+          echo "window.EnvConfig = EnvConfig;" >> env-config.js
+
+      - name: Remove keys.js
+        run: rm -f keys.js
+
+      - name: Create empty keys.js to prevent load errors
+        run: echo "// API keys are injected via GitHub secrets" > keys.js
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4.4.1
+        with:
+          branch: gh-pages
+          folder: .

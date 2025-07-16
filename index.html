@@ -933,35 +933,9 @@
 
 <!-- Load Environment Configuration -->
 <script src="config.js"></script>
-
-<!-- Load API Keys Securely -->
-<script>
-// Try to load secure keys file (not tracked in git)
-(function() {
-    const script = document.createElement('script');
-    script.src = 'keys.js';
-    script.onerror = function() {
-        console.log('Secure keys file not found - AI features may be limited');
-        
-        // For local development, try to load local config if available
-        if (window.location.protocol === 'file:' || 
-            window.location.hostname === 'localhost' || 
-            window.location.hostname === '127.0.0.1') {
-            
-            const localScript = document.createElement('script');
-            localScript.src = 'config.local.js';
-            localScript.onerror = function() {
-                console.log('Local config not found - using .env or default config');
-            };
-            document.head.appendChild(localScript);
-        }
-    };
-    document.head.appendChild(script);
-})();
-</script>
-
 <script src="env-config.js"></script>
 
+<!-- Initialize Chat System -->
 <script>
 // Plot modal functionality
 function openPlotModal(imgElement) {
