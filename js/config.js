@@ -11,8 +11,8 @@ const CONFIG = {
     
     // Model configuration
     MODEL_CONFIG: {
-        name: 'gemini-1.5-flash',
-        embeddingModel: 'embedding-001',
+        name: 'gemma-3-27b-it',
+        embeddingModel: 'gemini-embedding-001',
         temperature: 0.7,
         maxTokens: 1000,
         topP: 0.9
@@ -165,13 +165,13 @@ class LocalApiClient {
     
     async generateEmbedding(text) {
         try {
-            const response = await fetch(`${this.baseUrl}/models/embedding-001:embedContent?key=${this.apiKey}`, {
+            const response = await fetch(`${this.baseUrl}/models/gemini-embedding-001:embedContent?key=${this.apiKey}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    model: "models/embedding-001",
+                    model: "models/gemini-embedding-001",
                     content: {
                         parts: [{ text: text }]
                     }

@@ -26,13 +26,13 @@ export default async function handler(req, res) {
 
         if (action === 'embedding') {
             // Generate embedding for RAG using correct Gemini embedding model
-            const response = await fetch(`${baseUrl}/models/embedding-001:embedContent?key=${apiKey}`, {
+            const response = await fetch(`${baseUrl}/models/gemini-embedding-001:embedContent?key=${apiKey}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    model: "models/embedding-001",
+                    model: "models/gemini-embedding-001",
                     content: {
                         parts: [{ text: text }]
                     }
@@ -52,7 +52,7 @@ export default async function handler(req, res) {
             // Generate chat response
             const prompt = buildPrompt(message, context);
 
-            const response = await fetch(`${baseUrl}/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+            const response = await fetch(`${baseUrl}/models/gemma-3-27b-it:generateContent?key=${apiKey}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
