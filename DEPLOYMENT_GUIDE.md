@@ -49,6 +49,8 @@ GEMINI_GENERATION_API_KEY=your_gemini_api_key_here
 
 ## Troubleshooting
 
+## Troubleshooting
+
 ### If API Test Fails:
 
 1. **Check Environment Variables:**
@@ -68,7 +70,14 @@ GEMINI_GENERATION_API_KEY=your_gemini_api_key_here
    }
    ```
 
-3. **If Keys Are Missing:**
+3. **If You Get 404 NOT_FOUND:**
+   - The API routes are not being recognized by Vercel
+   - Ensure you have `/api/package.json` with `{"type": "module"}`
+   - Check that all API files use `export default` syntax
+   - Verify `vercel.json` includes the API routes configuration
+   - Redeploy the project completely
+
+4. **If Keys Are Missing:**
    - Go to Vercel Dashboard > Your Project > Settings > Environment Variables
    - Add both `GEMINI_EMBEDDING_API_KEY` and `GEMINI_GENERATION_API_KEY`
    - Redeploy the project
@@ -80,9 +89,35 @@ GEMINI_GENERATION_API_KEY=your_gemini_api_key_here
    - Look for error messages in the Console tab
 
 2. **Common Issues:**
+   - `Cannot read properties of undefined (reading 'getApiUrl')` - Configuration not loaded
+   - `404 NOT_FOUND` - API routes not deployed properly
    - API key quota exceeded
    - Invalid API key format
-   - Network connectivity issues
+
+3. **Debug Using Test Pages:**
+   - API Test: `https://your-project.vercel.app/test-api.html`
+   - Image Test: `https://your-project.vercel.app/test-images.html`
+   - Both pages test functionality independently
+
+### If Images Don't Load:
+
+1. **Check Image Test Page:**
+   - Visit: `https://your-project.vercel.app/test-images.html`
+   - This shows which specific images are failing to load
+
+2. **Common Issues:**
+   - Files with spaces in names (fixed: renamed to `dissertation_structure.png`)
+   - Case sensitivity issues in file paths
+   - Images not included in deployment
+   - Network path issues
+
+3. **Verify Files Are Deployed:**
+   - Check: `https://your-project.vercel.app/Plots/1/dissertation_structure.png`
+   - Should display the image directly
+
+4. **Check Browser Console:**
+   - Look for 404 errors for image files
+   - Verify the full URLs being attempted
 
 ### If Embeddings Fail:
 
