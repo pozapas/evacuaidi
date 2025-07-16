@@ -8,33 +8,7 @@ This is the presentation website for the PhD dissertation "EvacuAIDi: An AI-Driv
 
 ## 🚀 Live Demo
 
-Visit the live presentation: [https://pozapas.github.io/evacuaidi-presentation/](https://pozapas.github.io/evacuaidi-presentation/)
-
-## 🔧 Deployment Guide
-
-### Local Development
-
-1. Clone the repository
-2. Create a `.env` file in the root directory with your API keys:
-   ```
-   GEMINI_EMBEDDING_API_KEY=your_embedding_api_key
-   GEMINI_GENERATION_API_KEY=your_generation_api_key
-   ```
-3. Install dependencies: `npm install`
-4. Start the server: `node server.js`
-5. Open `index.html` in your browser
-
-### Deploying on Render.com
-
-1. Create a new Web Service on Render.com
-2. Connect your GitHub repository
-3. Configure the build settings:
-   - Build Command: `npm install`
-   - Start Command: `node server.js`
-4. Add environment variables:
-   - `GEMINI_EMBEDDING_API_KEY`: Your Google AI Gemini embedding API key
-   - `GEMINI_GENERATION_API_KEY`: Your Google AI Gemini generation API key
-5. Deploy your application
+Visit the live presentation: [https://evacuaidi-presentation.onrender.com/](https://evacuaidi-presentation.onrender.com/)
 
 ## 🔬 Research Overview
 
@@ -55,7 +29,7 @@ This dissertation addresses critical gaps in evacuation science through four int
 ## 📧 Contact
 
 **Amir Rafe**  
-PhD Candidate, Civil & Environmental Engineering  
+Civil & Environmental Engineering  
 Utah State University  
 Email: amir.rafe@usu.edu  
 Advisor: Dr. Patrick Singleton
