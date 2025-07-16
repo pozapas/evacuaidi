@@ -7,32 +7,19 @@ window.EVACUAIDI_CONFIG = {
     department: "Civil & Environmental Engineering"
 };
 
+// Simplified configuration - API keys are handled by Vercel serverless functions
 window.APP_CONFIG = {
-    // API keys are loaded dynamically for security
-    // Actual keys are not stored in this public repository
-    GEMINI_EMBEDDING_API_KEY: '',
-    GEMINI_GENERATION_API_KEY: '',
-    
     // Environment detection
     isDevelopment: window.location.protocol === 'file:' || 
                    window.location.hostname === 'localhost' || 
                    window.location.hostname === '127.0.0.1',
     
-    isProduction: window.location.hostname === 'pozapas.github.io',
+    isProduction: window.location.hostname.includes('vercel.app') || 
+                  window.location.hostname === 'pozapas.github.io',
     
-    // Get configuration value with fallback
-    get(key) {
-        return this[key] || '';
-    },
-    
-    // Check if keys are configured
-    hasKeys() {
-        return !!(this.GEMINI_EMBEDDING_API_KEY && this.GEMINI_GENERATION_API_KEY);
-    },
-    
-    // Load API keys securely (called from external source)
-    loadKeys(embeddingKey, generationKey) {
-        this.GEMINI_EMBEDDING_API_KEY = embeddingKey;
-        this.GEMINI_GENERATION_API_KEY = generationKey;
+    // API endpoints
+    getApiUrl(endpoint) {
+        const baseUrl = window.location.origin;
+        return `${baseUrl}/api/${endpoint}`;
     }
 };
