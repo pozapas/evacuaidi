@@ -18,16 +18,23 @@ class EnvConfig {
 
     // Determine backend URL based on environment
     getBackendUrl() {
-        // For production GitHub Pages, use Vercel serverless functions
-        if (window.location.hostname === 'pozapas.github.io' || 
-            window.location.hostname.includes('github.io')) {
-            return 'https://evacuaidi-backend.vercel.app'; // Replace with your Vercel deployment URL
+        // For Vercel deployment, use current domain with /api prefix
+        if (window.location.hostname.includes('vercel.app') || 
+            window.location.hostname === 'evacuaidi-presentation.vercel.app') {
+            return window.location.origin; // Use same domain for API calls
+        }
+        
+        // For custom domain deployment on Vercel
+        if (window.location.hostname !== 'localhost' && 
+            window.location.hostname !== '127.0.0.1' &&
+            !window.location.hostname.includes('github.io')) {
+            return window.location.origin; // Use same domain for API calls
         }
         
         // For local development, try local backend first
         if (window.location.hostname === 'localhost' || 
             window.location.hostname === '127.0.0.1') {
-            return 'http://localhost:3001'; // Local backend server
+            return window.location.origin; // Use same domain for local API calls
         }
         
         return null; // Fallback to direct API calls
