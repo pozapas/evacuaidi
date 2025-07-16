@@ -8,7 +8,7 @@ This is the presentation website for the PhD dissertation "EvacuAIDi: An AI-Driv
 
 ## 🚀 Live Demo
 
-Visit the live presentation: [https://evacuaidi-presentation.onrender.com/](https://evacuaidi-presentation.onrender.com/)
+Visit the live presentation: [https://evacuaidi.onrender.com](https://evacuaidi.onrender.com)
 
 ## 🔬 Research Overview
 
