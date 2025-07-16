@@ -1,8 +1,27 @@
 {
   "name": "evacuaidi-presentation",
   "version": "1.0.0",
-  "private": true,
+  "description": "EvacuAIDi: An AI-Driven, Causal-Informed Framework for Probabilistic and Disability-Inclusive Evacuation Guidance - Interactive Dissertation Presentation",
+  "main": "index.html",
   "scripts": {
-    "build": "echo 'No build step required'"
+    "dev": "vercel dev",
+    "build": "echo 'Static site - no build required'",
+    "deploy": "vercel --prod"
+  },
+  "keywords": [
+    "AI",
+    "evacuation",
+    "disability-inclusive",
+    "emergency-response",
+    "PhD-research",
+    "causal-inference"
+  ],
+  "author": "Amir Rafe",
+  "license": "MIT",
+  "devDependencies": {
+    "vercel": "^34.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

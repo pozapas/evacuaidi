@@ -8,11 +8,11 @@
     <meta name="author" content="Amir Rafe">
     <title>EvacuAIDi: An AI-Driven, Causal-Informed Framework for Probabilistic and Disability-Inclusive Evacuation Guidance</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/config.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script type="module" src="config.js"></script>
-    <script type="module" src="gemini.js"></script>
+
     
     <!-- Professional Academic Design System -->
     <style>
@@ -1601,9 +1601,6 @@ This comprehensive framework represents a significant advancement in evacuation 
             if (statusMessage) {
                 statusMessage.innerHTML += '<br><br><em>🔄 Initializing AI system...</em>';
             }
-
-            // Import Gemini API
-            const { geminiAPI } = await import('./gemini.js');
             
             // Initialize Gemini API
             const initialized = await geminiAPI.initialize();
@@ -1680,7 +1677,7 @@ This comprehensive framework represents a significant advancement in evacuation 
             
             let errorMessage;
             if (error.message.includes('API_KEY') || error.message.includes('your_api_key_here')) {
-                errorMessage = `I apologize, but the AI system is not properly configured. Please check your API key configuration in api-config-auto.js.
+                errorMessage = `I apologize, but the AI system is not properly configured.
 
 **Meanwhile, here are key findings from the EvacuAIDi research:**
 
