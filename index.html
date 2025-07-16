@@ -11,6 +11,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script type="module" src="config.js"></script>
+    <script type="module" src="gemini.js"></script>
     
     <!-- Professional Academic Design System -->
     <style>
@@ -931,9 +933,6 @@
     </div>
 </div>
 
-<!-- Load Configuration: Use auto switcher for environment detection -->
-<script src="api-config-secure.js"></script>
-
 <script>
 // Plot modal functionality
 function openPlotModal(imgElement) {
@@ -1585,7 +1584,7 @@ This comprehensive framework represents a significant advancement in evacuation 
             const welcomeMessage = document.querySelector('.chat-message p');
             if (welcomeMessage) {
                 if (error.message.includes('API_KEY') || error.message.includes('your_api_key_here')) {
-                    welcomeMessage.innerHTML += '<br><br><em style="color: #ef4444;">❌ Configuration Error: Please update your API keys in api-config-auto.js</em>';
+                    welcomeMessage.innerHTML += '<br><br><em style="color: #ef4444;">❌ Configuration Error</em>';
                 } else {
                     welcomeMessage.innerHTML += '<br><br><em style="color: #ef4444;">❌ Initialization failed. The AI assistant may not work properly.</em>';
                 }
@@ -1594,7 +1593,44 @@ This comprehensive framework represents a significant advancement in evacuation 
     }
 
     // Initialize RAG system on page load
-    initializeRAG();
+    async function initializeAI() {
+        try {
+            const statusMessage = document.querySelector('.chat-message p');
+            
+            // Show initializing message
+            if (statusMessage) {
+                statusMessage.innerHTML += '<br><br><em>🔄 Initializing AI system...</em>';
+            }
+
+            // Import Gemini API
+            const { geminiAPI } = await import('./gemini.js');
+            
+            // Initialize Gemini API
+            const initialized = await geminiAPI.initialize();
+            
+            if (!initialized) {
+                throw new Error('Failed to initialize Gemini API');
+            }
+
+            // Initialize RAG system
+            await initializeRAG();
+            
+            // Update status message
+            if (statusMessage) {
+                statusMessage.innerHTML += '<br><em>✅ AI system ready!</em>';
+            }
+            
+        } catch (error) {
+            console.error('Initialization error:', error);
+            const statusMessage = document.querySelector('.chat-message p');
+            if (statusMessage) {
+                statusMessage.innerHTML += `<br><br><em style="color: #ef4444;">❌ ${error.message}</em>`;
+            }
+        }
+    }
+
+    // Start initialization
+    initializeAI();
 
     const handleChat = async () => {
         const userMessage = chatInput.value.trim();

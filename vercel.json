@@ -1,23 +1,11 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "index.html",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "api/**/*.js",
-      "use": "@vercel/node"
-    }
-  ],
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
-    {
-      "src": "/Plots/(.*)",
-      "dest": "/Plots/$1"
-    }
-  ]
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ],
+  "env": {
+    "GEMINI_EMBEDDING_API_KEY": "@gemini_embedding_api_key",
+    "GEMINI_GENERATION_API_KEY": "@gemini_generation_api_key"
+  }
 }
