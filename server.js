@@ -5,6 +5,13 @@ const path = require('path');
 const fetch = require('node-fetch');
 require('dotenv').config();
 
+// Include Vercel specific configuration if it exists
+try {
+  require('./vercel');
+} catch (e) {
+  // Ignore if not exists
+}
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -26,6 +33,16 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
+
+// Detect if running on Vercel
+const isVercel = process.env.VERCEL === '1' || 
+                 process.env.VERCEL === 'true' || 
+                 process.env.IS_VERCEL === 'true' ||
+                 process.env.VERCEL_ENV !== undefined;
+                 
+if (isVercel) {
+  console.log('Vercel deployment detected');
+}
 
 // Proxy route for Gemini Embedding API
 app.post('/api/embedding', async (req, res) => {
@@ -140,8 +157,10 @@ app.get('/api/health', (req, res) => {
     status: 'ok', 
     message: 'EvacuAIDi API server is running',
     environment: process.env.NODE_ENV || 'development',
+    platform: isVercel ? 'Vercel' : (process.env.RENDER ? 'Render' : 'Other'),
     embeddings_api: GEMINI_EMBEDDING_API_KEY ? 'configured' : 'missing',
     generation_api: GEMINI_GENERATION_API_KEY ? 'configured' : 'missing',
+    vercel_env: process.env.VERCEL ? 'true' : 'false',
     server_time: new Date().toISOString()
   });
 });

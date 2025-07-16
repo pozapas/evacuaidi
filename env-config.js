@@ -22,12 +22,23 @@ class EnvConfig {
             // Detect deployment environment
             const isRenderDeploy = window.location.hostname.includes('render') || 
                                     window.location.hostname.includes('onrender.com');
+            const isVercelDeploy = window.location.hostname.includes('vercel') || 
+                                   window.location.hostname.includes('vercel.app');
             const isLocalhost = window.location.hostname === 'localhost' || 
                                 window.location.hostname === '127.0.0.1';
             
-            if (isRenderDeploy) {
-                console.log('Render.com deployment detected - using origin-prefixed paths');
-                // Ensure paths are absolute with origin for Render.com
+            // Log deployment environment for debugging
+            console.log('Deployment environment:', { 
+                hostname: window.location.hostname,
+                isRenderDeploy, 
+                isVercelDeploy, 
+                isLocalhost,
+                origin: window.location.origin
+            });
+            
+            // Ensure paths are absolute with origin for cloud deployments
+            if (isRenderDeploy || isVercelDeploy) {
+                console.log('Cloud deployment detected - using origin-prefixed paths');
                 Object.keys(this.apiEndpoints).forEach(key => {
                     if (!this.apiEndpoints[key].startsWith('http')) {
                         this.apiEndpoints[key] = window.location.origin + this.apiEndpoints[key];
@@ -35,8 +46,8 @@ class EnvConfig {
                 });
             }
             
-            // Try health check if local or in development mode
-            if (isLocalhost || !isRenderDeploy) {
+            // Try health check if local or if we need to validate API connection
+            if (isLocalhost || (!isRenderDeploy && !isVercelDeploy)) {
                 try {
                     const response = await fetch(this.apiEndpoints.health);
                     if (response.ok) {
@@ -53,10 +64,12 @@ class EnvConfig {
             return true;
         } catch (error) {
             console.error('Error establishing API connection:', error);
-            // For Render.com - continue even if health check fails
+            // For cloud deployments - continue even if health check fails
             if (window.location.hostname.includes('render') || 
-                window.location.hostname.includes('onrender.com')) {
-                console.log('Render.com deployment detected - continuing despite connection issues');
+                window.location.hostname.includes('onrender.com') ||
+                window.location.hostname.includes('vercel') ||
+                window.location.hostname.includes('vercel.app')) {
+                console.log('Cloud deployment detected - continuing despite connection issues');
                 this.loaded = true;
                 return true;
             }

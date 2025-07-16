@@ -1477,16 +1477,20 @@ This comprehensive framework represents a significant advancement in evacuation 
             const envConfig = new EnvConfig();
             const embeddingEndpoint = envConfig.get('embedding');
             
-            // For Render.com, ensure we have the full URL
+            // For cloud deployments, ensure we have the full URL
             let url = embeddingEndpoint;
-            if (window.location.hostname.includes('render') || 
-                window.location.hostname.includes('onrender.com')) {
-                // If we're on Render.com but the URL doesn't have the hostname, prepend it
-                if (!url.startsWith('http')) {
-                    url = window.location.origin + embeddingEndpoint;
-                    console.log('Using full URL for Render.com:', url);
-                }
+            const isCloudDeploy = window.location.hostname.includes('render') || 
+                window.location.hostname.includes('onrender.com') ||
+                window.location.hostname.includes('vercel') ||
+                window.location.hostname.includes('vercel.app');
+                
+            // If we're on cloud deployment but the URL doesn't have the hostname, prepend it
+            if (isCloudDeploy && !url.startsWith('http')) {
+                url = window.location.origin + embeddingEndpoint;
+                console.log(`Using full URL for cloud deployment: ${url}`);
             }
+            
+            console.log(`Making API request to: ${url} (${window.location.hostname})`);
             
             const response = await fetch(url, {
                 method: 'POST',
@@ -1496,8 +1500,24 @@ This comprehensive framework represents a significant advancement in evacuation 
             
             if (!response.ok) {
                 console.error(`API Error: ${response.status} - ${response.statusText}`);
-                const errorText = await response.text();
-                console.error("Error details:", errorText);
+                let errorText = '';
+                try {
+                    errorText = await response.text();
+                    console.error("Error details:", errorText);
+                } catch (e) {
+                    console.error("Could not read error response:", e);
+                }
+                
+                // For Vercel deployments, log extra diagnostic info
+                if (window.location.hostname.includes('vercel')) {
+                    console.log('Vercel diagnostic info:', {
+                        fullUrl: url,
+                        status: response.status,
+                        statusText: response.statusText,
+                        contentType: response.headers?.get('content-type'),
+                        error: errorText
+                    });
+                }
                 return null;
             }
             
@@ -1602,13 +1622,31 @@ This comprehensive framework represents a significant advancement in evacuation 
             dissertationChunks = chunkText(dissertationContent);
             console.log(`Created ${dissertationChunks.length} chunks for RAG system`);
             
+            // Log deployment information
+            const isVercelDeploy = window.location.hostname.includes('vercel') || 
+                                   window.location.hostname.includes('vercel.app');
+            const isRenderDeploy = window.location.hostname.includes('render') || 
+                                   window.location.hostname.includes('onrender.com');
+            
+            console.log('Deployment environment:', {
+                hostname: window.location.hostname,
+                isVercelDeploy,
+                isRenderDeploy,
+                origin: window.location.origin,
+                apiEndpoints: {
+                    embedding: envConfig.get('embedding'),
+                    generation: envConfig.get('generation'),
+                    health: envConfig.get('health')
+                }
+            });
+            
             // Test API connectivity before proceeding
             try {
                 const testEmbedding = await generateEmbedding("Test connectivity");
-                if (!testEmbedding && !window.location.hostname.includes('render')) {
+                if (!testEmbedding && !window.location.hostname.includes('render') && !isVercelDeploy) {
                     throw new Error("API connectivity test failed. Unable to generate embeddings.");
                 }
-                console.log("API connectivity test successful");
+                console.log("API connectivity test successful", testEmbedding ? "with embedding data" : "but no embedding returned");
             } catch (connectError) {
                 console.warn("API connectivity test failed, but continuing with limited functionality:", connectError.message);
                 // We'll continue with limited functionality - the chat will use server's fallback responses
@@ -1618,7 +1656,7 @@ This comprehensive framework represents a significant advancement in evacuation 
             chunkEmbeddings = [];
             
             // Determine how many chunks to process based on environment
-            const maxChunks = window.location.hostname.includes('render') ? 5 : 10;
+            const maxChunks = isRenderDeploy || isVercelDeploy ? 5 : 10;
             
             for (let i = 0; i < Math.min(dissertationChunks.length, maxChunks); i++) {
                 try {
@@ -1702,15 +1740,17 @@ This comprehensive framework represents a significant advancement in evacuation 
                 throw new Error('API endpoint not available');
             }
             
-            // For Render.com, ensure we have the full URL
+            // For cloud deployments, ensure we have the full URL
             let url = generationEndpoint;
-            if (window.location.hostname.includes('render') || 
-                window.location.hostname.includes('onrender.com')) {
-                // If we're on Render.com but the URL doesn't have the hostname, prepend it
-                if (!url.startsWith('http')) {
-                    url = window.location.origin + generationEndpoint;
-                    console.log('Using full URL for Render.com:', url);
-                }
+            const isCloudDeploy = window.location.hostname.includes('render') || 
+                window.location.hostname.includes('onrender.com') ||
+                window.location.hostname.includes('vercel') ||
+                window.location.hostname.includes('vercel.app');
+                
+            // If we're on cloud deployment but the URL doesn't have the hostname, prepend it
+            if (isCloudDeploy && !url.startsWith('http')) {
+                url = window.location.origin + generationEndpoint;
+                console.log(`Using full URL for cloud deployment: ${url}`);
             }
             
             console.log("API connection established, beginning response generation");
