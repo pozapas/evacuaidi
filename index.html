@@ -397,7 +397,7 @@
                                 </div>
                             </div>
                             <div class="bg-white rounded-2xl p-4 shadow-lg">
-                                <img src="Plots/1/Dissertation - Structure.png" alt="Dissertation Structure" class="w-full h-auto rounded-lg plot-clickable" onclick="openPlotModal(this)">
+                                <img src="Plots/1/dissertation_structure.png" alt="Dissertation Structure" class="w-full h-auto rounded-lg plot-clickable" onclick="openPlotModal(this)">
                                 <p class="text-xs text-gray-500 mt-2 text-center">Research Framework Structure</p>
                             </div>
                         </div>
@@ -1475,6 +1475,11 @@ This comprehensive framework represents a significant advancement in evacuation 
     // Generate embeddings using backend API
     async function generateEmbedding(text) {
         try {
+            // Safety check for APP_CONFIG
+            if (!window.APP_CONFIG || typeof window.APP_CONFIG.getApiUrl !== 'function') {
+                throw new Error('APP_CONFIG not loaded properly');
+            }
+            
             const apiUrl = window.APP_CONFIG.getApiUrl('embeddings');
             console.log('Making embedding request to:', apiUrl);
             
@@ -1551,6 +1556,11 @@ This comprehensive framework represents a significant advancement in evacuation 
         try {
             console.log('Initializing RAG system...');
             
+            // Safety check for APP_CONFIG
+            if (!window.APP_CONFIG || typeof window.APP_CONFIG.getApiUrl !== 'function') {
+                throw new Error('APP_CONFIG not loaded properly. Please refresh the page.');
+            }
+            
             // Test the backend connectivity
             const testUrl = window.APP_CONFIG.getApiUrl('test');
             console.log('Testing API connectivity at:', testUrl);
@@ -1626,8 +1636,20 @@ This comprehensive framework represents a significant advancement in evacuation 
 
     // Initialize RAG system on page load
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('Document ready, initializing RAG...');
-        setTimeout(initializeRAG, 500); // Small delay to ensure all scripts load
+        console.log('Document ready, checking configuration...');
+        
+        // Wait for configuration to load, then initialize
+        function waitForConfig() {
+            if (window.APP_CONFIG && typeof window.APP_CONFIG.getApiUrl === 'function') {
+                console.log('Configuration loaded, initializing RAG...');
+                setTimeout(initializeRAG, 500);
+            } else {
+                console.log('Waiting for APP_CONFIG to load...');
+                setTimeout(waitForConfig, 100); // Check again in 100ms
+            }
+        }
+        
+        waitForConfig();
     });
 
     const handleChat = async () => {
@@ -1647,6 +1669,11 @@ This comprehensive framework represents a significant advancement in evacuation 
         const typingId = appendTypingIndicator();
 
         try {
+            // Safety check for APP_CONFIG
+            if (!window.APP_CONFIG || typeof window.APP_CONFIG.getApiUrl !== 'function') {
+                throw new Error('APP_CONFIG not loaded properly. Please refresh the page.');
+            }
+            
             // Step 1: Retrieve relevant chunks using RAG
             const relevantChunks = await retrieveRelevantChunks(userMessage, 4);
             
@@ -1683,6 +1710,10 @@ Answer:`;
             };
 
             // Make API call to chat endpoint
+            if (!window.APP_CONFIG || typeof window.APP_CONFIG.getApiUrl !== 'function') {
+                throw new Error('APP_CONFIG not available for chat API call');
+            }
+            
             const apiUrl = window.APP_CONFIG.getApiUrl('chat');
             console.log('Making chat request to:', apiUrl);
             
@@ -1756,6 +1787,16 @@ Please contact the site administrator for assistance.`;
                 errorMessage = `I apologize, but I'm currently experiencing technical difficulties. 
 
 **Error:** ${error.message}
+
+**Debug Information:**
+- Current URL: ${window.location.href}
+- APP_CONFIG loaded: ${!!(window.APP_CONFIG)}
+- getApiUrl available: ${!!(window.APP_CONFIG && window.APP_CONFIG.getApiUrl)}
+
+**Possible Solutions:**
+1. Refresh the page to reload configuration
+2. Check if API endpoints are deployed: ${window.location.origin}/api/test
+3. Use debug page: ${window.location.origin}/test-api.html
 
 Please try again later or contact the site administrator.`;
             }
@@ -1900,6 +1941,32 @@ For more comprehensive answers to your questions, please contact **Amir Rafe** d
             }
         });
     }, observerOptions);
+
+    // Image error handling
+    function handleImageError(img) {
+        console.warn('Failed to load image:', img.src);
+        console.warn('Current domain:', window.location.origin);
+        console.warn('Full URL attempted:', new URL(img.src, window.location.origin).href);
+        
+        img.style.display = 'none';
+        
+        // Create placeholder
+        const placeholder = document.createElement('div');
+        placeholder.className = 'w-full h-32 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500';
+        placeholder.innerHTML = `<span>📊 Image Not Found<br><small>${img.src}</small></span>`;
+        img.parentNode.insertBefore(placeholder, img);
+    }
+
+    // Add error handlers to all plot images
+    document.querySelectorAll('img[src*="Plots/"]').forEach(img => {
+        img.addEventListener('error', () => handleImageError(img));
+        img.addEventListener('load', () => {
+            console.log('✅ Successfully loaded image:', img.src);
+        });
+        
+        // Log the full URL being attempted
+        console.log('🔍 Image URL:', new URL(img.src, window.location.origin).href);
+    });
 
     // Observe all cards and sections
     document.querySelectorAll('.contribution-card, .methodology-step, .finding-highlight').forEach(el => {
