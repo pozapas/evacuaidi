@@ -1,11 +1,13 @@
 // Auto-Configuration Switcher for EvacuAIDi
 // Automatically detects environment and uses appropriate configuration
 
-// Detect if running on GitHub Pages or localhost
+// Detect if running on GitHub Pages, localhost, or Vercel
 const isGitHubPages = window.location.hostname.includes('github.io');
 const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
+const isVercel = window.location.hostname.endsWith('.vercel.app');
+const isProduction = isGitHubPages || isVercel;
 
-console.log(`Detected environment: ${isGitHubPages ? 'GitHub Pages' : isLocalhost ? 'Local Development' : 'Unknown'}`);
+console.log(`Detected environment: ${isGitHubPages ? 'GitHub Pages' : isLocalhost ? 'Local Development' : isVercel ? 'Vercel Deployment' : 'Unknown'}`);
 
 // Configuration based on environment
 const CONFIG = {
@@ -14,10 +16,9 @@ const CONFIG = {
     AUTHOR: 'Amir Rafe',
     UNIVERSITY: 'Utah State University',
     
-    // Dynamic API configuration
-    // This will be your Vercel deployment URL - update after deploying to Vercel
-    API_BASE_URL: isGitHubPages ? 'https://evacuaidi-presentation.vercel.app' : null,
-    USE_SECURE_BACKEND: isGitHubPages,
+    // Dynamic API configuration based on production environment
+    API_BASE_URL: isProduction ? window.location.origin : null,
+    USE_SECURE_BACKEND: isProduction,
     
     // Chat Configuration
     MAX_MESSAGE_LENGTH: 500,
