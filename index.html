@@ -1566,6 +1566,26 @@ This comprehensive framework represents a significant advancement in evacuation 
             // Debug: Check if environment is loaded
             console.log('Environment loaded:', envConfig.isLoaded());
             console.log('Using proxy:', envConfig.isUsingProxy());
+            console.log('Proxy URL:', envConfig.getProxyUrl());
+            
+            // Test the backend connectivity - validate that the API is working
+            try {
+                console.log('Testing API connectivity...');
+                const testResponse = await fetch(`${envConfig.getProxyUrl() || ''}/api/test`);
+                if (!testResponse.ok) {
+                    throw new Error(`API test failed with status: ${testResponse.status}`);
+                }
+                const testData = await testResponse.json();
+                console.log('API test results:', testData);
+                
+                // Check if the test indicates API keys are available
+                if (!testData.hasEmbeddingKey || !testData.hasGenerationKey) {
+                    throw new Error('API keys not available on the server. Check Vercel environment variables.');
+                }
+            } catch (testError) {
+                console.error('API connectivity test failed:', testError);
+                throw new Error(`Backend API test failed: ${testError.message}`);
+            }
             
             if (!envConfig.isUsingProxy()) {
                 console.log('Has required keys:', envConfig.hasRequiredKeys());
@@ -1614,11 +1634,18 @@ This comprehensive framework represents a significant advancement in evacuation 
             // Update chat interface to show error status
             const welcomeMessage = document.querySelector('.chat-message p');
             if (welcomeMessage) {
-                if (error.message.includes('API')) {
+                if (error.message.includes('API keys not available')) {
+                    welcomeMessage.innerHTML += '<br><br><em style="color: #ef4444;">❌ Configuration Error: API keys not found on the server. Please check Vercel environment variables.</em>';
+                } else if (error.message.includes('Backend API test failed')) {
+                    welcomeMessage.innerHTML += `<br><br><em style="color: #ef4444;">❌ Backend API Error: ${error.message}</em>`;
+                } else if (error.message.includes('API')) {
                     welcomeMessage.innerHTML += '<br><br><em style="color: #ef4444;">❌ Configuration Error: API access not available. Please check backend configuration.</em>';
                 } else {
-                    welcomeMessage.innerHTML += '<br><br><em style="color: #ef4444;">❌ Initialization failed. The AI assistant may not work properly.</em>';
+                    welcomeMessage.innerHTML += `<br><br><em style="color: #ef4444;">❌ Initialization failed: ${error.message}</em>`;
                 }
+                
+                // Add "reload" button for convenience
+                welcomeMessage.innerHTML += '<br><br><button onclick="window.location.reload()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm mt-2">Retry Connection</button>';
             }
         }
     }

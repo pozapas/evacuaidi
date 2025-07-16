@@ -18,25 +18,22 @@ class EnvConfig {
 
     // Determine backend URL based on environment
     getBackendUrl() {
-        // For Vercel deployment, use current domain with /api prefix
-        if (window.location.hostname.includes('vercel.app') || 
-            window.location.hostname === 'evacuaidi-presentation.vercel.app') {
-            return window.location.origin; // Use same domain for API calls
-        }
-        
-        // For custom domain deployment on Vercel
+        // Always use proxy in production environments
+        // This includes all Vercel deployments and any non-localhost environment
         if (window.location.hostname !== 'localhost' && 
-            window.location.hostname !== '127.0.0.1' &&
-            !window.location.hostname.includes('github.io')) {
+            window.location.hostname !== '127.0.0.1') {
+            console.log('Using production proxy mode with:', window.location.origin);
             return window.location.origin; // Use same domain for API calls
         }
         
         // For local development, try local backend first
         if (window.location.hostname === 'localhost' || 
             window.location.hostname === '127.0.0.1') {
+            console.log('Using local development proxy with:', window.location.origin);
             return window.location.origin; // Use same domain for local API calls
         }
         
+        console.log('No proxy detected, will attempt direct API calls');
         return null; // Fallback to direct API calls
     }
 

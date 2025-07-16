@@ -37,12 +37,12 @@ export default async function handler(req, res) {
     // Test a simple embedding API call if keys are available
     if (embeddingKey) {
       try {
-        const testApiUrl = `https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:embedContent?key=${embeddingKey}`;
+        const testApiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:embedContent?key=${embeddingKey}`;
         const testResponse = await fetch(testApiUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            model: "models/text-embedding-004",
+            model: "models/gemini-embedding-001",
             content: { parts: [{ text: "test" }] }
           })
         });
