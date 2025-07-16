@@ -1,0 +1,28 @@
+{
+  "name": "evacuaidi-presentation",
+  "version": "1.0.0",
+  "description": "EvacuAIDi: An AI-Driven, Causal-Informed Framework for Probabilistic and Disability-Inclusive Evacuation Guidance",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'No build step required for static site'",
+    "start": "python -m http.server 8000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pozapas/evacuaidi-presentation.git"
+  },
+  "author": "Amir Rafe <amir.rafe@usu.edu>",
+  "license": "MIT",
+  "keywords": [
+    "evacuation",
+    "AI",
+    "disability-inclusive",
+    "phd-dissertation",
+    "fire-safety",
+    "emergency-management"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
