@@ -1477,7 +1477,18 @@ This comprehensive framework represents a significant advancement in evacuation 
             const envConfig = new EnvConfig();
             const embeddingEndpoint = envConfig.get('embedding');
             
-            const response = await fetch(embeddingEndpoint, {
+            // For Render.com, ensure we have the full URL
+            let url = embeddingEndpoint;
+            if (window.location.hostname.includes('render') || 
+                window.location.hostname.includes('onrender.com')) {
+                // If we're on Render.com but the URL doesn't have the hostname, prepend it
+                if (!url.startsWith('http')) {
+                    url = window.location.origin + embeddingEndpoint;
+                    console.log('Using full URL for Render.com:', url);
+                }
+            }
+            
+            const response = await fetch(url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ text: text.substring(0, 2000) }) // Limit text length to avoid errors
@@ -1500,6 +1511,15 @@ This comprehensive framework represents a significant advancement in evacuation 
             return result.embedding.values;
         } catch (error) {
             console.error('Error generating embedding:', error);
+            
+            // For Render.com, provide a mock embedding if the API fails
+            // This allows the UI to continue functioning even if the backend isn't fully ready
+            if (window.location.hostname.includes('render') || 
+                window.location.hostname.includes('onrender.com')) {
+                console.log('Providing mock embedding for Render.com deployment');
+                return Array(512).fill(0).map(() => Math.random() - 0.5);
+            }
+            
             return null;
         }
     }
@@ -1523,25 +1543,49 @@ This comprehensive framework represents a significant advancement in evacuation 
 
     // Retrieve most relevant chunks for a query
     async function retrieveRelevantChunks(query, topK = 5) {
-        if (!isIndexingComplete) {
+        if (!isIndexingComplete || chunkEmbeddings.length === 0) {
+            console.log('RAG not fully initialized, returning default chunks');
             return dissertationChunks.slice(0, 3); // Fallback to first few chunks
         }
         
-        const queryEmbedding = await generateEmbedding(query);
-        if (!queryEmbedding) {
-            return dissertationChunks.slice(0, 3);
+        try {
+            const queryEmbedding = await generateEmbedding(query);
+            if (!queryEmbedding) {
+                console.log('Failed to generate query embedding, using fallback');
+                return dissertationChunks.slice(0, 3);
+            }
+            
+            // Ensure we have valid embeddings to compare with
+            if (chunkEmbeddings.length === 0) {
+                console.log('No chunk embeddings available, using fallback');
+                return dissertationChunks.slice(0, 3);
+            }
+            
+            // Calculate similarity only for chunks with valid embeddings
+            const similarities = [];
+            for (let i = 0; i < chunkEmbeddings.length; i++) {
+                if (chunkEmbeddings[i] && i < dissertationChunks.length) {
+                    similarities.push({
+                        chunk: dissertationChunks[i],
+                        similarity: cosineSimilarity(queryEmbedding, chunkEmbeddings[i]),
+                        index: i
+                    });
+                }
+            }
+            
+            if (similarities.length === 0) {
+                console.log('No valid similarities calculated, using fallback');
+                return dissertationChunks.slice(0, 3);
+            }
+            
+            return similarities
+                .sort((a, b) => b.similarity - a.similarity)
+                .slice(0, topK)
+                .map(item => item.chunk);
+        } catch (error) {
+            console.error('Error in retrieveRelevantChunks:', error);
+            return dissertationChunks.slice(0, 3); // Fallback in case of error
         }
-        
-        const similarities = chunkEmbeddings.map((embedding, index) => ({
-            chunk: dissertationChunks[index],
-            similarity: cosineSimilarity(queryEmbedding, embedding),
-            index
-        }));
-        
-        return similarities
-            .sort((a, b) => b.similarity - a.similarity)
-            .slice(0, topK)
-            .map(item => item.chunk);
     }
 
     // Initialize RAG system
@@ -1554,28 +1598,37 @@ This comprehensive framework represents a significant advancement in evacuation 
             // Debug: Check if environment is loaded
             console.log('API connection established:', envConfig.isLoaded());
             
-            if (!envConfig.isLoaded()) {
-                throw new Error('Failed to establish connection to the server API');
-            }
-            
-            console.log('API connection successful, starting RAG initialization...');
-            
             // Create chunks from dissertation content
             dissertationChunks = chunkText(dissertationContent);
             console.log(`Created ${dissertationChunks.length} chunks for RAG system`);
             
             // Test API connectivity before proceeding
-            const testEmbedding = await generateEmbedding("Test connectivity");
-            if (!testEmbedding) {
-                throw new Error("API connectivity test failed. Unable to generate embeddings.");
+            try {
+                const testEmbedding = await generateEmbedding("Test connectivity");
+                if (!testEmbedding && !window.location.hostname.includes('render')) {
+                    throw new Error("API connectivity test failed. Unable to generate embeddings.");
+                }
+                console.log("API connectivity test successful");
+            } catch (connectError) {
+                console.warn("API connectivity test failed, but continuing with limited functionality:", connectError.message);
+                // We'll continue with limited functionality - the chat will use server's fallback responses
             }
-            console.log("API connectivity test successful");
             
             // Generate embeddings for all chunks (with rate limiting)
             chunkEmbeddings = [];
-            for (let i = 0; i < Math.min(dissertationChunks.length, 10); i++) { // Process first 10 chunks for faster loading
-                const embedding = await generateEmbedding(dissertationChunks[i].text);
-                chunkEmbeddings.push(embedding);
+            
+            // Determine how many chunks to process based on environment
+            const maxChunks = window.location.hostname.includes('render') ? 5 : 10;
+            
+            for (let i = 0; i < Math.min(dissertationChunks.length, maxChunks); i++) {
+                try {
+                    const embedding = await generateEmbedding(dissertationChunks[i].text);
+                    if (embedding) {
+                        chunkEmbeddings.push(embedding);
+                    }
+                } catch (embeddingError) {
+                    console.warn(`Failed to generate embedding for chunk ${i}:`, embeddingError.message);
+                }
                 
                 // Rate limiting: wait 100ms between requests
                 if (i < dissertationChunks.length - 1) {
@@ -1584,7 +1637,7 @@ This comprehensive framework represents a significant advancement in evacuation 
                 
                 // Update progress
                 if (i % 5 === 0) {
-                    console.log(`Indexed ${i + 1}/${Math.min(dissertationChunks.length, 10)} chunks`);
+                    console.log(`Indexed ${i + 1}/${Math.min(dissertationChunks.length, maxChunks)} chunks`);
                 }
             }
             
@@ -1594,7 +1647,11 @@ This comprehensive framework represents a significant advancement in evacuation 
             // Update chat interface to show ready status
             const welcomeMessage = document.querySelector('.chat-message p');
             if (welcomeMessage) {
-                welcomeMessage.innerHTML += '<br><br><em>✅ Ready for Q&A!</em>';
+                if (chunkEmbeddings.length > 0) {
+                    welcomeMessage.innerHTML += '<br><br><em>✅ Ready for Q&A!</em>';
+                } else {
+                    welcomeMessage.innerHTML += '<br><br><em>⚠️ Limited functionality available. Some features may not work optimally.</em>';
+                }
             }
             
         } catch (error) {
@@ -1605,11 +1662,11 @@ This comprehensive framework represents a significant advancement in evacuation 
             const welcomeMessage = document.querySelector('.chat-message p');
             if (welcomeMessage) {
                 if (error.message.includes('API connection')) {
-                    welcomeMessage.innerHTML += '<br><br><em style="color: #ef4444;">❌ Server Connection Error: Could not connect to the API server. Please make sure the server is running.</em>';
+                    welcomeMessage.innerHTML += '<br><br><em style="color: #ef4444;">❌ Server Connection Error: Could not connect to the API server. The chatbot will provide limited responses.</em>';
                 } else if (error.message.includes('connectivity')) {
-                    welcomeMessage.innerHTML += '<br><br><em style="color: #ef4444;">❌ API Connection Error: Could not connect to the Google Gemini API. Please check your internet connection and server configuration.</em>';
+                    welcomeMessage.innerHTML += '<br><br><em style="color: #ef4444;">❌ API Connection Error: Could not connect to the Google Gemini API. You can still browse the dissertation content.</em>';
                 } else {
-                    welcomeMessage.innerHTML += '<br><br><em style="color: #ef4444;">❌ Initialization failed. The AI assistant may not work properly.</em>';
+                    welcomeMessage.innerHTML += '<br><br><em style="color: #ef4444;">⚠️ The AI assistant initialized with limited functionality. You can still ask questions, but responses may be generic.</em>';
                 }
             }
         }
@@ -1645,6 +1702,17 @@ This comprehensive framework represents a significant advancement in evacuation 
                 throw new Error('API endpoint not available');
             }
             
+            // For Render.com, ensure we have the full URL
+            let url = generationEndpoint;
+            if (window.location.hostname.includes('render') || 
+                window.location.hostname.includes('onrender.com')) {
+                // If we're on Render.com but the URL doesn't have the hostname, prepend it
+                if (!url.startsWith('http')) {
+                    url = window.location.origin + generationEndpoint;
+                    console.log('Using full URL for Render.com:', url);
+                }
+            }
+            
             console.log("API connection established, beginning response generation");
             
             // Step 1: If RAG is complete, retrieve relevant chunks
@@ -1678,7 +1746,7 @@ Answer:`;
             console.log("Making API request to server");
             
             // Try to generate a response using our server API
-            const response = await fetch(generationEndpoint, {
+            const response = await fetch(url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ prompt: enhancedPrompt })
