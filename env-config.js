@@ -1,63 +1,65 @@
-// Environment Configuration Loader
+// Environment Configuration Loader with Backend Proxy Support
 
 class EnvConfig {
     constructor() {
         this.config = {};
         this.loaded = false;
+        this.useProxy = false;
         
-        // Check if we're in the production environment with directly injected variables
-        // This happens when GitHub Actions injects the environment variables during build
-        if (typeof this.config.GEMINI_EMBEDDING_API_KEY === 'string' && 
-            typeof this.config.GEMINI_GENERATION_API_KEY === 'string') {
-            console.log('Production environment detected with pre-injected API keys');
+        // Determine if we should use backend proxy
+        this.backendUrl = this.getBackendUrl();
+        this.useProxy = !!this.backendUrl;
+        
+        if (this.useProxy) {
+            console.log('Using backend proxy for API calls:', this.backendUrl);
             this.loaded = true;
         }
     }
 
+    // Determine backend URL based on environment
+    getBackendUrl() {
+        // For production GitHub Pages, use Vercel serverless functions
+        if (window.location.hostname === 'pozapas.github.io' || 
+            window.location.hostname.includes('github.io')) {
+            return 'https://evacuaidi-backend.vercel.app'; // Replace with your Vercel deployment URL
+        }
+        
+        // For local development, try local backend first
+        if (window.location.hostname === 'localhost' || 
+            window.location.hostname === '127.0.0.1') {
+            return 'http://localhost:3001'; // Local backend server
+        }
+        
+        return null; // Fallback to direct API calls
+    }
+
     // Load environment configuration
     async loadEnv() {
-        // If already loaded with injected variables, don't try to load again
-        if (this.loaded && Object.keys(this.config).length > 0) {
-            console.log('Environment already loaded with injected variables');
+        if (this.useProxy) {
+            // Using backend proxy, no need to load API keys client-side
+            this.loaded = true;
             return;
         }
         
         try {
-            // For GitHub Pages, always use APP_CONFIG fallback
-            if (window.location.hostname === 'pozapas.github.io' || 
-                window.location.hostname.includes('github.io')) {
-                console.log('GitHub Pages detected - using config.js settings');
-                this.loadFromAppConfig();
-                return;
-            }
-            
-            // Try to fetch the .env file (for local development)
+            // Try to fetch the .env file (for local development only)
             const response = await fetch('./.env');
             
-            // Check if the response is successful
             if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: .env file not found or not accessible`);
+                throw new Error(`HTTP ${response.status}: .env file not found`);
             }
             
             const envText = await response.text();
-            
-            // Check if the content looks like an env file
-            if (!envText.trim()) {
-                throw new Error('.env file is empty');
-            }
-            
             const lines = envText.split('\n');
             let keyCount = 0;
             
             for (const line of lines) {
                 const trimmedLine = line.trim();
                 
-                // Skip comments and empty lines
                 if (trimmedLine === '' || trimmedLine.startsWith('#')) {
                     continue;
                 }
                 
-                // Parse key=value pairs
                 const [key, ...valueParts] = trimmedLine.split('=');
                 if (key && valueParts.length > 0) {
                     const value = valueParts.join('=').trim();
@@ -99,19 +101,25 @@ class EnvConfig {
 
     // Check if environment is loaded
     isLoaded() {
-        return this.loaded && Object.keys(this.config).length > 0;
+        return this.loaded;
     }
 
-    // Get all API keys for debugging (remove in production)
-    getApiKeys() {
-        return {
-            embedding: this.get('GEMINI_EMBEDDING_API_KEY'),
-            generation: this.get('GEMINI_GENERATION_API_KEY')
-        };
+    // Check if using backend proxy
+    isUsingProxy() {
+        return this.useProxy;
+    }
+
+    // Get backend URL
+    getProxyUrl() {
+        return this.backendUrl;
     }
     
-    // Check if required API keys are present
+    // Check if required API keys are present (only relevant for direct API calls)
     hasRequiredKeys() {
+        if (this.useProxy) {
+            return true; // Backend handles API keys
+        }
+        
         const embedding = this.get('GEMINI_EMBEDDING_API_KEY');
         const generation = this.get('GEMINI_GENERATION_API_KEY');
         return !!(embedding && generation);
@@ -119,6 +127,10 @@ class EnvConfig {
     
     // Get missing keys for debugging
     getMissingKeys() {
+        if (this.useProxy) {
+            return []; // Backend handles API keys
+        }
+        
         const missing = [];
         if (!this.get('GEMINI_EMBEDDING_API_KEY')) missing.push('GEMINI_EMBEDDING_API_KEY');
         if (!this.get('GEMINI_GENERATION_API_KEY')) missing.push('GEMINI_GENERATION_API_KEY');

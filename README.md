@@ -10,6 +10,39 @@ This is the presentation website for the PhD dissertation "EvacuAIDi: An AI-Driv
 
 Visit the live presentation: [https://pozapas.github.io/evacuaidi-presentation/](https://pozapas.github.io/evacuaidi-presentation/)
 
+## 🤖 AI Chat Feature
+
+The website includes an interactive AI research assistant that can answer questions about the dissertation. The AI uses:
+
+- **RAG (Retrieval-Augmented Generation)** for accurate, context-aware responses
+- **Google Gemini API** for embeddings and text generation
+- **Secure backend proxy** to protect API keys
+
+### 🔧 Setup Instructions
+
+To enable the AI chat feature:
+
+1. **Deploy Backend Proxy** (Required for security)
+   - See [BACKEND_DEPLOYMENT.md](./BACKEND_DEPLOYMENT.md) for detailed instructions
+   - Recommended: Deploy to Vercel (free and easy)
+   - Alternative: Deploy to Netlify Functions
+
+2. **Configure API Keys** (In your backend deployment)
+   - `GEMINI_EMBEDDING_API_KEY`: For semantic search functionality
+   - `GEMINI_GENERATION_API_KEY`: For chat responses
+   - Get these from [Google AI Studio](https://makersuite.google.com/app/apikey)
+
+3. **Update Frontend Configuration**
+   - Edit `env-config.js` to point to your deployed backend URL
+   - The frontend will automatically use the secure backend proxy
+
+### 🔒 Security Model
+
+- ✅ **API Keys Protected**: Never exposed to client-side code
+- ✅ **Backend Proxy**: Secure server-side API handling
+- ✅ **CORS Configured**: Only authorized domains can access backend
+- ✅ **No Repository Secrets**: GitHub secrets not used for client-side code
+
 ## �🔬 Research Overview
 
 This dissertation addresses critical gaps in evacuation science through four interconnected research contributions:

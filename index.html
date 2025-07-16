@@ -1472,22 +1472,44 @@ This comprehensive framework represents a significant advancement in evacuation 
         return chunks;
     }
 
-    // Generate embeddings using Gemini embedding model
-    async function generateEmbedding(text, apiKey) {
+    // Generate embeddings using backend proxy or direct API
+    async function generateEmbedding(text, envConfig) {
         try {
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:embedContent?key=${apiKey}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    model: "models/gemini-embedding-001",
-                    content: {
-                        parts: [{ text: text }]
-                    }
-                })
-            });
-            
-            const result = await response.json();
-            return result.embedding?.values || null;
+            if (envConfig.isUsingProxy()) {
+                // Use backend proxy
+                const response = await fetch(`${envConfig.getProxyUrl()}/api/embeddings`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: text })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Proxy server error: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                return result.embedding?.values || null;
+            } else {
+                // Direct API call (for local development)
+                const apiKey = envConfig.get('GEMINI_EMBEDDING_API_KEY');
+                if (!apiKey) {
+                    throw new Error('GEMINI_EMBEDDING_API_KEY not found');
+                }
+                
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:embedContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        model: "models/gemini-embedding-001",
+                        content: {
+                            parts: [{ text: text }]
+                        }
+                    })
+                });
+                
+                const result = await response.json();
+                return result.embedding?.values || null;
+            }
         } catch (error) {
             console.error('Error generating embedding:', error);
             return null;
@@ -1512,12 +1534,12 @@ This comprehensive framework represents a significant advancement in evacuation 
     }
 
     // Retrieve most relevant chunks for a query
-    async function retrieveRelevantChunks(query, apiKey, topK = 5) {
+    async function retrieveRelevantChunks(query, envConfig, topK = 5) {
         if (!isIndexingComplete) {
             return dissertationChunks.slice(0, 3); // Fallback to first few chunks
         }
         
-        const queryEmbedding = await generateEmbedding(query, apiKey);
+        const queryEmbedding = await generateEmbedding(query, envConfig);
         if (!queryEmbedding) {
             return dissertationChunks.slice(0, 3);
         }
@@ -1543,19 +1565,17 @@ This comprehensive framework represents a significant advancement in evacuation 
             
             // Debug: Check if environment is loaded
             console.log('Environment loaded:', envConfig.isLoaded());
-            console.log('Has required keys:', envConfig.hasRequiredKeys());
-            if (!envConfig.hasRequiredKeys()) {
-                console.log('Missing keys:', envConfig.getMissingKeys());
+            console.log('Using proxy:', envConfig.isUsingProxy());
+            
+            if (!envConfig.isUsingProxy()) {
+                console.log('Has required keys:', envConfig.hasRequiredKeys());
+                if (!envConfig.hasRequiredKeys()) {
+                    console.log('Missing keys:', envConfig.getMissingKeys());
+                    throw new Error(`API keys not found. Missing keys: ${envConfig.getMissingKeys().join(', ')}`);
+                }
             }
             
-            // Get API key from environment
-            const apiKey = envConfig.get('GEMINI_EMBEDDING_API_KEY');
-            if (!apiKey) {
-                const missingKeys = envConfig.getMissingKeys();
-                throw new Error(`GEMINI_EMBEDDING_API_KEY not found. Missing keys: ${missingKeys.join(', ')}`);
-            }
-            
-            console.log('API key found, starting RAG initialization...');
+            console.log('API configuration ready, starting RAG initialization...');
             
             // Create chunks from dissertation content
             dissertationChunks = chunkText(dissertationContent);
@@ -1564,7 +1584,7 @@ This comprehensive framework represents a significant advancement in evacuation 
             // Generate embeddings for all chunks (with rate limiting)
             chunkEmbeddings = [];
             for (let i = 0; i < dissertationChunks.length; i++) {
-                const embedding = await generateEmbedding(dissertationChunks[i].text, apiKey);
+                const embedding = await generateEmbedding(dissertationChunks[i].text, envConfig);
                 chunkEmbeddings.push(embedding);
                 
                 // Rate limiting: wait 100ms between requests
@@ -1594,8 +1614,8 @@ This comprehensive framework represents a significant advancement in evacuation 
             // Update chat interface to show error status
             const welcomeMessage = document.querySelector('.chat-message p');
             if (welcomeMessage) {
-                if (error.message.includes('API_KEY')) {
-                    welcomeMessage.innerHTML += '<br><br><em style="color: #ef4444;">❌ Configuration Error: API keys not found. Please check your .env file setup.</em>';
+                if (error.message.includes('API')) {
+                    welcomeMessage.innerHTML += '<br><br><em style="color: #ef4444;">❌ Configuration Error: API access not available. Please check backend configuration.</em>';
                 } else {
                     welcomeMessage.innerHTML += '<br><br><em style="color: #ef4444;">❌ Initialization failed. The AI assistant may not work properly.</em>';
                 }
@@ -1627,20 +1647,8 @@ This comprehensive framework represents a significant advancement in evacuation 
             const envConfig = new EnvConfig();
             await envConfig.loadEnv();
             
-            // Get API key from environment
-            const apiKey = envConfig.get('GEMINI_GENERATION_API_KEY');
-            if (!apiKey) {
-                throw new Error('GEMINI_GENERATION_API_KEY not found in environment configuration');
-            }
-            
-            // Get embedding API key for retrieving relevant chunks
-            const embeddingApiKey = envConfig.get('GEMINI_EMBEDDING_API_KEY');
-            if (!embeddingApiKey) {
-                throw new Error('GEMINI_EMBEDDING_API_KEY not found in environment configuration');
-            }
-            
             // Step 1: Retrieve relevant chunks using RAG
-            const relevantChunks = await retrieveRelevantChunks(userMessage, embeddingApiKey, 4);
+            const relevantChunks = await retrieveRelevantChunks(userMessage, envConfig, 4);
             
             // Step 2: Prepare context from relevant chunks
             const ragContext = relevantChunks.map((chunk, index) => 
@@ -1674,15 +1682,37 @@ Answer:`;
                 ]
             };
 
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemma-3-27b-it:generateContent?key=${apiKey}`;
+            let result;
+            if (envConfig.isUsingProxy()) {
+                // Use backend proxy
+                const response = await fetch(`${envConfig.getProxyUrl()}/api/chat`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Proxy server error: ${response.status} ${response.statusText}`);
+                }
+                
+                result = await response.json();
+            } else {
+                // Direct API call (for local development)
+                const apiKey = envConfig.get('GEMINI_GENERATION_API_KEY');
+                if (!apiKey) {
+                    throw new Error('GEMINI_GENERATION_API_KEY not found in environment configuration');
+                }
+                
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemma-3-27b-it:generateContent?key=${apiKey}`;
 
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
 
-            const result = await response.json();
+                result = await response.json();
+            }
             
             removeTypingIndicator(typingId);
 
@@ -1721,15 +1751,20 @@ For more detailed information about specific aspects of this research, please co
             console.error('Chat Error:', error);
             
             let errorMessage;
-            if (error.message.includes('API_KEY')) {
-                errorMessage = `I apologize, but the AI system is not properly configured. The API keys are missing from the environment configuration. 
+            if (error.message.includes('Proxy server error')) {
+                errorMessage = `I apologize, but the backend service is currently unavailable. 
 
-**Configuration Required:**
-Please ensure the .env file is set up with valid Google Gemini API keys. See the README.md file for setup instructions.
+**Service Status:** Backend proxy connection failed
+**Error:** ${error.message}
 
-**Meanwhile, here are key findings from the EvacuAIDi research:**
+**Meanwhile, here are key findings from the EvacuAIDi research:**`;
+            } else if (error.message.includes('API')) {
+                errorMessage = `I apologize, but the AI system is not properly configured.
 
-**Core Research Question:** How can AI-driven guidance systems improve evacuation safety and inclusivity?`;
+**Configuration Issue:** API access not available
+**Solution:** Please ensure the backend proxy is deployed and configured properly.
+
+**Meanwhile, here are key findings from the EvacuAIDi research:**`;
             } else {
                 errorMessage = `I apologize, but I'm currently experiencing technical difficulties. However, here are some key findings from the EvacuAIDi research:
 
