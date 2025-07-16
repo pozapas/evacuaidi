@@ -142,5 +142,13 @@ class EnvConfig {
     }
 }
 
-// Export for use in main application
-window.EnvConfig = EnvConfig;
+// Export for use in main application - with defensive check
+(function(global) {
+    try {
+        console.log('Registering EnvConfig to global scope');
+        global.EnvConfig = EnvConfig;
+        console.log('EnvConfig successfully registered');
+    } catch (error) {
+        console.error('Failed to register EnvConfig to global scope:', error);
+    }
+})(typeof window !== 'undefined' ? window : this);

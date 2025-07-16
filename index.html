@@ -12,6 +12,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
+    <!-- Load Configuration Files Early -->
+    <script src="config.js"></script>
+    <script src="env-config.js"></script>
+    <script src="verify.js"></script>
+    
     <!-- Professional Academic Design System -->
     <style>
         :root {
@@ -931,10 +936,6 @@
     </div>
 </div>
 
-<!-- Load Environment Configuration -->
-<script src="config.js"></script>
-<script src="env-config.js"></script>
-
 <!-- Initialize Chat System -->
 <script>
 // Plot modal functionality
@@ -1559,6 +1560,11 @@ This comprehensive framework represents a significant advancement in evacuation 
     // Initialize RAG system
     async function initializeRAG() {
         try {
+            // Check if EnvConfig is defined
+            if (typeof window.EnvConfig === 'undefined') {
+                throw new Error('EnvConfig is not defined. The environment configuration could not be loaded.');
+            }
+            
             // Initialize environment configuration
             const envConfig = new EnvConfig();
             await envConfig.loadEnv();
@@ -1651,7 +1657,39 @@ This comprehensive framework represents a significant advancement in evacuation 
     }
 
     // Initialize RAG system on page load
-    initializeRAG();
+    // Wrap initialization in a document.ready check and verify EnvConfig exists
+    document.addEventListener('DOMContentLoaded', function() {
+        // Make sure EnvConfig is defined before initializing
+        if (typeof window.EnvConfig === 'undefined') {
+            console.error('EnvConfig class is not defined. Attempting to reload scripts...');
+            
+            // Try to reload the config scripts
+            const configScript = document.createElement('script');
+            configScript.src = 'config.js';
+            configScript.onload = function() {
+                const envConfigScript = document.createElement('script');
+                envConfigScript.src = 'env-config.js';
+                envConfigScript.onload = function() {
+                    console.log('Scripts reloaded, checking EnvConfig...');
+                    if (typeof window.EnvConfig !== 'undefined') {
+                        console.log('EnvConfig now available, initializing...');
+                        setTimeout(initializeRAG, 500); // Give a small delay before initializing
+                    } else {
+                        console.error('EnvConfig still not available after reload');
+                        const welcomeMessage = document.querySelector('.chat-message p');
+                        if (welcomeMessage) {
+                            welcomeMessage.innerHTML += '<br><br><em style="color: #ef4444;">❌ Initialization failed: EnvConfig class not available. Please refresh the page or check console for errors.</em>';
+                        }
+                    }
+                };
+                document.head.appendChild(envConfigScript);
+            };
+            document.head.appendChild(configScript);
+        } else {
+            console.log('EnvConfig found, initializing...');
+            initializeRAG();
+        }
+    });
 
     const handleChat = async () => {
         const userMessage = chatInput.value.trim();
