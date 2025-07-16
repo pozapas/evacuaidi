@@ -8,7 +8,13 @@
     <meta name="author" content="Amir Rafe">
     <title>EvacuAIDi: An AI-Driven, Causal-Informed Framework for Probabilistic and Disability-Inclusive Evacuation Guidance</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="js/config.js"></script>
+    <script src="js/config.js" onerror="console.error('Failed to load config.js')"></script>
+    <script>
+        // Debug: Check if config loaded properly
+        console.log('Config.js loaded. geminiAPI available:', typeof window.geminiAPI);
+        console.log('EnvConfig available:', typeof window.EnvConfig);
+        console.log('CONFIG available:', typeof window.CONFIG);
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -1602,8 +1608,13 @@ This comprehensive framework represents a significant advancement in evacuation 
                 statusMessage.innerHTML += '<br><br><em>🔄 Initializing AI system...</em>';
             }
             
+            // Check if geminiAPI is available
+            if (typeof window.geminiAPI === 'undefined') {
+                throw new Error('geminiAPI is not defined. Please check if config.js is loaded properly.');
+            }
+            
             // Initialize Gemini API
-            const initialized = await geminiAPI.initialize();
+            const initialized = await window.geminiAPI.initialize();
             
             if (!initialized) {
                 throw new Error('Failed to initialize Gemini API');
@@ -1626,8 +1637,23 @@ This comprehensive framework represents a significant advancement in evacuation 
         }
     }
 
-    // Start initialization
-    initializeAI();
+    // Start initialization with proper error handling
+    document.addEventListener('DOMContentLoaded', function() {
+        // Wait a bit to ensure all scripts are loaded
+        setTimeout(() => {
+            // Final check if everything is loaded
+            if (typeof window.geminiAPI === 'undefined' || typeof window.EnvConfig === 'undefined') {
+                console.error('Critical: Config.js not loaded properly');
+                const statusMessage = document.querySelector('.chat-message p');
+                if (statusMessage) {
+                    statusMessage.innerHTML += '<br><br><em style="color: #ef4444;">❌ Configuration loading failed. Please refresh the page.</em>';
+                }
+                return;
+            }
+            
+            initializeAI();
+        }, 200);
+    });
 
     const handleChat = async () => {
         const userMessage = chatInput.value.trim();
@@ -1649,7 +1675,12 @@ This comprehensive framework represents a significant advancement in evacuation 
             // Get the global environment configuration
             const envConfig = window.envConfigInstance;
             if (!envConfig || !envConfig.isLoaded()) {
-                throw new Error('Environment configuration not loaded. Please refresh the page.');
+                throw new Error('Environment configuration not loaded. Please refresh the page and try again.');
+            }
+            
+            // Check if we have the necessary API access
+            if (!envConfig.hasRequiredKeys()) {
+                throw new Error('API configuration missing. Please contact the administrator.');
             }
             
             // Step 1: Retrieve relevant chunks using RAG
@@ -1660,6 +1691,10 @@ This comprehensive framework represents a significant advancement in evacuation 
             
             // Step 3: Generate response using the appropriate API client
             const apiClient = envConfig.getApiClient();
+            if (!apiClient) {
+                throw new Error('API client not available. Please refresh the page.');
+            }
+            
             const botMessage = await apiClient.generateResponse(userMessage, ragContext);
             
             removeTypingIndicator(typingId);
