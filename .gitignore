@@ -1,10 +1,66 @@
-# Environment Variables (contains sensitive API keys)
+# EvacuAIDi Presentation - Git Ignore File
+
+# Environment variables (contains API keys)
 .env
+.env.local
+.env.development
+.env.production
 
-# Local development configuration (may contain API keys)
-config.local.js
+# API configuration with keys (for security)
+api-config.js
+api-config-local.js
 
-# Secure API key loader (contains actual keys)
-keys.js
+# Node.js dependencies (if using any build tools)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
+# Build outputs
+dist/
+build/
 
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+
+# Logs
+*.log
+
+# Backup files
+*.bak
+*.backup
+
+# Cache files
+.cache/
+
+# Vercel deployment files
+.vercel
+
+# Local development files
+local-config.js
+
+# Test files
+test-results/
+coverage/
+
+# Documentation drafts
+drafts/
+notes.txt
+todo.md

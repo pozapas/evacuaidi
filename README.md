@@ -16,32 +16,25 @@ The website includes an interactive AI research assistant that can answer questi
 
 - **RAG (Retrieval-Augmented Generation)** for accurate, context-aware responses
 - **Google Gemini API** for embeddings and text generation
-- **Secure backend proxy** to protect API keys
+- **Secure backend proxy** to protect API keys from users
 
-### 🔧 Setup Instructions
+### 🔧 Deployment Options
 
-To enable the AI chat feature:
+#### For GitHub Pages (Secure - Recommended)
+1. **Deploy backend to Vercel** (keeps API keys secure)
+2. **See [DEPLOYMENT.md](./DEPLOYMENT.md)** for complete step-by-step guide
+3. **Benefits:** API keys protected, free hosting, professional setup
 
-1. **Deploy Backend Proxy** (Required for security)
-   - See [BACKEND_DEPLOYMENT.md](./BACKEND_DEPLOYMENT.md) for detailed instructions
-   - Recommended: Deploy to Vercel (free and easy)
-   - Alternative: Deploy to Netlify Functions
+#### For Local Development Only
+1. **Update `api-config.js`** with your API keys
+2. **Open `index.html`** in browser
+3. **Warning:** Never commit API keys to public repositories
 
-2. **Configure API Keys** (In your backend deployment)
-   - `GEMINI_EMBEDDING_API_KEY`: For semantic search functionality
-   - `GEMINI_GENERATION_API_KEY`: For chat responses
-   - Get these from [Google AI Studio](https://makersuite.google.com/app/apikey)
+### 🔒 Security Notes
 
-3. **Update Frontend Configuration**
-   - Edit `env-config.js` to point to your deployed backend URL
-   - The frontend will automatically use the secure backend proxy
-
-### 🔒 Security Model
-
-- ✅ **API Keys Protected**: Never exposed to client-side code
-- ✅ **Backend Proxy**: Secure server-side API handling
-- ✅ **CORS Configured**: Only authorized domains can access backend
-- ✅ **No Repository Secrets**: GitHub secrets not used for client-side code
+- **GitHub Pages Version:** Uses secure backend proxy (API keys hidden)
+- **Local Development:** API keys visible in code (development only)
+- **Production Ready:** Secure deployment protects your API usage and costs
 
 ## �🔬 Research Overview
 
