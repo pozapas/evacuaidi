@@ -8,4 +8,5 @@
     "GEMINI_EMBEDDING_API_KEY": "@gemini_embedding_api_key",
     "GEMINI_GENERATION_API_KEY": "@gemini_generation_api_key"
   }
+  
 }
