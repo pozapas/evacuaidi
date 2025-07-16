@@ -1478,18 +1478,37 @@ This comprehensive framework represents a significant advancement in evacuation 
         try {
             if (envConfig.isUsingProxy()) {
                 // Use backend proxy
-                const response = await fetch(`${envConfig.getProxyUrl()}/api/embeddings`, {
+                const proxyUrl = envConfig.getProxyUrl();
+                if (!proxyUrl) {
+                    throw new Error('Proxy URL is undefined but proxy mode is enabled');
+                }
+                
+                // Format the API URL properly
+                const apiUrl = new URL('/api/embeddings', proxyUrl).toString();
+                console.log('Making embedding request to:', apiUrl);
+                
+                const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ text: text })
                 });
                 
                 if (!response.ok) {
-                    throw new Error(`Proxy server error: ${response.status}`);
+                    const errorText = await response.text();
+                    console.error('Embedding API error:', {
+                        status: response.status,
+                        statusText: response.statusText,
+                        body: errorText
+                    });
+                    throw new Error(`Proxy server error: ${response.status} - ${errorText}`);
                 }
                 
                 const result = await response.json();
-                return result.embedding?.values || null;
+                if (!result.embedding || !result.embedding.values) {
+                    console.error('Invalid embedding response format:', result);
+                    throw new Error('Invalid embedding response format from API');
+                }
+                return result.embedding.values;
             } else {
                 // Direct API call (for local development)
                 const apiKey = envConfig.get('GEMINI_EMBEDDING_API_KEY');
@@ -1576,16 +1595,41 @@ This comprehensive framework represents a significant advancement in evacuation 
             
             // Test the backend connectivity - validate that the API is working
             try {
-                console.log('Testing API connectivity...');
-                const testResponse = await fetch(`${envConfig.getProxyUrl() || ''}/api/test`);
-                if (!testResponse.ok) {
-                    throw new Error(`API test failed with status: ${testResponse.status}`);
+                const proxyUrl = envConfig.getProxyUrl();
+                console.log('Testing API connectivity with URL:', proxyUrl);
+                
+                // Validate the URL format first
+                if (!proxyUrl) {
+                    throw new Error('No proxy URL available, but proxy mode is enabled');
                 }
+                
+                // Format the API test URL properly
+                const testUrl = new URL('/api/test', proxyUrl).toString();
+                console.log('Making test request to:', testUrl);
+                
+                const testResponse = await fetch(testUrl, {
+                    method: 'GET',
+                    headers: { 'Accept': 'application/json' },
+                    // Add a cache-busting parameter
+                    cache: 'no-store'
+                });
+                
+                if (!testResponse.ok) {
+                    const errorBody = await testResponse.text();
+                    console.error('API test response error:', {
+                        status: testResponse.status,
+                        statusText: testResponse.statusText,
+                        body: errorBody
+                    });
+                    throw new Error(`API test failed with status: ${testResponse.status} - ${errorBody}`);
+                }
+                
                 const testData = await testResponse.json();
                 console.log('API test results:', testData);
                 
                 // Check if the test indicates API keys are available
                 if (!testData.hasEmbeddingKey || !testData.hasGenerationKey) {
+                    console.error('API keys missing in test response:', testData);
                     throw new Error('API keys not available on the server. Check Vercel environment variables.');
                 }
             } catch (testError) {
@@ -1750,14 +1794,29 @@ Answer:`;
             let result;
             if (envConfig.isUsingProxy()) {
                 // Use backend proxy
-                const response = await fetch(`${envConfig.getProxyUrl()}/api/chat`, {
+                const proxyUrl = envConfig.getProxyUrl();
+                if (!proxyUrl) {
+                    throw new Error('Proxy URL is undefined but proxy mode is enabled');
+                }
+                
+                // Format the API URL properly
+                const apiUrl = new URL('/api/chat', proxyUrl).toString();
+                console.log('Making chat request to:', apiUrl);
+                
+                const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
                 
                 if (!response.ok) {
-                    throw new Error(`Proxy server error: ${response.status} ${response.statusText}`);
+                    const errorText = await response.text();
+                    console.error('Chat API error:', {
+                        status: response.status,
+                        statusText: response.statusText,
+                        body: errorText
+                    });
+                    throw new Error(`Proxy server error: ${response.status} - ${errorText}`);
                 }
                 
                 result = await response.json();
@@ -1822,18 +1881,32 @@ For more detailed information about specific aspects of this research, please co
 **Service Status:** Backend proxy connection failed
 **Error:** ${error.message}
 
-**Meanwhile, here are key findings from the EvacuAIDi research:**`;
-            } else if (error.message.includes('API')) {
+**Possible Solutions:**
+1. Ensure Vercel API routes are properly deployed
+2. Check that environment variables are set in Vercel dashboard
+3. Visit the API test endpoint directly: ${window.location.origin}/api/test
+
+Please contact the site administrator for assistance.`;
+            } else if (error.message.includes('API keys not available')) {
                 errorMessage = `I apologize, but the AI system is not properly configured.
 
-**Configuration Issue:** API access not available
-**Solution:** Please ensure the backend proxy is deployed and configured properly.
+**Configuration Issue:** API keys not found on server
+**Solution:** Please ensure GEMINI_EMBEDDING_API_KEY and GEMINI_GENERATION_API_KEY are set in the Vercel dashboard under Environment Variables.
 
-**Meanwhile, here are key findings from the EvacuAIDi research:**`;
+If you're the site owner, please see the [Deployment Guide](https://github.com/pozapas/evacuaidi-presentation/blob/main/DEPLOYMENT_GUIDE.md) for setup instructions.`;
+            } else if (error.message.includes('API') || error.message.includes('backend') || error.message.includes('proxy')) {
+                errorMessage = `I apologize, but the AI system is not properly configured.
+
+**Configuration Issue:** ${error.message}
+**Debug Info:** Using backend at: ${envConfig?.getProxyUrl() || 'Unknown'}
+**Solution:** Please ensure the backend proxy is deployed and configured properly.`;
             } else {
-                errorMessage = `I apologize, but I'm currently experiencing technical difficulties. However, here are some key findings from the EvacuAIDi research:
+                errorMessage = `I apologize, but I'm currently experiencing technical difficulties. 
 
-**Core Research Question:** How can AI-driven guidance systems improve evacuation safety and inclusivity?`;
+**Error:** ${error.message}
+**Debug Info:** Using proxy: ${envConfig?.isUsingProxy() ? 'Yes' : 'No'}, URL: ${envConfig?.getProxyUrl() || 'None'}
+
+Please try again later or contact the site administrator.`;
             }
             
             appendMessage(errorMessage + `
