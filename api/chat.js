@@ -26,7 +26,14 @@ export default async function handler(req, res) {
     if (!apiKey) {
       console.error('GEMINI_GENERATION_API_KEY not found in environment variables');
       console.error('Available env vars:', Object.keys(process.env).filter(key => key.includes('GEMINI')));
-      return res.status(500).json({ error: 'API configuration error: GEMINI_GENERATION_API_KEY not found' });
+      return res.status(500).json({ 
+        error: 'API configuration error: GEMINI_GENERATION_API_KEY not found',
+        debug: {
+          nodeEnv: process.env.NODE_ENV,
+          vercelEnv: process.env.VERCEL_ENV,
+          availableGeminiVars: Object.keys(process.env).filter(key => key.includes('GEMINI'))
+        }
+      });
     }
 
     console.log('Processing chat request with', contents.length, 'messages');
@@ -34,7 +41,7 @@ export default async function handler(req, res) {
     // Call Google Gemini API
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
     
-    console.log('Making chat API request to:', apiUrl.replace(apiKey, 'HIDDEN_KEY'));
+    console.log('Making chat API request to Gemini API');
     
     const response = await fetch(apiUrl, {
       method: 'POST',
@@ -53,8 +60,7 @@ export default async function handler(req, res) {
       });
       return res.status(response.status).json({ 
         error: `API request failed: ${response.status}`,
-        details: errorText,
-        apiUrl: apiUrl.replace(apiKey, 'HIDDEN_KEY')
+        details: errorText
       });
     }
 
