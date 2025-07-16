@@ -11,8 +11,8 @@ const CONFIG = {
     
     // Model configuration
     MODEL_CONFIG: {
-        name: 'gemma-3-27b-it',
-        embeddingModel: 'gemini-embedding-001',
+        name: 'gemini-1.5-flash',
+        embeddingModel: 'embedding-001',
         temperature: 0.7,
         maxTokens: 1000,
         topP: 0.9
@@ -89,6 +89,9 @@ class SecureApiClient {
     
     async generateEmbedding(text) {
         try {
+            console.log('Attempting to generate embedding for:', text.substring(0, 100) + '...');
+            console.log('Using endpoint:', this.endpoint);
+            
             const response = await fetch(this.endpoint, {
                 method: 'POST',
                 headers: {
@@ -100,11 +103,16 @@ class SecureApiClient {
                 })
             });
             
+            console.log('Embedding response status:', response.status);
+            
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                const errorText = await response.text();
+                console.error('Embedding API error response:', errorText);
+                throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
             }
             
             const data = await response.json();
+            console.log('Embedding generated successfully');
             return data.embedding;
         } catch (error) {
             console.error('Error generating embedding:', error);
@@ -114,6 +122,10 @@ class SecureApiClient {
     
     async generateResponse(userMessage, ragContext) {
         try {
+            console.log('Attempting to generate response for:', userMessage);
+            console.log('Using endpoint:', this.endpoint);
+            console.log('RAG context length:', ragContext.length);
+            
             const response = await fetch(this.endpoint, {
                 method: 'POST',
                 headers: {
@@ -126,11 +138,16 @@ class SecureApiClient {
                 })
             });
             
+            console.log('Chat response status:', response.status);
+            
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                const errorText = await response.text();
+                console.error('Chat API error response:', errorText);
+                throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
             }
             
             const data = await response.json();
+            console.log('Response generated successfully');
             return data.response;
         } catch (error) {
             console.error('Error generating response:', error);
@@ -148,13 +165,13 @@ class LocalApiClient {
     
     async generateEmbedding(text) {
         try {
-            const response = await fetch(`${this.baseUrl}/models/gemini-embedding-001:embedContent?key=${this.apiKey}`, {
+            const response = await fetch(`${this.baseUrl}/models/embedding-001:embedContent?key=${this.apiKey}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    model: "models/gemini-embedding-001",
+                    model: "models/embedding-001",
                     content: {
                         parts: [{ text: text }]
                     }

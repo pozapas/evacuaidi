@@ -1512,12 +1512,14 @@ This comprehensive framework represents a significant advancement in evacuation 
     // Retrieve most relevant chunks for a query
     async function retrieveRelevantChunks(query, topK = 5) {
         if (!isIndexingComplete) {
-            return dissertationChunks.slice(0, 3); // Fallback to first few chunks
+            console.log('Indexing not complete, using keyword-based fallback');
+            return keywordBasedSearch(query, topK);
         }
         
         const queryEmbedding = await generateEmbedding(query);
         if (!queryEmbedding) {
-            return dissertationChunks.slice(0, 3);
+            console.log('Embedding generation failed, using keyword-based fallback');
+            return keywordBasedSearch(query, topK);
         }
         
         const similarities = chunkEmbeddings.map((embedding, index) => ({
@@ -1530,6 +1532,92 @@ This comprehensive framework represents a significant advancement in evacuation 
             .sort((a, b) => b.similarity - a.similarity)
             .slice(0, topK)
             .map(item => item.chunk);
+    }
+
+    // Fallback keyword-based search when embeddings fail
+    function keywordBasedSearch(query, topK = 3) {
+        const queryWords = query.toLowerCase().split(/\s+/);
+        const scored = dissertationChunks.map(chunk => {
+            const chunkText = chunk.text.toLowerCase();
+            let score = 0;
+            
+            queryWords.forEach(word => {
+                const matches = (chunkText.match(new RegExp(word, 'g')) || []).length;
+                score += matches;
+            });
+            
+            return { chunk, score };
+        });
+        
+        return scored
+            .sort((a, b) => b.score - a.score)
+            .slice(0, topK)
+            .map(item => item.chunk);
+    }
+
+    // Generate a fallback response when API calls fail
+    function generateFallbackResponse(userMessage, ragContext) {
+        const query = userMessage.toLowerCase();
+        
+        // Provide specific responses based on keywords
+        if (query.includes('evacuation time') || query.includes('22.5%')) {
+            return `Based on the EvacuAIDi research, **increasing AI compliance from 10% to 70% causes a 22.5% reduction in mean evacuation time**. This was demonstrated through counterfactual simulations using Pearl's do-calculus across diverse building scenarios.
+
+**Key findings:**
+• Largest marginal gains occur between 10% and 50% compliance
+• Diminishing returns observed beyond 50% compliance  
+• The causal effect was statistically significant with 95% credible interval: [–22.1 s, –17.3 s]`;
+        }
+        
+        if (query.includes('disability') || query.includes('inclusive') || query.includes('15.9%')) {
+            return `The EvacuAIDi framework provides **15.9% stronger benefits for individuals with disabilities** compared to non-disabled participants.
+
+**Disability-inclusive findings:**
+• AI guidance reduces the evacuation time gap from 39.4 seconds to 22.1 seconds
+• People with disabilities encountered high crush density (≥ 3.5 pers/m²) in 34% of simulations without AI guidance
+• With AI guidance, this dropped to 12.8%, showing improved spatial flow distribution
+• The DiSFM-GS model captured realistic walking speed disparities: 0.72 m/s vs 1.29 m/s for able-bodied individuals`;
+        }
+        
+        if (query.includes('risk') || query.includes('57%') || query.includes('occupant load')) {
+            return `The Hierarchical Bayesian Risk Framework identified the primary drivers of evacuation risk:
+
+**Risk Variance Attribution:**
+• **Occupant Load: 57%** of total risk variance
+• **AI Compliance: 29%** of total risk variance  
+• **Hazard Severity: 14%** of remaining variance
+
+The Gaussian Process surrogate model achieved **R² > 0.95** for evacuation time prediction, enabling efficient probabilistic risk assessment under uncertainty.`;
+        }
+        
+        if (query.includes('model') || query.includes('disfm') || query.includes('validation')) {
+            return `The **Disability-Inclusive Social Force Model with Guidance Switch (DiSFM-GS)** was developed and validated using RFID trajectory data from evacuation drills.
+
+**Model Features:**
+• Empirically-calibrated parameters for individuals with disabilities
+• Transfer Entropy analysis revealing leader-follower dynamics
+• Probabilistic "guidance switch" mechanism for compliance variability
+• Validated against real evacuation data using Kolmogorov-Smirnov tests
+
+**Validation Results:**
+• Final objective function error: 0.038
+• All validation scenarios passed KS test with p > 0.05
+• Best-matching scenario: KS-statistic = 0.094, p = 0.78`;
+        }
+        
+        // Default response with relevant context
+        return `Based on the EvacuAIDi research, here are the key findings relevant to your question:
+
+**Main Research Contributions:**
+1. **22.5% reduction** in evacuation time through AI guidance
+2. **15.9% stronger benefits** for people with disabilities  
+3. **57% of risk variance** attributed to occupant load
+4. **92%+ accuracy** in automated parameter extraction
+
+**Research Context:**
+${ragContext.substring(0, 500)}...
+
+For more specific information, please try asking about: evacuation time reduction, disability benefits, risk drivers, or the DiSFM-GS model validation.`;
     }
 
     // Initialize RAG system
@@ -1695,7 +1783,14 @@ This comprehensive framework represents a significant advancement in evacuation 
                 throw new Error('API client not available. Please refresh the page.');
             }
             
-            const botMessage = await apiClient.generateResponse(userMessage, ragContext);
+            let botMessage;
+            try {
+                botMessage = await apiClient.generateResponse(userMessage, ragContext);
+            } catch (apiError) {
+                console.warn('API call failed, using fallback response:', apiError);
+                // Fallback to a simpler response based on keywords
+                botMessage = generateFallbackResponse(userMessage, ragContext);
+            }
             
             removeTypingIndicator(typingId);
             
@@ -1708,7 +1803,10 @@ This comprehensive framework represents a significant advancement in evacuation 
 
         } catch (error) {
             removeTypingIndicator(typingId);
-            console.error('Chat Error:', error);
+            console.error('Chat Error Details:', error);
+            console.error('Error name:', error.name);
+            console.error('Error message:', error.message);
+            console.error('Error stack:', error.stack);
             
             let errorMessage;
             if (error.message.includes('API_KEY') || error.message.includes('your_api_key_here')) {
@@ -1717,8 +1815,14 @@ This comprehensive framework represents a significant advancement in evacuation 
 **Meanwhile, here are key findings from the EvacuAIDi research:**
 
 **Core Research Question:** How can AI-driven guidance systems improve evacuation safety and inclusivity?`;
+            } else if (error.message.includes('Environment configuration not loaded')) {
+                errorMessage = `The AI system is still initializing. Please wait a moment and try again.
+
+**Key EvacuAIDi Research Findings:**`;
             } else {
-                errorMessage = `I apologize, but I'm currently experiencing technical difficulties. However, here are some key findings from the EvacuAIDi research:
+                errorMessage = `I'm experiencing technical difficulties. Here's what I know about the EvacuAIDi research:
+
+**Error Details for debugging:** ${error.message}
 
 **Core Research Question:** How can AI-driven guidance systems improve evacuation safety and inclusivity?`;
             }
