@@ -1,6 +1,6 @@
 # Chapter 3 Resources
 
-Supplementary resources for Chapter 3 of the dissertation paper.
+Supplementary resources for Chapter 3 of the dissertation.
 
 ## Files
 
