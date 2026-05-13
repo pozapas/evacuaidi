@@ -1,0 +1,272 @@
+# DiSFM-CG Literature-Based Parameters
+# Created: 2025-05-27
+# For: Disability-Inclusive Social Force Model with Compliance Gate
+
+# ===============================================
+# CORE SOCIAL FORCE MODEL PARAMETERS
+# ===============================================
+
+social_force_core:
+  # Desired walking speed (v₀)
+  desired_speed_mean: 1.34  # m/s
+  desired_speed_std: 0.26   # m/s  
+  desired_speed_emergency: 1.8  # m/s (emergency conditions)
+  context: "Free-flow hallway walking, young adults"
+  source: "Helbing & Molnár (1995)"
+  
+  # Relaxation time (τ)
+  relaxation_time: 0.5  # s
+  relaxation_time_range: [0.3, 0.8]  # s
+  context: "Time to adapt velocity toward desired velocity"
+  source: "Helbing & Molnár (1995)"
+  # Agent-agent repulsion
+  repulsion_strength_A: 2000  # N
+  repulsion_strength_range: [1000, 3000]  # N
+  repulsion_range_B: 0.08  # m
+  repulsion_range_effective: [0.1, 0.5]  # m (practical personal space)
+  context: "Inter-personal collision avoidance"
+  source: "Helbing et al. (2000)"
+  
+  # Wall-agent interaction  
+  wall_repulsion_strength_A: 2000  
+  wall_repulsion_range_B: 0.1  # m
+  wall_range_effective: [0.1, 0.3]  # m
+  context: "Wall avoidance and boundary conditions"
+  source: "Helbing et al. (2005)"
+
+# ===============================================
+# DISABILITY-SPECIFIC MODIFICATIONS
+# ===============================================
+
+disability_modifiers:
+  # Speed factors (relative to able-bodied baseline)
+  wheelchair_manual_speed_factor: 0.50  # 50% of able-bodied speed
+  wheelchair_electric_speed_factor: 0.71  # 71% of able-bodied speed  
+  visually_impaired_speed_factor: 0.87  # 87% (range: 43-100%)
+  source: "Sharifi et al. (2017); Wright et al. (1999)"
+  
+  # Personal space multipliers
+  wheelchair_space_multiplier: 1.5  # 50% larger interaction radius
+  visually_impaired_space_multiplier: 0.95  # Slightly smaller (counter-intuitive)
+  mobility_aid_space_multiplier: 1.5  # General mobility aid users
+  context: "Physical dimensions + behavioral preferences"
+  source: "Sharifi et al. (2017); Fruin body ellipse analysis"
+  
+  # Reaction time adjustments
+  wheelchair_reaction_factor: 1.25  # 25% longer relaxation time
+  visually_impaired_reaction_factor: 1.5  # 50% longer (estimated)
+  mobility_impaired_reaction_factor: 1.2  # 20% longer (general)
+  context: "Slower acceleration and response times"
+  source: "Disability mobility research (estimated from Cha analysis)"
+
+# ===============================================
+# AI GUIDANCE SYSTEM PARAMETERS
+# ===============================================
+
+ai_guidance:
+  # Force strength
+  guidance_strength_k_AI: 2.0  # m/s² (comparable to desired acceleration)
+  k_AI_range: [1.0, 5.0]  # m/s² (calibration bounds)
+  context: "Attractive force from AI instructions"
+  source: "Yang et al. leader navigation force analogy"
+  
+  # System characteristics
+  update_frequency: 1.0  # Hz (once per second)
+  sensor_range: 30.0  # m (visibility/audibility range)
+  detection_range_indoor: 15.0  # m (reduced for indoor/congested areas)
+  context: "AI system responsiveness and sensor range"
+  source: "Exit sign visibility standards (~30m); PA system range"
+
+# ===============================================
+# COMPLIANCE BEHAVIORAL MODEL  
+# ===============================================
+
+compliance_model:
+  # Logistic curve parameters
+  logistic_alpha: 5.0  # steepness of compliance curve
+  logistic_alpha_range: [2.0, 10.0]  # calibration bounds
+  logistic_beta: 0.0  # threshold point (50% compliance)
+  logistic_beta_range: [-1.0, 1.0]  # bias adjustment range
+  
+  # Base compliance rates
+  base_compliance_probability: 0.5  # 50% baseline compliance
+  high_trust_compliance: 0.8  # 80% for trusted sources
+  low_trust_compliance: 0.3  # 30% for distrusted sources
+  
+  # Modifying factors
+  trust_weight: 0.4  # influence of trust on compliance
+  visibility_weight: 0.3  # influence of guidance clarity
+  congestion_penalty: -0.2  # negative effect of crowding
+  
+  context: "Probabilistic obedience to AI guidance"
+  source: "Chu et al. (2017); Kinateder et al. (2014)"
+
+# ===============================================
+# LEADER-FOLLOWER DYNAMICS
+# ===============================================
+
+leader_follower_dynamics:
+  # Attraction strength (β parameter in Eq. 1)
+  attraction_strength_beta: 1.5  # N/m or comparable to goal attraction
+  beta_leader_range: [0.5, 3.0]  # calibration bounds
+  
+  # Interaction range
+  max_attraction_distance: 2.0  # m (effective leader influence distance)
+  following_range_max: 5.0  # m (maximum detection distance)
+  
+  # Influence decay
+  influence_decay_type: "exponential"  # exponential distance decay
+  influence_cutoff: 0.1  # minimum influence threshold
+  line_of_sight_required: true  # occlusion blocks influence
+  
+  context: "Social following and leader attraction"
+  source: "Moussaïd et al. (2011); Geoerg et al. (2022)"
+
+# ===============================================
+# CALIBRATION OBJECTIVE WEIGHTS
+# ===============================================
+
+calibration_weights:
+  # Multi-objective calibration (Equation 4-11)
+  w1_velocity_profile: 1.0  # RMSE_v weight
+  w2_exit_timing: 1.0  # KS_exit weight  
+  w3_transfer_entropy: 1.0  # ΔTE weight
+  w4_exit_choice: 2.0  # ERR_exit weight (higher priority)
+  
+  # Normalization targets (for weight tuning)
+  target_rmse_v: 0.12  # m/s (target velocity RMSE)
+  target_ks_exit: 0.08  # target KS statistic
+  target_delta_te: 0.25  # target TE relative error
+  target_err_exit: 0.20  # target exit choice error (20%)
+  
+  context: "Multi-objective optimization balance"
+  source: "DiSFM-CG methodology specification"
+
+# ===============================================
+# SIMULATION PARAMETERS
+# ===============================================
+
+simulation_settings:
+  # Time integration
+  dt: 0.05  # s (Euler timestep)
+  max_simulation_time: 600.0  # s (10 minutes max)
+    # Population characteristics (REAL TRAJECTORY DATA - RECOMMENDED)
+  agents_per_session_variable: true  # Agent count varies by scenario
+  agents_per_session_range: [13, 17]  # Actual tracked agents per session
+  agents_per_session_mean: 15.3  # Average from trajectory analysis
+  
+  # Disability representation (from actual data)
+  iwd_per_session: 5  # Consistent IWDs across sessions
+  iwd_percentage: 0.33  # 33% disability representation (higher than typical)
+  total_unique_participants: 47  # Total individuals across all 16 sessions
+  
+  # Physical characteristics
+  agent_mass: 80.0  # kg (average adult)
+  agent_radius: 0.3  # m (shoulder width approximation)
+  
+  # Data source validation
+  data_source: "RFID trajectory tracking"
+  tracking_success_rate: 0.38  # ~15/40 agents successfully tracked per session
+  note: "Using actual tracked trajectories ensures empirical validity"
+  
+  # Environment
+  boundary_conditions: "reflective"  # wall interaction type
+  exit_detection_threshold: 0.5  # m (distance to count as exited)
+  
+  context: "Numerical integration and simulation bounds"
+  source: "DiSFM-CG methodology; standard SFM practice"
+
+# ===============================================
+# CITATIONS AND SOURCES
+# ===============================================
+
+references:
+  - "Helbing, D., & Molnár, P. (1995). Social force model for pedestrian dynamics. Physical Review E, 51(5), 4282."
+  - "Helbing, D., Farkas, I., & Vicsek, T. (2000). Simulating dynamical features of escape panic. Nature, 407(6803), 487-490."
+  - "Moussaïd, M., et al. (2011). How simple rules determine pedestrian behavior and crowd disasters. PNAS, 108(17), 6884-6888."
+  - "Zhang, Y., et al. (2023). Modified social force model to simulate evacuation with individuals with disabilities. Applied Mathematical Modelling, 114, 639-658."
+  - "Sharifi, M.S., et al. (2017). Evacuation and Pedestrian Dynamics. Transportation Research Procedia, 2, 777-785."
+  - "Kinateder, M., et al. (2014). Human behavior in severe tunnel accidents. Transportation Research Part F, 24, 80-92."
+  - "Chu, M., et al. (2017). Agent-based evacuation modeling with multiple exits using NetLogo. Safety Science, 95, 47-58."
+
+# ===============================================
+# PARAMETER VALIDATION RANGES
+# ===============================================
+
+validation_bounds:
+  # Performance targets from methodology
+  rmse_v_target: "< 0.12 m/s"
+  ks_exit_target: "< 0.08"  
+  err_exit_target: "< 20%"
+  delta_te_target: "< 0.25"
+  sobol_sensitivity_k_AI: "≈ 0.25"
+  
+  # Physical constraints
+  max_speed_physical: 3.0  # m/s (human sprint limit)
+  min_personal_space: 0.05  # m (minimum collision distance)
+  max_force_magnitude: 10000  # N (reasonable upper bound)
+
+# Model version and metadata
+model_info:
+  version: "DiSFM-CG v1.0"
+  created_date: "2025-05-27"
+  created_by: "PhD Dissertation Research"
+  calibration_target: "47-person RFID evacuation drill"
+  optimization_method: "CMA-ES"
+
+# ===============================================
+# DISABILITY-SPECIFIC PARAMETER SETS
+# ===============================================
+# CRITICAL: The methodology requires separate parameter sets for 
+# able-bodied vs. individuals with disabilities (IWDS)
+# This enables proper disability-inclusive modeling
+
+disability_specific_parameters:
+  # Able-bodied parameter set
+  able_bodied:
+    # Core parameters
+    desired_speed_mean: 1.34  # m/s
+    relaxation_time: 0.5      # s
+    repulsion_strength_A: 2000  # N
+    repulsion_range_B: 0.08    # m
+    
+    # Calibration bounds
+    desired_speed_range: [0.8, 2.0]    # m/s
+    relaxation_time_range: [0.2, 0.8]  # s
+    repulsion_A_range: [1000, 4000]    # N
+    repulsion_B_range: [0.05, 0.15]    # m
+    
+  # Individuals with disabilities (IWDS) parameter set
+  iwds:
+    # Core parameters (modified from able-bodied baseline)
+    desired_speed_mean: 0.67  # m/s (50% of able-bodied, wheelchair manual)
+    relaxation_time: 0.625    # s (25% longer reaction time)
+    repulsion_strength_A: 2000  # N (same collision avoidance)
+    repulsion_range_B: 0.12    # m (50% larger personal space)
+    
+    # Calibration bounds (disability-adjusted)
+    desired_speed_range: [0.3, 1.2]    # m/s (broader disability range)
+    relaxation_time_range: [0.4, 1.2]  # s (slower responses)
+    repulsion_A_range: [1000, 4000]    # N (same as able-bodied)
+    repulsion_B_range: [0.08, 0.20]    # m (larger space needs)
+  
+  # Shared parameters (same for both groups)
+  shared:
+    guidance_strength_k_AI: 2.0        # m/s²
+    attraction_strength_beta: 1.5      # N/m
+    logistic_alpha: 5.0                # compliance steepness
+    logistic_beta: 0.0                 # compliance bias
+    
+    # Shared calibration bounds
+    k_AI_range: [0.5, 10.0]           # m/s²
+    beta_range: [0.1, 3.0]            # N/m
+    alpha_range: [1.0, 10.0]          # steepness
+    beta_c_range: [-2.0, 2.0]         # bias  
+  
+  # Runtime selection mechanism
+  class_mask_required: true  # Boolean vector for IWDS identification
+  class_mask_path: "processed_data/class_mask.npy"  # Boolean array: True = IWDS
+  runtime_parameter_selection: true  # Enable disability-specific parameter use
+  
+  context: "Separate parameter sets enable proper disability-inclusive modeling"
+  source: "DiSFM-CG methodology requirements; Sharifi et al. (2017)"
