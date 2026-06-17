@@ -7,7 +7,7 @@ require('dotenv').config();
 
 // Include Vercel specific configuration if it exists
 try {
-  require('./vercel');
+  require('./vercel-env');
 } catch (e) {
   // Ignore if not exists
 }
@@ -18,6 +18,7 @@ const PORT = process.env.PORT || 3000;
 // API keys from environment variables with fallbacks for development
 const GEMINI_EMBEDDING_API_KEY = process.env.GEMINI_EMBEDDING_API_KEY || process.env.EMBEDDING_API_KEY || '';
 const GEMINI_GENERATION_API_KEY = process.env.GEMINI_GENERATION_API_KEY || process.env.GENERATION_API_KEY || '';
+const GEMINI_GENERATION_MODEL = process.env.GEMINI_GENERATION_MODEL || 'gemini-2.5-flash';
 
 // Check if API keys are available - just log warning instead of exiting
 if (!GEMINI_EMBEDDING_API_KEY || !GEMINI_GENERATION_API_KEY) {
@@ -119,7 +120,7 @@ app.post('/api/generate', async (req, res) => {
     }
 
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemma-3-27b-it:generateContent?key=${GEMINI_GENERATION_API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_GENERATION_MODEL}:generateContent?key=${GEMINI_GENERATION_API_KEY}`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -160,6 +161,7 @@ app.get('/api/health', (req, res) => {
     platform: isVercel ? 'Vercel' : (process.env.RENDER ? 'Render' : 'Other'),
     embeddings_api: GEMINI_EMBEDDING_API_KEY ? 'configured' : 'missing',
     generation_api: GEMINI_GENERATION_API_KEY ? 'configured' : 'missing',
+    generation_model: GEMINI_GENERATION_MODEL,
     vercel_env: process.env.VERCEL ? 'true' : 'false',
     server_time: new Date().toISOString()
   });

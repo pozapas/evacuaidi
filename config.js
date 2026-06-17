@@ -23,7 +23,7 @@ const aiConfig = {
     // Models to use
     models: {
         embedding: "gemini-embedding-001",
-        generation: "gemma-3-27b-it"
+        generation: "gemini-2.5-flash"
     },
     
     // RAG (Retrieval-Augmented Generation) Settings
