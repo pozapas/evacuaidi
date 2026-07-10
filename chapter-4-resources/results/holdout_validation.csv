@@ -1,0 +1,4 @@
+scenario,KS_distance_D,D_crit_0.05,result
+5,0.27,0.4,pass
+9,0.33,0.4,pass
+11,0.45,0.42,under-predicted

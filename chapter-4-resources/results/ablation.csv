@@ -1,0 +1,6 @@
+model,mechanisms,J_mean,J_min,J_max
+M0,plain single-class SFM,9.25,8.75,9.67
+M1,+ two-class kinematics,6.48,6.22,6.96
+M2,+ leader force,6.39,5.64,6.96
+M3,+ guidance switch,6.69,6.27,7.54
+M4,full model,6.62,6.44,6.83

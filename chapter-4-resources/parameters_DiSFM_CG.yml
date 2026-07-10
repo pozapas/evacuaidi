@@ -1,6 +1,7 @@
-# DiSFM-CG Literature-Based Parameters
+# DiSFM-GS literature-based parameter priors
+# Combined from ChatGPT and Gemini research with academic rigor
 # Created: 2025-05-27
-# For: Disability-Inclusive Social Force Model with Compliance Gate
+# For: Disability-Inclusive Social Force Model with Guidance Switch
 
 # ===============================================
 # CORE SOCIAL FORCE MODEL PARAMETERS
@@ -28,7 +29,7 @@ social_force_core:
   source: "Helbing et al. (2000)"
   
   # Wall-agent interaction  
-  wall_repulsion_strength_A: 2000  
+  wall_repulsion_strength_A: 2000  # N (equivalent to 5 m/s² for 80kg person)
   wall_repulsion_range_B: 0.1  # m
   wall_range_effective: [0.1, 0.3]  # m
   context: "Wall avoidance and boundary conditions"
@@ -127,7 +128,7 @@ leader_follower_dynamics:
 # ===============================================
 
 calibration_weights:
-  # Multi-objective calibration (Equation 4-11)
+  # Multi-objective calibration (Equation 3)
   w1_velocity_profile: 1.0  # RMSE_v weight
   w2_exit_timing: 1.0  # KS_exit weight  
   w3_transfer_entropy: 1.0  # ΔTE weight
@@ -213,6 +214,7 @@ model_info:
   created_by: "PhD Dissertation Research"
   calibration_target: "47-person RFID evacuation drill"
   optimization_method: "CMA-ES"
+  expected_runtime: "~95 min for 40k simulations"
 
 # ===============================================
 # DISABILITY-SPECIFIC PARAMETER SETS

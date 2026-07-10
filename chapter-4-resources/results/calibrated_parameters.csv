@@ -1,0 +1,21 @@
+parameter,value,status
+v0_amb,1.3279,calibrated
+tau_amb,0.3442,calibrated
+B_amb,0.055,calibrated
+v0_mob,0.7376,calibrated
+tau_mob,0.7843,calibrated
+B_mob,0.1298,calibrated
+beta_leader,0.6403,calibrated
+lambda_door,8.4433,calibrated
+w_cong,0.5896,calibrated
+k_AI,1.1784,calibrated
+a_D2,1.923,calibrated
+a_D3,0.0737,calibrated
+a_D4,0.8391,calibrated
+t_premove,12.1786,calibrated
+phi_unfam,0.9138,calibrated
+A_amb,2000.0,frozen
+A_mob,2000.0,frozen
+alpha_c,5.0,fixed (prior)
+beta_c,0.0,fixed (prior)
+J_optimum,6.4438,objective at optimum
