@@ -3,17 +3,21 @@ DiSFM-GS calibration driver.
 =================================================================
 CMA-ES calibration under a strict 13/3 split, with A frozen at 2000 N.
 
-Free parameters (15):
+Optimization coordinates (15):
     v0_amb, tau_amb, B_amb, v0_mob, tau_mob, B_mob,
     beta_leader, lambda_door, w_cong, k_AI, a_D2, a_D3, a_D4,
     t_premove, phi_unfam
 Held / from priors (not in the search vector):
     A_amb = A_mob = 2000 N  (frozen; data uninformative)
-    alpha_c, beta_c         (compliance-gate shape; set from priors)
+    alpha_c, beta_c         (fixed structural response settings)
     dt = 0.05, max_time     (integration settings)
 
-Population is evaluated in parallel (joblib).  Every generation logs the full
-loss decomposition; checkpoints every 10 generations.
+The archived calibration supplies no route recommendation distinct from the
+sampled self-route.  Therefore the formal ``k_AI`` coordinate has zero force
+and is non-identifiable in its reported outputs; it is retained here only to
+reproduce the archived code configuration.  Population candidates are
+evaluated in parallel (joblib).  Every generation logs the full loss
+decomposition; checkpoints occur every 10 generations.
 """
 from __future__ import annotations
 import argparse
@@ -34,10 +38,10 @@ PARAM_SPACE = [
     ("v0_mob",      0.5,  1.1,  0.77),   # IWD desired speed; stays below AB (disability-slower); low bound 0.5 prevents crawl
     ("tau_mob",     0.4,  1.2,  0.70),
     ("B_mob",       0.08, 0.20, 0.10),
-    ("beta_leader", 0.1,  5.0,  1.60),
+    ("beta_leader", 0.1,  5.0,  1.60),  # continuous directional-alignment strength
     ("lambda_door", 2.0,  20.0, 8.00),
     ("w_cong",      0.0,  3.0,  0.50),
-    ("k_AI",        0.5,  10.0, 2.19),
+    ("k_AI",        0.5,  10.0, 2.19),  # formal zero-force coordinate in archived calibration
     ("a_D2",       -2.0,  4.0,  0.00),   # per-door attractiveness (D1 = reference 0)
     ("a_D3",       -2.0,  4.0,  0.00),
     ("a_D4",       -2.0,  4.0,  0.00),
@@ -49,8 +53,9 @@ FIXED = dict(A_amb=2000.0, A_mob=2000.0, alpha_c=5.0, beta_c=0.0,
 
 # Ablation ladder (M0-M4). Each entry sets the model toggles; disabled
 # mechanisms have their parameter pinned so CMA-ES does not search an inactive
-# term.  use_familiarity: the unfamiliar-exit (D3/D4) tentative-speed effect,
-# active for M1+ and off for the plain-SFM baseline (M0).
+# term.  The formal guidance toggle has zero force under the archived
+# self-route calibration.  use_familiarity is the unfamiliar-exit (D3/D4)
+# tentative-speed effect, active for M1+ and off for the plain-SFM baseline.
 ABLATIONS = {
     "M4_full":     dict(single_class=False, use_leader=True,  use_guidance=True,  use_familiarity=True),
     "M0_sfm":      dict(single_class=True,  use_leader=False, use_guidance=False, use_familiarity=False),

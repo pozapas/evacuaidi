@@ -1,7 +1,7 @@
 """
 DiSFM-GS simulation core.
 =================================================================
-Disability-Inclusive Social Force Model with a Guidance Switch.
+Disability-Aware Social Force Model with a Formal Guidance-Response Extension.
 
 Self-contained implementation in a single meter frame: agents navigate the
 building navigation graph to the available exits.
@@ -13,7 +13,8 @@ Design (all in ONE meter frame = the building-graph frame):
      X_smooth_aligned / Y_smooth_aligned), which live in the building frame.
   * Per-scenario door availability from exit_usage_summary.csv.
   * Graph shortest-path routing: each agent follows corridor waypoints to its
-    target door (nearest OPEN door by graph distance, unless AI-guided).
+    target door (sampled from available doors; a distinct policy target can be
+    supplied only in a future guidance study).
 
 Mechanisms (Eq. 1 terms) are added on top of this foundation; see the force
 methods.  Nothing here prints during simulation (calibration-friendly).
@@ -35,16 +36,16 @@ import networkx as nx
 # Paths (relative to the Codes/ working directory)
 # --------------------------------------------------------------------------
 CODES_DIR = Path(__file__).resolve().parent
-TA_RESULTS = CODES_DIR.parent / "trajectory_analysis" / "results"   # aligned traj, leader graphs, exits
+TA_RESULTS = CODES_DIR.parent / "trajectory_analysis" / "results"   # aligned trajectories and exit summaries
 PROCESSED = CODES_DIR / "processed_data"
 
 VALID_SCENARIOS = list(range(1, 17))
 IWD_IDS = {18, 22, 31, 36, 39}   # anonymized IDs of the tracked IWD participants
 
-# Authoritative scenario metadata (paper Table 4-1). Controlled = guided
-# evacuation: in the drill a marshal gave explicit instructions as the physical
-# proxy for AI guidance; the paper frames/measures this as AI-guided evacuation.
-# Available doors govern routing.
+# Scenario metadata.  The controlled flag records scenario-level control status
+# and available doors only.  The released records do not supply a person-level
+# directive, receipt, or response mapping and must not be treated as evidence
+# of AI or marshal compliance.
 # NOTE: for scenario 6 the table lists D3,D4; the usage records show all four
 # doors used. The table is treated as authoritative here.
 SCENARIOS = {
@@ -156,9 +157,10 @@ def load_scenario_agents(scenario_id: int) -> pd.DataFrame:
 
 
 # --------------------------------------------------------------------------
-# Directional correlation delay (Nagy et al. 2010) leader-follower network.
-# Robust replacement for transfer entropy on short trajectory series: the peak
-# lag of the velocity-direction correlation gives who moves first (the leader).
+# Continuous directional correlation delay (Nagy et al. 2010).  On these short
+# trajectory series, a peak lag is used only to construct structural alignment
+# weights.  It is not an FDR-screened pair network and does not establish an
+# individual leader/follower role or social causation.
 # --------------------------------------------------------------------------
 _TMAX_LAG = 6   # +/- 6 samples = +/- 12 s at 0.5 Hz
 
@@ -187,8 +189,11 @@ def _peak_lag_corr(vi, vj, tmax=_TMAX_LAG):
 
 
 def directional_leadership_matrix(vel_by_agent: Dict[int, np.ndarray], ids: List[int]):
-    """L[i,j] = peak directional correlation when i leads j (tau*>0), else 0.
-    Works on observed OR simulated unit-velocity series (same estimator)."""
+    """Continuous delayed-alignment matrix; an oriented positive lag is stored.
+
+    The legacy function name is retained for API compatibility.  The output is
+    a structural alignment summary, not a validated leader--follower network.
+    """
     n = len(ids); L = np.zeros((n, n))
     for a in range(n):
         for b in range(a + 1, n):
@@ -204,8 +209,11 @@ def directional_leadership_matrix(vel_by_agent: Dict[int, np.ndarray], ids: List
 
 
 def build_leader_P_directional(cap: float = 0.6) -> Dict[int, Dict[int, float]]:
-    """P[follower][leader] from the directional correlation delay network,
-    aggregated across sessions (row-normalise per follower, cap, average)."""
+    """Normalized delayed-alignment weights, aggregated across sessions.
+
+    The legacy dictionary keys are retained for API compatibility.  They are
+    continuous structural weights, not significant individual social ties.
+    """
     traj = pickle.load(open(PROCESSED / "clean_traj.pkl", "rb"))
     per_follower: Dict[int, List[Dict[int, float]]] = {}
     for s, df in traj.items():
@@ -235,8 +243,7 @@ def build_leader_P_directional(cap: float = 0.6) -> Dict[int, Dict[int, float]]:
 
 
 # --------------------------------------------------------------------------
-# Transfer-entropy leader network (optional; the directional correlation-delay
-# method is used by default for the leader force).
+# Legacy transfer-entropy helpers (not used by the active calibration path).
 # --------------------------------------------------------------------------
 _GML_EDGE = re.compile(
     r"edge\s*\[\s*source\s+(\d+)\s+target\s+(\d+)\s+weight\s+[A-Za-z.]*\(?([-\d.eE]+)\)?",
@@ -445,12 +452,13 @@ class Simulation:
         (optionally) congestion.  lambda_door sets distance sensitivity; w_cong
         the aversion to a door many others are already heading to.
 
-        Controlled scenarios: the marshal/AI directs each participant to their
-        NEAREST available designated door (group/location-based split).
-        A compliant agent (Bernoulli sigma(alpha_c*c_i +
-        beta_c)) adopts that door; a non-compliant agent uses the softmax
-        choice.  natural_door (nearest among ALL doors) is the intrinsic
-        preference used by the continuous guidance force."""
+        A future scenario-level policy run may pass an explicit
+        ``guidance_doors`` mapping.  The archived calibration does not pass
+        such a mapping: in controlled scenarios the guided door defaults to
+        the sampled self-route.  Its guidance force is therefore zero.  The
+        gate is a fixed structural assumption, not an observed participant
+        response measure.  ``natural_door`` (nearest among all doors) is used
+        only by the formal guidance equation."""
         controlled = SCENARIOS[scenario_id][1]
         all_doors = list(self.b.exits.keys())
         dist = {a.id: {d: self.b.graph_distance(a.pos, d) for d in doors} for a in self.agents}
@@ -476,13 +484,11 @@ class Simulation:
             Z = sum(ex.values())
             probs = np.array([ex[d] / Z for d in doors])
             chosen = doors[int(self.rng.choice(len(doors), p=probs))]
-            # Exit choice is EMERGENT (distance + congestion + door attractiveness)
-            # in all scenarios. The drill data show guidance reinforced, not
-            # redirected, door choice (guided scen 4 split ~= free-choice scen 1),
-            # so there is no "nearest-door" override. The guidance force remains a
-            # modelled capability: compliant agents in controlled scenarios can be
-            # steered toward an explicitly-supplied guidance door for counterfactual
-            # policy runs; during calibration the guided door is their own choice.
+            # Exit choice is sampled from distance, congestion, and door
+            # attractiveness in every archived calibration scenario.  A formal
+            # guidance direction can be supplied in a later policy study; here
+            # no independently specified mapping exists, so guided_door falls
+            # back to chosen and the guidance-force difference is zero.
             if controlled and self.use_guidance:
                 ag.guided_door = self.guidance_doors.get(ag.id, chosen)
                 p_comply = 1.0 / (1.0 + np.exp(-(alpha_c * ag.c_i + beta_c)))
@@ -542,14 +548,14 @@ class Simulation:
                 continue
             e_i = self._desired_dir(ai)
             F[i] += ai.mass * (ai.v0 * e_i - ai.vel) / ai.tau
-            # guidance force (Eq. 11): A_it * k_AI * (d_guided - d_self), only for
-            # compliant agents in controlled scenarios; nonzero when the guided
-            # door differs from the agent's natural preference (reinforcing in
-            # scen 4, counter-intuitive in scen 11).
+            # Formal guidance equation: A_it * k_AI * (d_guided - d_self).
+            # It is zero in the archived calibration because guided_door is the
+            # sampled self-route; a distinct policy mapping is required for a
+            # nonzero future-policy run.
             F[i] += self._guidance_force(ai)
-            # leader-follower attraction (Eq. 1, 5th term): beta * sum_j P[i->j] * dir(x_j - x_i)
+            # Continuous delayed-alignment attraction: beta * sum_j P[i->j] * dir(x_j - x_i)
             F[i] += self._leader_force(ai)
-            # soft outer boundary (keeps agents in-domain; walls proper TODO)
+            # Soft outer boundary only; interior CAD walls/obstacles are not force-resolved.
             F[i] += self._boundary_force(ai)
         return F
 

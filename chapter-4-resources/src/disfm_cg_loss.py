@@ -4,16 +4,16 @@ DiSFM-GS calibration objective.
 Four loss components on the simulation core (disfm_cg_core), under a strict
 calibrate/validate split.
 
-    J(Theta) = w1*RMSE_v + w2*KS_exit + w3*dTE + w4*ERR_exit
+    J(Theta) = w1*E_v + w2*KS_exit + w3*Delta_dir + w4*ERR_exit
 
-  RMSE_v   : distributional RMSE between simulated and observed agent-speed
-             distributions (0.5 Hz), pooled per scenario.
+  E_v      : mean absolute error of simulated able-bodied and aggregated-IWD
+             class-speed means against the fixed targets 1.28 and 0.77 m/s.
   KS_exit  : 2-sample KS distance between simulated exit times (real, from the
              agents that reach their door) and observed exit times.
-  dTE      : Frobenius norm of (observed TE matrix - simulated TE matrix),
-             same plug-in estimator (10 bins, k=l=1), normalised by ||T_obs||_F.
-  ERR_exit : share of simulated agents whose door != the participant's observed
-             door, on the controlled calibration scenarios {4, 15}.
+  Delta_dir: normalized Frobenius distance between observed and simulated
+             continuous delayed directional-alignment matrices.
+  ERR_exit : aggregate door-usage total-variation distance on the controlled
+             calibration scenarios {4, 15}; it is not a person-level error.
 
 """
 from __future__ import annotations
@@ -32,17 +32,16 @@ from disfm_cg_core import (
     IWD_IDS, CODES_DIR, TA_RESULTS,
 )
 
-N_BINS = 10   # TE discretisation (matches trajectory_analysis estimator)
+N_BINS = 10   # legacy TE helper only; TE is not used by the active loss
 
-# Reported per-group mean walking speeds: each
-# participant's total distance / total time. RMSE_v calibrates each class's
-# desired speed so the simulated class-mean speed matches these.
+# Reported per-group mean walking speeds: each participant's total distance /
+# total time.  E_v compares simulated class-mean speed with these targets.
 AB_MEAN_SPEED = 1.28
 IWD_MEAN_SPEED = 0.77
 
 
 # --------------------------------------------------------------------------
-# Transfer-entropy plug-in estimator (ported from trajectory_analysis.py)
+# Legacy transfer-entropy helpers (not used by the active calibration loss)
 # --------------------------------------------------------------------------
 def transfer_entropy(v_src: np.ndarray, v_tgt: np.ndarray, n_bins: int = N_BINS) -> float:
     """TE from source velocity series to target (predictive of target future
@@ -100,7 +99,7 @@ class Objective:
         # The directional-coupling term (index 2) has a structural floor ~2 (sim
         # velocity fields are goal-dominated), so its target is 2.0, not 0.25.
         self.b = Building(str(CODES_DIR / "building_graph.json"))
-        self.leader_P = build_leader_P_directional()   # directional correlation delay network
+        self.leader_P = build_leader_P_directional()   # continuous delayed-alignment weights
         self.open_doors = {s: SCENARIOS[s][2] for s in SCENARIOS}
         self.scenarios = scenarios or CALIBRATION_SCENARIOS
         self.n_rep = n_replications
@@ -115,7 +114,7 @@ class Objective:
         self.obs_speeds: Dict[int, np.ndarray] = {}          # scenario -> pooled speeds
         self.obs_speeds_ab: Dict[int, np.ndarray] = {}       # scenario -> able-bodied speeds
         self.obs_speeds_iwd: Dict[int, np.ndarray] = {}      # scenario -> IWD speeds
-        self.obs_dir: Dict[int, np.ndarray] = {}          # scenario -> directional leadership matrix
+        self.obs_dir: Dict[int, np.ndarray] = {}          # scenario -> continuous alignment matrix
         self.obs_dir_agents: Dict[int, List[int]] = {}
         self.obs_exit_times: Dict[int, np.ndarray] = {}
         for s in self.scenarios:
@@ -173,12 +172,12 @@ class Objective:
         rmse_list, ks_list, dte_list, err_list = [], [], [], []
         for s in self.scenarios:
             sim_speeds_all, sim_exit_all = [], []
-            # per-scenario TE / ERR use a single replication (seed); metrics that
+            # Per-scenario directional/ERR terms use one replication (seed); metrics that
             # are distributional (speed, exit time) can pool replications.
             sim, res, agents = self._sim_scenario(s, params, seed + s)
-            # RMSE_v: match the simulated class-mean walking speed (able-bodied
-            # and IWD separately) to the reported per-group means (1.28 and
-            # 0.77 m/s). speed_series excludes the pre-movement phase.
+            # E_v: match simulated able-bodied and aggregated-IWD class-mean
+            # speed to the reported targets 1.28 and 0.77 m/s.  speed_series
+            # excludes the pre-movement phase.
             sim_ab, sim_iwd = [], []
             for aid, ser in res.get("speed_series", {}).items():
                 (sim_iwd if aid in IWD_IDS else sim_ab).extend(ser)
@@ -194,9 +193,8 @@ class Objective:
             et = et[et > 0]      # drop t=0 door-adjacent starts
             if len(et) >= 3 and len(self.obs_exit_times.get(s, [])) >= 3:
                 ks_list.append(float(stats.ks_2samp(et, self.obs_exit_times[s]).statistic))
-            # directional-coupling mismatch (replaces dTE): Frobenius distance
-            # between observed and simulated directional-correlation leadership
-            # matrices, same estimator (Nagy et al. 2010), normalised.
+            # Continuous directional-alignment mismatch: normalized Frobenius
+            # distance between observed and simulated correlation-delay matrices.
             ids = self.obs_dir_agents[s]
             sim_vel = {aid: v for aid, v in res.get("vel_series", {}).items() if len(v)}
             sim_unit = {aid: v / np.clip(np.linalg.norm(v, axis=1, keepdims=True), 1e-6, None)

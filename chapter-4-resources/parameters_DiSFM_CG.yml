@@ -1,3 +1,11 @@
+# ARCHIVE-SCOPE NOTE (2026-07-19): this legacy prior file is not the active
+# configuration for the reported calibration.  The active parameter space,
+# fixed settings, and normalized objective are in src/disfm_cg_calibrate.py
+# and src/disfm_cg_loss.py.  Several historical labels and values below
+# predate the V4 scope correction and must not be read as reported results or
+# as evidence of interior wall forces, person-level guidance response, or a
+# transfer-entropy/FDR network.
+#
 # DiSFM-GS literature-based parameter priors
 # Combined from ChatGPT and Gemini research with academic rigor
 # Created: 2025-05-27
@@ -171,7 +179,7 @@ simulation_settings:
   note: "Using actual tracked trajectories ensures empirical validity"
   
   # Environment
-  boundary_conditions: "reflective"  # wall interaction type
+  boundary_conditions: "reflective"  # historical archive value; active code uses a soft outer boundary
   exit_detection_threshold: 0.5  # m (distance to count as exited)
   
   context: "Numerical integration and simulation bounds"
