@@ -50,9 +50,6 @@ future extensions that require new data or validation.
   response records.  The results must not be read as a causal evaluation of
   marshal or AI guidance.
 
-See [`V4_DOCUMENTATION_SCOPE.md`](V4_DOCUMENTATION_SCOPE.md) for the status
-of this documentation-only release.
-
 ## Repository layout
 
 ```text
