@@ -1,0 +1,27 @@
+# V6 physical-model lock. This file records references only; V5 artifacts remain immutable.
+schema_version: 1
+status: locked_for_v6_counterfactual_use
+physical_model:
+  family: A1_disfm
+  source_core: ../../../github_package/src/disfm_cg_core.py
+  source_campaign: ../../results/v5_physical_ablation_G4_20260722_full
+  provenance_file: ../../results/v5_pure_sfm_G6_20260724_reuse_locked_A1/locked_a1_provenance.json
+  parameter_sets:
+    - ../../results/v5_physical_ablation_G4_20260722_full/parameters/A1_disfm_optimizer_0.json
+    - ../../results/v5_physical_ablation_G4_20260722_full/parameters/A1_disfm_optimizer_1.json
+    - ../../results/v5_physical_ablation_G4_20260722_full/parameters/A1_disfm_optimizer_2.json
+    - ../../results/v5_physical_ablation_G4_20260722_full/parameters/A1_disfm_optimizer_3.json
+    - ../../results/v5_physical_ablation_G4_20260722_full/parameters/A1_disfm_optimizer_4.json
+    - ../../results/v5_physical_ablation_G4_20260722_full/parameters/A1_disfm_optimizer_5.json
+    - ../../results/v5_physical_ablation_G4_20260722_full/parameters/A1_disfm_optimizer_6.json
+    - ../../results/v5_physical_ablation_G4_20260722_full/parameters/A1_disfm_optimizer_7.json
+  selection_rule: Use all eight locked optimizer artifacts; do not select a favorable set after counterfactual outcomes are inspected.
+counterfactual_overrides:
+  use_guidance: false
+  k_AI: 0.0
+  use_leader: false
+  rule: Guidance is target replacement only. A nonzero independent guidance force is prohibited in V6.
+integrity_requirements:
+  - Hash every listed source before a run starts.
+  - Reject a run if any V5 A1 artifact has changed.
+  - Retain parameter_set_id in every agent- and run-level output.

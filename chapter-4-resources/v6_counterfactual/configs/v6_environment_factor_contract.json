@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "status": "locked_factor_semantics_pending_registered_geometry",
+  "scope": "Synthetic visibility and wayfinding stressors for the counterfactual V6 experiment. They are not a CFD fire reconstruction, a reconstruction of the building's installed lighting, or evidence of observed occupant response.",
+  "smoke": {
+    "quantity": "light_extinction_coefficient_m_inv",
+    "visibility_relation": "S_m = C / K_m_inv",
+    "cue_constant_C": 3.0,
+    "cue_assumption": "Conservative reflecting-directional-cue convention. Do not represent this as the installed exit-sign type.",
+    "levels": {
+      "low": {
+        "K_m_inv": 0.05,
+        "cue_visibility_m": 60.0
+      },
+      "medium": {
+        "K_m_inv": 0.15,
+        "cue_visibility_m": 20.0
+      },
+      "high": {
+        "K_m_inv": 0.6,
+        "cue_visibility_m": 5.0
+      }
+    },
+    "implementation_boundary": "Smoke must enter the V6 runner only through an explicitly registered, time-stamped route-visibility field and route-cost audit. It must not alter physical DiSFM parameters, uptake C, or an unmeasured human compliance probability. The three fixed values are predeclared stress-test anchors, not measured building smoke conditions."
+  },
+  "emergency_lighting": {
+    "nominal": {
+      "emergency_egress_illumination_reference_lux_average": 10.8,
+      "emergency_egress_illumination_reference_lux_minimum": 1.1,
+      "meaning": "Code-context reference only; this project has no photometric survey of the building."
+    },
+    "outage_50pct": {
+      "virtual_marker_unavailable_fraction": 0.5,
+      "assignment": "For each scenario environment seed, choose an exactly half-sized set of registered virtual wayfinding markers by a seeded permutation; for an odd number of markers, floor(n/2) are unavailable and the realized count is logged.",
+      "meaning": "A stylized wayfinding-marker outage stressor, not a claim that 50% of actual building luminaires fail."
+    },
+    "implementation_boundary": "Virtual markers may be attached only to registered route-decision portals after geometry acceptance. Nominal emergency lighting does not prove actual code compliance or installed illumination."
+  },
+  "pairing": {
+    "environment_seed_stream": "Use the existing paired environment_seed. The same smoke field and marker availability assignment must be reused at every uptake C within a scenario, A1 set, and replication.",
+    "prohibited": "Do not resample environmental state by uptake condition or use it to recalibrate the V5 physical core."
+  },
+  "source_basis": [
+    {
+      "citation": "NIST FDS-SMV Manuals, current FDS documentation",
+      "url": "https://pages.nist.gov/fds/manuals.html",
+      "use": "Optical extinction/visibility relation only; V6 does not claim to execute FDS."
+    },
+    {
+      "citation": "Collins and Madrzykowski (1990), NISTIR 4399",
+      "url": "https://doi.org/10.6028/NIST.IR.4399",
+      "use": "Establishes that sign luminance and smoke conditions influence sign visibility; it does not calibrate V6 occupant behaviour."
+    },
+    {
+      "citation": "NFPA 101, 2024, Sections 7.9 and 7.10; local licensed source copy",
+      "local_path": "C:\\Users\\nib37\\OneDrive - Texas State University\\USU\\Dissertation\\PhD_Dissertation\\Methodology\\Floor_Plan\\NFPA101_2024.txt",
+      "use": "Emergency-egress illumination and sign-visibility code context only; not a compliance determination for this building."
+    }
+  ]
+}

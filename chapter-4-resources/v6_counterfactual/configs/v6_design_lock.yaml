@@ -1,0 +1,47 @@
+# Pre-execution V6 design lock. It specifies design dimensions, not an outcome.
+schema_version: 1
+status: locked_pending_registered_geometry_and_scale_benchmark
+design:
+  building_load:
+    reported_capacity_persons: 3224
+    stress_test_fraction: 0.65
+    stress_test_agents: 2096
+    capacity_source: ../inputs/room_population_2096.csv
+  environmental_scenarios:
+    count: 100
+    design: stratified_latin_hypercube_for_continuous_inputs_plus_balanced_categorical_assignment
+    continuous:
+      alarm_delay_s: [0.0, 60.0]
+      iwd_share: [0.0, 0.5]
+    categorical:
+      smoke_level: [low, medium, high]
+      emergency_lighting: [nominal, outage_50pct]
+    important_boundary: >-
+      Mechanisms and parameters are locked in v6_environment_factor_contract.json. No production run
+      may start until registered geometry defines the actual route-edge and marker realization.
+  uptake_levels:
+    internal_reference: 0.0
+    reported_levels: [0.1, 0.3, 0.5, 0.7]
+    gate: A_i = 1(U_i < C), with one persistent U_i per agent and paired scenario/replication.
+  uncertainty:
+    locked_physical_parameter_sets: 8
+    paired_monte_carlo_replications_per_cell: 10
+    production_cells: 40000  # 100 scenarios x 5 uptake levels x 8 A1 sets x 10 replications
+    rule: Pilots may measure runtime but may not reduce this design, select a policy, or rewrite the claim after outcomes are inspected.
+randomness:
+  base_seed: 20260725
+  independent_streams:
+    - initial_placement
+    - movement
+    - uptake_uniforms
+    - planner_tie_break
+    - environment
+pairing:
+  same_environment_and_streams_across_uptake: true
+  nested_uptake_sets: true
+  planner_policy_version_must_match_across_uptake: true
+production_blockers:
+  - Registered four-floor geometry with room polygons, portals, exits, stairs, and accessibility attributes.
+  - A route-feasible 2,096-agent origin map derived from the registered rooms.
+  - Registered realization of the locked smoke visibility field and virtual lighting-marker state.
+  - Passing unit, integration, reproducibility, and scale benchmarks.

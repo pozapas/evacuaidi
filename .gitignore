@@ -30,3 +30,9 @@ Thumbs.db
 # Build directories
 dist/
 build/
+
+# Python caches and local execution outputs
+__pycache__/
+*.py[cod]
+chapter-4-resources/v6_counterfactual/results_raw/
+chapter-4-resources/v6_counterfactual/audit/

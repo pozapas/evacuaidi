@@ -1,98 +1,28 @@
-# DiSFM-GS: Disability-Aware Social Force Model with a Formal Guidance-Response Extension
+# Chapter 4 reproducibility materials
 
-Code, calibration configuration, and derived results supporting the revised
-manuscript *Experimental analysis and disability-aware social force modeling
-of heterogeneous crowd evacuation with probabilistic guidance response*
-(Physica A, PHYSA-261820).
+This directory contains the non-sensitive code, configurations, derived inputs, and summarized outputs supporting the V6 revision of the associated Physica A manuscript on disability-inclusive evacuation modeling and counterfactual route guidance.
 
-## What the reported calculation does
-
-The reported model combines:
-
-- class-specific kinematic and interpersonal-interaction parameters for
-  able-bodied occupants and the aggregated IWD class;
-- graph-based routing to scenario-available exits in the building coordinate
-  frame;
-- continuous delayed directional-alignment weights derived from velocity
-  direction correlation; and
-- an exit-familiarity factor.
-
-The empirical calibration uses a strict split of 13 calibration scenarios and
-three untouched hold-out scenarios (5, 9, and 11).  Its four normalized loss
-components are the mean absolute class-speed error, exit-time KS distance,
-continuous directional-alignment discrepancy, and aggregate door-usage
-total-variation distance.
-
-## Important implementation scope
-
-This repository deliberately distinguishes the reported calculation from
-future extensions that require new data or validation.
-
-- **Geometry:** `building_graph.json` supplies the navigation graph and exit
-  locations.  The force implementation uses a soft, four-side outer-domain
-  boundary to keep agents inside the simulation domain.  It does **not**
-  implement force-resolved interior CAD walls, door openings, furnishings, or
-  other obstacles.
-- **Directional alignment:** the active code computes continuous lagged
-  velocity-direction correlations and uses normalized positive-lag weights in
-  a structural attraction term.  These are not an FDR-screened pair network
-  and do not establish individual leader identities or social causation.
-- **Guidance response:** the source contains a formal route-recommendation
-  equation for a future scenario-level marshal/AI policy study.  In the
-  reported calibration no independently specified `guidance_doors` mapping is
-  supplied; the guided door defaults to the sampled self-route.  Thus the two
-  direction vectors coincide, the reported guidance force is zero, and the
-  optimizer coordinate `k_AI` is not an empirical estimate of response,
-  compliance, or guidance benefit.
-- **Controlled scenarios:** runs 4, 11, and 15 are recorded as
-  scenario-level controlled conditions with specified available doors.  The
-  public inputs do not contain participant-level directive, receipt, or
-  response records.  The results must not be read as a causal evaluation of
-  marshal or AI guidance.
-
-## Repository layout
+The current release is `v6_counterfactual/`. It provides the locked two-class physical DiSFM core, the accessibility-aware route-planner implementation, the paired 100-scenario route-guidance screen, and the data used to prepare the reported aggregate outcomes. The planner changes an agent's selected route target; it does not estimate observed individual compliance.
 
 ```text
-parameters_DiSFM_CG.yml    legacy prior archive; not the active calibration configuration
-building_graph.json        navigation graph and exit positions
-src/
-  disfm_cg_core.py         simulation core, routing, forces, alignment weights
-  disfm_cg_loss.py         normalized calibration objective and strict split
-  disfm_cg_calibrate.py    CMA-ES driver and M0--M4 code configurations
-results/
-  calibrated_parameters.csv  archived optimization output (including non-identified k_AI)
-  ablation.csv               archived M0--M4 objective values
-  holdout_validation.csv     archived hold-out KS distances
-  calibration_log_seed1.csv  per-generation loss decomposition
+v6_counterfactual/
+  configs/          locked A1 parameter snapshot and scenario specifications
+  inputs/           non-sensitive topology, occupancy allocation, and scenarios
+  legacy_core/      locked physical DiSFM implementation
+  src/              route-planning and multi-floor simulation adapters
+  scripts/          runner and result-summary scripts
+  results_summary/  reported paired 100-scenario aggregate output
+  tests/            unit tests for route-target and environmental-factor logic
+manuscript/
+  manuscript_v6_clean.pdf
 ```
 
-## Reproduction status
+Earlier files at this level are retained as an archived prior package. Use `v6_counterfactual/` for the current implementation and accompanying results.
 
-The command below is the archived calibration entry point.  It requires the
-privacy-restricted local RFID-derived inputs described below.  This
-documentation-only V4 release does **not** claim that the calibration was
-newly rerun or that it reproduces new numerical outputs.
+## Data scope
 
-```bash
-python src/disfm_cg_calibrate.py --gens 100 --seed 1 --jobs 8 --ablation M4_full
-```
-
-## Data availability
-
-The raw radio-frequency-identification trajectories were collected from human
-participants under an approved protocol and are not redistributed here.  The
-scripts expect local trajectory and exit-time inputs in the project layout.
-De-identified derived results needed to inspect the archived reported outputs
-are provided in `results/`.  Further data may be available on reasonable
-request, subject to the data owner's approval.
-
-## Requirements
-
-Python 3.10+ with `numpy`, `scipy`, `pandas`, `networkx`, `cma`, and `joblib`.
+The repository does not include raw RFID trajectories, original building drawings, or run-level agent records. Those materials remain restricted under the human-participant protocol. The released inputs and summaries are non-sensitive derived materials sufficient to inspect the reported model configuration, scenario design, target-allocation logic, and aggregate results.
 
 ## Citation
 
-Rafe, A., Singleton, P. A., and Christensen, K. M. Experimental analysis and
-disability-aware social force modeling of heterogeneous crowd evacuation with
-probabilistic guidance response. *Physica A: Statistical Mechanics and its
-Applications* (revision in preparation).
+Rafe, A., Singleton, P. A., and Christensen, K. M. Disability-inclusive social force modeling of heterogeneous evacuation with counterfactual route guidance. *Physica A: Statistical Mechanics and its Applications* (revision in preparation).
