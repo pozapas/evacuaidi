@@ -69,9 +69,9 @@ def main() -> None:
         "paired_comparison": "Within each scenario, placement, movement, uptake-uniform, and planner-tie-break streams are shared at every uptake level.",
         "hard_limit": "This is one A1 parameter set and one replication per scenario. It is a building-specific counterfactual screen, not a multi-parameter validation ensemble or an estimate of observed response.",
         "aggregate_by_uptake": aggregate,
-        "raw_row_file": str(csv_path),
+        "raw_row_file": csv_path.relative_to(V6).as_posix(),
     }
-    json_path = SUMMARY / "V6_PROVISIONAL_MAP_SCENARIO_ENSEMBLE_100X5.json"
+    json_path = SUMMARY / "V6_MAP_DERIVED_SCENARIO_ENSEMBLE_100X5.json"
     json_path.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(result, indent=2))
 

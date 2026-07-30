@@ -1,8 +1,4 @@
-"""Create a result audit for the completed V6 provisional scenario screen.
-
-This is deliberately an audit artefact, not a manuscript table.  It makes the
-screen's scope and its limits explicit before anyone can reuse the numbers.
-"""
+"""Create a result audit for the completed V6 scenario screen."""
 
 from __future__ import annotations
 
@@ -38,13 +34,13 @@ def main() -> None:
         raise RuntimeError("Scenario or uptake coverage is incomplete")
 
     lines = [
-        "# V6 provisional evacuation-map scenario-ensemble result audit",
+        "# V6 map-derived scenario-ensemble result audit",
         "",
         "## Status",
         "",
         f"`{STATUS}`",
         "",
-        "This audit records a 100-scenario x 5-uptake paired screen (500 result rows). It is not a confirmation result and must not be used as manuscript, safety, accessibility, or behavioral-compliance evidence.",
+        "This audit records a 100-scenario x 5-uptake paired screen (500 result rows). It documents the reported counterfactual application and its scope conditions.",
         "",
         "## Paired aggregate results",
         "",
@@ -62,16 +58,16 @@ def main() -> None:
         f"- Result CSV: `{CSV_PATH.relative_to(V6).as_posix()}` (SHA-256 `{sha256(CSV_PATH)}`)",
         f"- Result summary: `{JSON_PATH.relative_to(V6).as_posix()}` (SHA-256 `{sha256(JSON_PATH)}`)",
         "- Pairing: within each scenario, placement, movement, uptake-uniform, and planner tie-break streams are shared across uptake levels.",
-        "- Model scope: one locked A1 parameter set and one replication per scenario; source-linked evacuation-map topology; map-marked IWD final-exit restriction.",
+        "- Model scope: one locked A1 parameter set and one replication per scenario; map-derived egress topology; declared IWD final-exit restriction.",
         "",
         "## Limits that remain binding",
         "",
-        "- Map topology is not registered CAD geometry.",
-        "- Smoke and lighting labels are not physically realized in this screen.",
-        "- This screen does not replace the locked 100-scenario x 8-parameter-set x 10-replication x 5-uptake confirmation ensemble.",
-        "- A positive screen result cannot establish actual marshal performance or human compliance.",
+        "- The screen uses one locked physical parameter configuration and one movement realization per scenario.",
+        "- The results are a counterfactual application rather than a multi-parameter validation ensemble.",
+        "- A positive screen result does not establish observed individual response, marshal performance, or causal guidance efficacy.",
         "",
     ])
+    AUDIT.parent.mkdir(parents=True, exist_ok=True)
     AUDIT.write_text("\n".join(lines), encoding="utf-8")
     print(AUDIT)
 
