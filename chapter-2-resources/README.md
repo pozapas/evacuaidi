@@ -16,6 +16,8 @@ the underlying record.
 - `search_query_log.pdf`: Query log for both search arms, with sources, dates, year spans, and yields.
 - `supplementary_search_queries.csv`: The five supplementary keyword families as issued, with hit and retrieval counts.
 
+The primary-arm search strings are reproduced in Appendix A of the published paper.
+
 ### `corpus/`
 
 - `included_studies.csv`: The 265 included studies with year, publication type, venue, DOI, and title. Composition is 195 journal articles, 61 conference papers, 4 book chapters, 3 preprints, and 2 doctoral dissertations.
