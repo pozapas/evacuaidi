@@ -1,0 +1,111 @@
+﻿id	label	x	y	cluster	weight<Links>	weight<Total link strength>	weight<Occurrences>
+1	age	-0.1995	-0.6817	3	24	25	6
+2	algorithm	0.8582	0.4566	2	69	202	38
+3	benefit	-0.1922	0.6012	1	26	30	7
+4	bottleneck	1.7859	-0.2374	6	21	38	6
+5	cellular automata	-0.0691	-0.6599	3	27	33	9
+6	china	0.1102	-0.5343	4	25	26	5
+7	circumstance	-0.3063	-0.0428	5	33	38	10
+8	collective behavior	-0.0755	0.3968	4	31	42	10
+9	collision	0.3165	0.9241	2	34	53	11
+10	common phenomenon	-0.1211	-0.7412	5	22	31	5
+11	conflict	0.3127	-0.5721	3	23	27	6
+12	congestion	0.4291	0.5846	2	40	62	14
+13	control	0.7288	-0.2096	6	52	81	18
+14	cooperation	0.066	-0.7557	4	18	22	5
+15	crowd evacuation dynamic	-0.3891	-0.7643	4	24	30	5
+16	crowd evacuation efficiency	0.0733	-0.6812	4	28	31	5
+17	crowd evacuation simulation	0.3731	0.4521	2	35	49	8
+18	crowd model	0.2214	-0.5298	3	23	28	7
+19	crowd simulation	-0.3156	0.359	2	38	52	10
+20	desire	-0.571	0.9064	1	19	25	5
+21	destination	0.1363	0.1459	2	23	27	6
+22	emergency management	-0.3324	-0.2741	3	23	27	7
+23	emergency response	-0.7645	0.9502	1	18	29	7
+24	evacuation behavior	-0.4065	-0.1531	5	44	58	14
+25	evacuation dynamic	-0.1201	-0.3984	5	43	54	9
+26	evacuation experiment	-0.7582	-0.5533	3	33	45	7
+27	evacuation guidance	0.3991	0.0643	4	23	29	7
+28	evacuation leader	0.3328	-0.0908	4	21	25	5
+29	evacuation path	0.7396	0.9625	2	22	40	10
+30	evacuation route	0.1731	-0.0543	4	40	52	9
+31	evacuation simulation	0.0873	0.9139	2	34	49	10
+32	evacuation speed	-0.3913	-0.5461	5	12	13	5
+33	evacuation strategy	0.1968	-0.2607	4	47	59	18
+34	evacuation system	-0.1007	0.263	5	30	44	9
+35	exit choice	-0.6192	0.005	5	23	27	6
+36	exit width	-0.5693	-0.6057	5	20	21	5
+37	experimental data	0.0146	-0.0214	4	18	22	5
+38	family	-0.1263	-0.8568	3	42	68	10
+39	fatality	-0.1381	0.7871	1	20	23	6
+40	fire	-0.7405	0.4649	1	52	88	17
+41	follower	0.4448	0.229	2	54	111	28
+42	force	0.5405	-0.2157	6	69	146	25
+43	friend	-0.5221	-0.8356	3	28	45	7
+44	group behavior	-0.6751	-0.5687	3	35	56	10
+45	group leader	-0.0219	-0.2451	2	27	32	6
+46	group size	-0.6393	-0.6777	5	26	37	6
+47	grouping	-0.226	-0.3278	5	46	62	11
+48	guide	0.273	-0.2154	3	33	52	13
+49	hazard	-0.6182	0.1676	1	29	32	7
+50	hri	2.0702	-0.3061	6	16	42	5
+51	human behavior	-0.1502	0.5077	1	57	101	20
+52	human crowd	0.2019	0.376	6	24	37	7
+53	human life	0.3119	0.4959	4	19	23	5
+54	improved social force model	0.7376	0.2082	2	23	27	6
+55	incident	-0.1549	0.1678	1	49	67	12
+56	injury	-0.0851	0.5077	1	30	42	10
+57	interaction	0.6738	-0.0336	6	69	175	41
+58	interview	-0.8715	0.7449	1	11	14	6
+59	kind	0.1413	-0.4143	4	22	24	5
+60	large crowd	-0.3451	0.1386	5	17	19	6
+61	leader follower relationship	-0.0647	-0.332	2	26	35	5
+62	leadership	-0.2411	-0.5088	3	47	71	15
+63	life	-0.2294	0.4858	1	50	71	17
+64	majority	-0.1121	0.0643	2	22	24	5
+65	mean	0.3013	-0.2514	3	26	28	6
+66	member	-0.4558	-0.4812	3	56	103	22
+67	mobile robot	1.5571	-0.1855	6	24	44	7
+68	modification	0.841	-0.4248	4	33	44	6
+69	modified social force model	0.2909	0.6972	2	27	32	6
+70	motion	0.7518	-0.1266	6	59	129	25
+71	multiple exit	-0.6209	0.042	5	18	19	6
+72	navigation	0.5794	0.3328	2	24	32	9
+73	nearest exit	-0.9388	0.2621	1	26	31	7
+74	observation	0.0033	-0.4942	3	52	84	15
+75	obstacle	0.7527	0.5331	2	44	78	16
+76	occupant	-0.4498	0.3877	1	32	38	9
+77	optimal number	0.6393	-0.3541	4	17	24	5
+78	overall evacuation	-0.681	-0.7084	3	32	41	5
+79	participant	-0.9005	0.1302	1	48	80	16
+80	path	0.6019	0.4568	2	60	127	24
+81	path planning	0.6538	0.8371	2	29	59	9
+82	patient	0.0689	-0.8382	3	17	23	6
+83	pedestrian behavior	-0.4254	-0.6897	3	38	55	9
+84	pedestrian dynamic	1.0676	-0.5108	6	32	49	7
+85	pedestrian flow	1.8999	-0.25	6	20	42	5
+86	pedestrian movement	0.3293	-0.1378	5	43	52	11
+87	perception	-0.5757	0.5014	1	33	43	11
+88	presence	-0.5108	-0.2775	4	52	80	17
+89	questionnaire	-0.8672	-0.5402	3	28	34	6
+90	recent year	-0.5314	-0.3296	5	30	34	8
+91	response	-0.5821	0.4508	1	48	77	19
+92	risk	0.095	0.2797	1	47	67	14
+93	robot	1.1246	0.0091	6	55	147	30
+94	route	-0.5448	0.2642	1	54	84	16
+95	rvo	0.6247	0.8502	2	18	27	5
+96	sfm	0.3504	1.1467	2	21	30	5
+97	significant impact	-0.6792	-0.0882	5	24	24	5
+98	small group	-0.4294	-0.408	3	53	82	14
+99	smoke	-1.0822	0.439	1	26	38	7
+100	social group	-0.9356	-0.478	3	35	61	9
+101	social influence	-0.7531	0.6719	1	17	22	5
+102	structure	-0.2422	-0.1183	4	50	81	18
+103	subway station	0.1161	-0.6703	4	29	32	5
+104	support	-0.0217	0.129	5	36	50	10
+105	tendency	-0.4546	0.201	1	35	51	9
+106	terrorist attack	-0.6451	0.1925	1	28	35	8
+107	threat	-0.4537	0.5382	1	34	50	9
+108	trained leader	0.4463	0.0377	4	25	32	5
+109	velocity	0.7662	-0.4116	6	44	69	12
+110	virtual reality	-0.567	0.9586	1	26	38	8

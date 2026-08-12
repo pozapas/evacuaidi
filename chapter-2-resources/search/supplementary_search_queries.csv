@@ -1,0 +1,6 @@
+family,theme,database,date,years,query,hits,retrieved
+SS-1,social identity / collective behavior,OpenAlex,2026-08-11,2001-2025,"(evacuation OR ""emergency egress"" OR ""mass emergency"") AND (""social identity"" OR ""self-categorization"" OR ""collective behaviour"" OR ""collective behavior"" OR ""crowd psychology"")",203,203
+SS-2,panic / affiliation,OpenAlex,2026-08-11,2001-2025,"(evacuation OR emergency) AND (panic OR ""mass panic"" OR ""affiliation model"" OR ""prosocial behaviour"" OR ""prosocial behavior"" OR ""helping behaviour"" OR ""helping behavior"") AND (crowd OR disaster)",980,980
+SS-3,witness accounts / interviews,OpenAlex,2026-08-11,2001-2025,"(evacuation OR disaster OR ""emergency egress"") AND (""survivor accounts"" OR ""witness accounts"" OR ""interview study"" OR ""qualitative study"") AND (behaviour OR behavior OR decision)",463,463
+SS-4,group dynamics under threat,OpenAlex,2026-08-11,2001-2025,"(emergency OR evacuation) AND (""group dynamics"" OR ""group decision"" OR ""social influence"" OR conformity OR ""leadership emergence"") AND (crowd OR pedestrian OR occupant)",110,110
+SS-5,emergent norms / roles,OpenAlex,2026-08-11,2001-2025,"(""emergent norm"" OR ""emergent norms"" OR ""emergent leader"" OR ""emergent leadership"" OR ""role improvisation"") AND (disaster OR evacuation OR emergency)",38,38

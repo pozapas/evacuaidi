@@ -1,0 +1,224 @@
+id,study,title,design,instrument,A1,A2,A3,A4,A5,B1,B2,B3,B4,B5
+101,"Ahmed, 2020",Modeling social network influence on hurricane eva,empirical,A,R,R,R,R,P,,,,,
+102,"Albi, 2016",Invisible Control of Self-Organizing Agents Leavin,mixed,A+B,R,R,R,P,P,R,P,P,P,P
+103,"Albi, 2020",Mathematical models and methods for crowd dynamics,other,B,,,,,,NA,NA,NA,NA,NA
+104,"Albi, 2021",Optimized leaders strategies for crowd evacuation,simulation,B,,,,,,R,P,N,P,P
+105,"Alhindi, 2021",Emergency Planning for UAV-Controlled Crowd Evacua,simulation,B,,,,,,R,P,P,P,R
+106,"Alidmat, 2025",Simulation of Crowd Evacuation in Asymmetrical Exi,simulation,B,,,,,,R,P,P,R,P
+107,"Almeida, 2015",Crowd Simulation Applied to Emergency and Evacuati,simulation,B,,,,,,R,P,N,P,P
+108,"Almeida, 2021",Evacuation by leader-follower model with bounded c,simulation,B,,,,,,R,P,N,R,P
+109,"Arteaga, 2023",Effect of trained evacuation leaders on victims,simulation,B,,,,,,R,R,N,R,P
+113,"Bellomo, 2016",Human behaviours in evacuation crowd dynamics Fro,simulation,B,,,,,,R,P,N,P,P
+114,"Bode, 2014",Human responses to multiple sources of directional,empirical,A,R,R,R,R,R,,,,,
+115,"Bode, 2015",Information use by humans during dynamic route cho,empirical,A,R,R,R,P,P,,,,,
+116,"Boos, 2014",Leadership in Moving Human Groups,empirical,A,R,R,R,R,R,,,,,
+117,"Boukas, 2015",Robot Guided Crowd Evacuation,mixed,A+B,R,P,R,P,P,R,R,R,P,R
+118,"Cai, 2014",Crowd Evacuation Simulation in Multi-Agent Based V,simulation,B,,,,,,R,P,N,N,P
+119,"Cao, 2016",Modeling pedestrian evacuation with guiders based,simulation,B,,,,,,R,P,N,R,P
+120,"Cao, 2021",Simulation of competitive and cooperative egress m,simulation,B,,,,,,R,R,R,N,P
+121,"Cao, 2024",Simulation of Crowd Evacuation in Subway Stations,simulation,B,,,,,,R,R,N,R,P
+122,"Charalampous, 2014",Social mapping on RGB-D scenes,other,NA,,,,,,,,,,
+123,"Chen, 2022",An Entropy-Based Combined Behavior Model for Crowd,simulation,B,,,,,,R,P,N,R,P
+124,"Chen, 2021",An extended model for crowd evacuation considering,simulation,B,,,,,,R,P,N,P,P
+125,"Chen, 2023",An evacuation guidance model for heterogeneous pop,simulation,B,,,,,,R,P,R,R,P
+126,"Cheng, 2023",Study on evacuation strategy of multi-exit room,simulation,B,,,,,,R,P,N,N,P
+127,"Chennoufi, 2019",Decision Making in Complex System,simulation,B,,,,,,P,N,N,N,P
+128,"Chennoufi, 2020",Fuzzy controller and emotional model for evacuatio,simulation,B,,,,,,R,P,P,R,R
+129,"Chu, 2019","Incorporating Individual Behavior, Knowledge, and",simulation,B,,,,,,R,P,P,R,P
+131,"Cimellaro, 2019",Integrating a Human Behavior Model within an Agent,mixed,A+B,R,R,R,P,N,R,R,R,R,R
+132,"\emph{Coordinated Robot-Assisted Human C\dots}, 2018",,simulation,B,,,,,,R,P,N,N,P
+134,"Ding, 2020",Experimental study of leader-and-follower behaviou,empirical,A,R,R,R,P,P,,,,,
+135,"Ding, 2021",Experiment and simulation study of emergency evacu,mixed,A+B,R,R,R,P,P,P,R,R,R,P
+137,"Ding, 2024",A modified social force model for crowd evacuation,simulation,B,,,,,,R,R,R,R,R
+138,"Dong, 2014",Crowd Evacuation Optimization by Leader-follower M,simulation,B,,,,,,R,R,P,R,P
+139,"Dong, 2022",An optimization method for evacuation guidance und,simulation,B,,,,,,R,P,P,R,P
+140,"Dong, 2024",An Entropy-Based Path Planning Method for Crowd Ev,simulation,B,,,,,,R,P,P,R,P
+141,"Drury, 2009",Cooperation versus competition in a mass emergency,empirical,A,R,R,R,R,R,,,,,
+142,"Du, 2018",Study of the Indoor Evacuation Based on the Groupi,simulation,B,,,,,,R,P,N,R,P
+143,"Elzie, 2023",Groups in pedestrian evacuation Survey data on at,empirical,A,R,R,R,R,R,,,,,
+144,"Fachri, 2017",Crowd evacuation using multi-agent system with lea,simulation,B,,,,,,R,P,N,R,P
+146,"Faria, 2010",Leadership and social information use in human cro,empirical,A,R,R,R,R,R,,,,,
+147,"Feuz, 2013",Group Formation and Knowledge Sharing in Pedestria,simulation,B,,,,,,R,P,N,R,P
+148,"Fu, 2021",Do people follow neighbors An immersive virtual r,empirical,A,R,R,R,R,R,,,,,
+149,"Fujihara, 2014",Necessary Condition for Self-Organized Follow-Me E,simulation,B,,,,,,R,P,P,R,P
+151,"Georgoudas, 2007",An Intelligent Cellular Automata Model for Crowd,simulation,B,,,,,,R,P,P,R,P
+152,"Gretenkort, 2002",Interface between Hospital and Fire Authorities,empirical,A,R,P,R,P,P,,,,,
+153,"Guan, 2019",Towards pedestrian room evacuation with a spatial,simulation,B,,,,,,R,P,N,R,P
+155,"Gul, 2024",A Game-Theoretic Approach to Safe Crowd Evacuation,simulation,B,,,,,,R,P,N,R,P
+156,"Ha, 2012",Agent-based modeling of a multi-room multi-floor b,simulation,B,,,,,,R,R,P,R,P
+159,"Haghani, 2017",Following the crowd or avoiding it Empirical inve,empirical,A,R,R,R,R,R,,,,,
+160,"Haghani, 2019",Imitative (herd) behaviour in direction decision-m,simulation,B,,,,,,R,R,R,R,P
+163,"Han, 2017",Modified social force model based on information t,simulation,B,,,,,,R,P,N,P,P
+164,"Henein, 2010",Microscopic information processing and communicati,simulation,B,,,,,,R,P,N,R,P
+165,"Hou, 2014",A social force evacuation model with the leadershi,simulation,B,,,,,,R,P,N,R,P
+166,"Huang, 2022",Study on an emergency evacuation model considering,simulation,B,,,,,,R,P,N,R,P
+167,"Irnich, 2023",Impact of Leader-Follower Behavior,simulation,B,,,,,,R,R,R,R,R
+168,"Ito, 2021",Evacuation support system to control emotional lev,simulation,B,,,,,,R,P,N,P,P
+169,"Ivo, 2021",A model for flexible representation of social grou,simulation,B,,,,,,R,P,N,P,P
+170,"Jensen, 2019",Survival in cold waters - learnings from participa,empirical,A,P,P,R,P,P,,,,,
+171,"Ji, 2007",Simulating crowd evacuation with a leader-follower model,simulation,B,,,,,,R,P,N,P,P
+172,"Ji, 2018",A cellular automata model for high-density crowd e,mixed,A+B,R,P,R,R,P,R,R,R,P,P
+173,"Jiang, 2016",Robot-assisted pedestrian regulation in an exit co,simulation,B,,,,,,R,R,P,R,R
+175,"Jiang, 2020",Pedestrian Flow Optimization to Reduce the Risk of,simulation,B,,,,,,R,P,P,R,P
+176,"Jiayang, 2021",Study on a new simulation model of evacuation beha,mixed,A+B,R,R,R,P,P,R,R,R,P,R
+177,"Junaedi, 2013",Multi agent with multi behavior based on particle,simulation,B,,,,,,R,P,N,P,R
+178,"Juniastuti, 2016",Crowd navigation using leader-follower algorithm,simulation,B,,,,,,R,P,N,R,P
+179,"Kakizaki, 2015",Simulation and Experiment of Mass Evacuation to a,mixed,A+B,R,R,R,P,P,R,P,R,P,P
+180,"Khalid, 2019",A Two-Phase Context-Aware Approach to Emergency Ev,simulation,B,,,,,,P,N,N,N,P
+181,"Khamis, 2020",Optimized exit door locations for a safer emergenc,simulation,B,,,,,,R,P,N,R,P
+182,"Klatt, 2024",Crowd-Related Considerations at Mass Gathering Eve,other,NA,,,,,,,,,,
+183,"Le, 2017",Reinforcement learning approach for adapting compl,simulation,B,,,,,,R,P,R,R,P
+184,"Li, 2016",Decision-Making and Group Behaviors in a Building,empirical,A,R,R,R,P,R,,,,,
+185,"Li, 2019",Emergency evacuation with incomplete information i,simulation,B,,,,,,R,P,N,P,P
+186,"Li, 2019",Group structures facilitate emergency evacuation,simulation,B,,,,,,R,P,N,R,P
+187,"Li, 2020",Research on Efficient Evacuation during Earthquake,simulation,B,,,,,,R,P,N,R,P
+188,"Li, 2020",Social Relation Network and group behavior based o,empirical,A,R,R,R,P,P,,,,,
+189,"Li, 2021",Deep deterministic policy gradient algorithm for c,simulation,B,,,,,,R,P,R,P,P
+190,"Li, 2021",Simulation of a pediatric hospital in evacuation c,simulation,B,,,,,,R,R,N,R,P
+191,"Li, 2022",The effect of geometric layout of exit on escape m,simulation,B,,,,,,R,P,P,R,P
+192,"Li, 2023",Pedestrian evacuation simulation in multi-exit cas,simulation,B,,,,,,R,P,N,R,P
+193,"Li, 2024",Safety Indication Signs-Based Crowd Division and L,simulation,B,,,,,,R,P,P,R,R
+194,"Lima, 2017",A cellular automata ant memory model of foraging i,other,B,,,,,,R,P,N,R,P
+195,"Lin, 2018",Evacuation simulation with consideration of obstac,simulation,B,,,,,,R,P,N,R,P
+196,"Liu, 2018",A social force model for the crowd evacuation in a,simulation,B,,,,,,R,R,N,R,P
+197,"Liu, 2018",The effect of dedicated exit on the evacuation of,simulation,B,,,,,,R,R,N,R,P
+198,"Liu, 2018",A path planning approach for crowd evacuation in b,simulation,B,,,,,,R,P,P,R,P
+199,"Liu, 2018",A social force evacuation model driven by video da,simulation,B,,,,,,R,R,R,P,P
+200,"Liu, 2018",An Evacuation Route Model of Crowd Based on Emotio,simulation,B,,,,,,R,P,P,R,P
+201,"Liu, 2018",Crowd evacuation simulation approach based on navi,simulation,B,,,,,,R,P,P,R,P
+202,"Liu, 2019",A Relationship-Based Pedestrian Social Groups Mode,simulation,B,,,,,,R,P,N,R,P
+204,"Liu, 2022",Modeling the dynamics of pedestrian evacuation in,simulation,B,,,,,,R,R,R,R,P
+205,"Lombardi, 2020",Nonverbal leadership emergence in walking groups,empirical,A,R,R,R,R,P,,,,,
+206,"Long, 2020",Simulation-Based Model of Emergency Evacuation Gui,simulation,B,,,,,,R,P,N,R,P
+207,"Lopez, 2021",CellEVAC An adaptive guidance system for crowd ev,simulation,B,,,,,,R,P,N,R,R
+208,"Lopez, 2022",Adaptive cell-based evacuation systems for leader-,simulation,B,,,,,,R,P,N,R,R
+209,"Lu, 2017",A study of pedestrian group behaviors in crowd eva,mixed,A+B,R,R,R,R,P,R,R,R,R,P
+210,"Lu, 2021",Multi-agent modeling of crowd dynamics under mass,simulation,B,,,,,,R,R,R,R,P
+211,"Lu, 2021","Swarm intelligence, social force and multi-agent m",simulation,B,,,,,,R,R,R,R,P
+212,"Lu, 2024",Stochastic Optimal Intervention for Robot-Assisted,simulation,B,,,,,,R,P,N,R,P
+213,"Luh, 2012",Modeling and Optimization of Building Emergency Ev,simulation,B,,,,,,R,P,P,R,R
+214,"Luna, 2018",A Fuzzy Speed Controller for a Guide Robot Using a,other,A,NA,NA,NA,NA,NA,,,,,
+215,"Ma, 2016",Effective leadership for crowd evacuation,simulation,B,,,,,,R,R,N,R,P
+216,"Ma, 2017",Dual effects of guide-based guidance on pedestrian,simulation,B,,,,,,R,P,N,R,P
+217,"Ma, 2017",Experimental study on small group behavior and cro,empirical,A,R,R,R,R,P,,,,,
+218,"Ma, 2020",Study on large-scale crowd evacuation method in cu,simulation,B,,,,,,R,P,N,R,P
+219,"Makmul, 2023",A Pedestrian Evacuation Model with Leaders during the Smoke,simulation,B,,,,,,R,P,N,R,P
+220,"Mao, 2019",Modeling Group Structures With Emotion in Crowd Ev,simulation,B,,,,,,R,P,N,P,P
+221,"Mao, 2020",Personality trait and group emotion contagion base,simulation,B,,,,,,R,P,P,R,P
+222,"Mao, 2024",Simulated interventions based on virtual reality t,empirical,A,R,R,R,P,P,,,,,
+223,"Marsh, 2014",Crowd Guidance in Building Emergencies Using Virt,mixed,A+B,R,P,R,P,P,P,P,P,N,P
+224,"Mason, 2020",Evolutionary Game Dynamics for Crowd Behavior in E,simulation,B,,,,,,R,P,N,P,P
+225,"Minton, 2004",Crowd dynamics a paradigm for simulating and pred,simulation,B,,,,,,P,P,N,R,P
+230,"Muhammad, 2018",Crowds Evacuation Simulation on Heterogeneous Agen,simulation,B,,,,,,R,P,N,P,P
+231,"Nayyar, 2021",Aiding Emergency Evacuations Using Obstacle-Aware,simulation,B,,,,,,R,P,P,R,P
+232,"Nayyar, 2020",Exploring the Effect of Explanations During Robot-,empirical,A,R,R,R,R,P,,,,,
+233,"Nayyar, 2023",Characterizing Evacuee Behavior During a Robot-Gui,empirical,A,R,R,R,P,P,,,,,
+235,"Okaya, 2011",Evacuation simulation with communication for anti-,simulation,B,,,,,,R,P,N,P,R
+236,"Pelechano, 2006",Modeling Crowd and Trained Leader Behavior during,simulation,B,,,,,,R,P,N,R,P
+237,"Pinkert, 2007",Leadership as a Component of Crowd Control in a Ho,other,NA,,,,,,,,,,
+238,"Pluchino, 2015",Agent-Based Model for Pedestrians Evacuation afte,simulation,B,,,,,,R,R,P,R,P
+239,"Qiao, 2024",A simulation study of the influence of dedicated b,simulation,B,,,,,,R,R,P,R,P
+240,"Qiu, 2010",Modeling group structures in pedestrian crowd simu,simulation,B,,,,,,R,P,N,R,P
+244,"Ren, 2009",Agent-Based Modeling and Simulation on Emergency E,simulation,B,,,,,,R,P,N,R,P
+245,"Ren, 2021",Variable guiding strategies in multi-exits evacuat,simulation,B,,,,,,R,P,N,R,P
+246,"Ren, 2022",Experimental study of crowd evacuation dynamics co,empirical,A,R,R,R,P,P,,,,,
+247,"Ren, 2023",Modified social force model considering emotional,simulation,B,,,,,,R,P,N,R,P
+248,"Rio, 2014",A Data-Driven Model of Pedestrian Following and Em,mixed,A+B,R,R,R,R,R,R,R,R,R,P
+250,"Robinette, 2012",Information propagation applied to robot-assisted,simulation,B,,,,,,R,P,P,R,P
+253,"Sakour, 2016",Robot assisted evacuation simulation,simulation,B,,,,,,R,P,N,R,P
+255,"Sattaratnamai, 2020",Urban Navigation System With Multiple Sub-Maps and,other,B,,,,,,R,P,P,P,R
+256,"Shao, 2015",Effective strategies of collective evacuation from,simulation,B,,,,,,R,P,N,R,P
+257,"Sharma, 2009",Modeling Emergency Scenarios in Virtual Evacuation,simulation,B,,,,,,R,P,N,P,P
+258,"Sharma, 2011",Crowd simulation in emergency aircraft evacuation,simulation,B,,,,,,P,N,N,N,P
+259,"Sharma, 2017",Megacity A Collaborative Virtual Reality Environm,simulation,B,,,,,,P,N,N,N,P
+260,"Sharpanskykh, 2011",Grouping Behaviour in AmI-Enabled Crowd Evacuation,simulation,B,,,,,,R,P,P,R,P
+262,"Shendarkar, 2006",Crowd Simulation for Emergency Response using BDI,mixed,A+B,R,P,R,P,P,R,R,P,R,P
+263,"Shendarkar, 2008",Crowd simulation for emergency response using BDI,mixed,A+B,R,P,R,R,P,R,R,P,P,P
+264,"Shiwakoti, 2014",Using non-human biological entities to understand,simulation,B,,,,,,R,R,R,R,P
+265,"Singh, 2009",Modelling subgroup behaviour in crowd dynamics DEM,mixed,A+B,R,R,R,P,P,R,R,R,P,P
+266,"Sirakoulis, 2014",Cellular Automata for Crowd Dynamics,other,B,,,,,,NA,NA,NA,NA,NA
+267,"Sirakoulis, 2015",The Computational Paradigm of Cellular Automata in,other,B,,,,,,NA,NA,NA,NA,NA
+269,"Sobhana, 2023",Modelling and simulating the leader-follower behav,mixed,A+B,R,R,R,P,P,R,R,R,R,P
+270,"Spartalis, 2014",CA Crowd Modeling for a Retirement House Evacuatio,simulation,B,,,,,,R,P,N,P,P
+271,"Sriniketh, 2023",Robot-aided human evacuation optimal path planning,mixed,A+B,R,P,R,P,P,R,P,R,R,R
+272,"Srinivasan, 2017",Pedestrian dynamics with explicit sharing of exit,simulation,B,,,,,,R,P,R,R,P
+273,"Srinivasan, 2018",A Study of How Opinion Sharing Affects Emergency E,simulation,B,,,,,,R,P,N,P,P
+274,"Sun, 2021",Self-Organized Crowd Dynamics Research on Earthqu,simulation,B,,,,,,R,P,N,R,P
+275,"Taneja, 2018",Pedestrian control measures for efficient emergenc,simulation,B,,,,,,R,R,N,R,P
+276,"Tang, 2016",Human Mobility Modeling for Robot-Assisted Evacuat,simulation,B,,,,,,R,P,N,R,P
+277,"Tian, 2024",NegEmotion Explore the Double-Edged Sword Effect,mixed,A+B,R,P,R,P,P,R,P,R,R,P
+278,"Tianhe, 2018",Optimal Control on Crowd Evacuation with Leader-Fo,simulation,B,,,,,,R,P,N,P,P
+279,"Tresa, 2021",IoT based Smart Sensing and Alarming System with A,other,A,NA,NA,NA,NA,NA,,,,,
+280,"Trivedi, 2018",Agent-Based Modeling of Emergency Evacuations Cons,simulation,B,,,,,,R,P,N,P,P
+281,"Tsorvas, 2016",Enhanced Multi-parameterized Cellular Automata Mo,simulation,B,,,,,,R,P,R,R,P
+282,"Turgut, 2022",Modeling pedestrian group behavior in crowd evacua,simulation,B,,,,,,R,R,R,R,R
+283,"Urata, 2012",Modeling the Cooperation Network Formation Process,mixed,A+B,R,P,R,P,P,R,R,P,P,P
+284,"Vackova, 2020",Follower-Leader Concept in Microscopic Analysis,empirical,A,R,P,P,P,P,,,,,
+285,"Vani, 2013",Agent Based Evacuation Simulation Using Leader-Follower Model,simulation,B,,,,,,R,N,N,P,P
+287,"Voyer, 2016",Hospital evacuation in disasters uncovering the s,simulation,B,,,,,,R,R,P,R,P
+288,"Wagner, 2020",Principles of evacuation robots,other,NA,,,,,,,,,,
+290,"Wan, 2020",Robot-Assisted Pedestrian Regulation Based on Deep,simulation,B,,,,,,R,P,P,R,P
+291,"Wang, 2019",Effects of Leaders in the Low-visibility Environment,simulation,B,,,,,,R,P,N,P,P
+292,"Wang, 2019",Simulation of pedestrian evacuation strategies und,simulation,B,,,,,,R,P,N,R,P
+293,"Wang, 2012",Evacuation assistants An extended model for deter,simulation,B,,,,,,R,P,N,P,P
+294,"Wang, 2015",Understanding the centripetal effect and evacuatio,simulation,B,,,,,,R,P,N,R,P
+295,"Wang, 2017",A utility threshold model of herding-panic behavio,mixed,A+B,R,P,R,R,P,R,P,P,P,P
+296,"Wang, 2017",Social Interaction in Pedestrian Evacuation a Cel,simulation,B,,,,,,R,P,N,P,P
+297,"Wang, 2018",Study on Post-Earthquake Evacuation Model by Fusin,simulation,B,,,,,,R,P,P,R,P
+298,"Wang, 2019",Improved Multi-Agent Reinforcement Learning for Pa,simulation,B,,,,,,R,P,P,R,P
+300,"Wang, 2022",Simulating the leadership effect in crowd evacuation,simulation,B,,,,,,R,N,N,R,P
+301,"Wang, 2022",Wall-following searching or area coverage searchin,simulation,B,,,,,,R,P,N,R,P
+302,"Wei, 2011",A Hybrid Simulation of Large Crowd Evacuation,simulation,B,,,,,,R,N,N,N,P
+303,"Wong, 2017",Optimized evacuation route based on crowd simulati,simulation,B,,,,,,R,R,P,R,P
+304,"Wu, 2014","Computer Simulation of Leadership, Consensus Decis",simulation,B,,,,,,R,R,R,R,P
+305,"Wu, 2022",Dynamic leader role modeling for self-organizing crowd evacuation simulation,simulation,B,,,,,,R,P,N,P,P
+306,"Wu, 2024",A Vision-Driven Model Based on Cognitive Heuristic,simulation,B,,,,,,R,P,R,R,P
+307,"Wu, 2024",An Unmanned System-Guided Crowd Evacuation Method,simulation,B,,,,,,R,P,P,R,P
+308,"Xie, 2020",Evacuation performance of individuals and social g,empirical,A,R,P,R,P,R,,,,,
+309,"Xie, 2021",A study of group effects in pedestrian crowd evacu,mixed,A+B,R,R,R,P,P,R,R,R,R,P
+310,"Xie, 2022",Detecting Undeclared-Leader-Follower Structure in,simulation,B,,,,,,R,P,R,R,P
+312,"Xie, 2023",Study on single-group dynamics in evacuation,simulation,B,,,,,,R,P,P,R,P
+313,"Xu, 2021",System dynamics research of non-adaptive evacuatio,simulation,B,,,,,,R,R,P,R,P
+314,"Xu, 2023",Pedestrian evacuation dynamics considering information guidance,simulation,B,,,,,,R,P,N,R,P
+315,"Xu, 2024",Transfer entropy on collective motion with undecla,mixed,A+B,R,P,R,P,P,R,R,R,P,P
+316,"Yang, 2014",Guided crowd dynamics via modified social force mo,simulation,B,,,,,,R,R,R,R,P
+317,"Yang, 2016",Necessity of guides in pedestrian emergency evacua,simulation,B,,,,,,R,P,N,R,P
+319,"Yang, 2020",Guide optimization in pedestrian emergency evacuat,simulation,B,,,,,,R,P,N,R,P
+321,"Yi, 2022",An extended queueing model based on vision and mor,mixed,A+B,R,P,P,P,P,R,P,P,R,P
+322,"Yi, 2024",Phase Transitions in Pedestrian Evacuation A Dyna,simulation,B,,,,,,R,P,N,R,P
+324,"Yu, 2023",Modeling of crowd groups with an extended social f,simulation,B,,,,,,R,P,N,R,P
+325,"Yu, 2022",An extended model for crowd evacuation considering,simulation,B,,,,,,R,P,N,R,P
+326,"Yu, 2022",DArteiclteermining Subway Emergency Evacuation Eff,mixed,A+B,R,R,R,P,P,R,R,P,P,P
+327,"Yu, 2024",Integrated modeling of crowd groups based on spati,simulation,B,,,,,,R,R,R,R,P
+328,"Yuan, 2023",Multi-robot-assisted human crowd control for emerg,simulation,B,,,,,,R,P,R,P,P
+329,"Yuecheng, 2013",Optimal leader-follower control for crowd evacuati,simulation,B,,,,,,R,P,R,N,P
+330,"Zell, 2019",Simulation Prepares an Interprofessional Team to E,empirical,A,R,R,R,R,P,,,,,
+331,"Zhang, 2013",,simulation,B,,,,,,R,P,N,P,P
+332,"Zhang, 2021",Optimal guidance strategy for crowd evacuation wit,simulation,B,,,,,,R,R,P,R,P
+333,"Zhang, 2018",Modified two-layer social force model for emergenc,simulation,B,,,,,,R,P,R,P,P
+334,"Zhang, 2021",Experimental study on crowd following behavior und,empirical,A,R,R,R,R,P,,,,,
+335,"Zhang, 2021",IoT-Based Positive Emotional Contagion for Crowd E,mixed,A+B,R,P,P,P,P,R,P,P,P,P
+336,"Zhang, 2022",Experimental study on evacuation behavior with gui,empirical,A,R,R,R,P,P,,,,,
+337,"Zhang, 2023",Experimental and modeling study on evacuation beha,mixed,A+B,R,P,R,P,P,R,R,R,R,P
+338,"Zhang, 2023",Pedestrian Evacuation Modelling and Simulation Und,simulation,B,,,,,,R,P,N,R,P
+339,"Zhang, 2023",Pedestrian small group behaviour and evacuation dy,mixed,A+B,R,P,R,P,P,R,R,R,R,P
+340,"Zhang, 2023",Sensor-Based Pedestrian Movement Simulation and Ev,mixed,A+B,R,P,R,P,P,R,P,P,P,P
+341,"Zhang, 2024",A double‐layer crowd evacuation simulation method based on deep reinforcement,simulation,B,,,,,,R,P,N,R,R
+342,"Zhang, 2024",Multisource-Knowledge-Based Approach for Crowd Eva,simulation,B,,,,,,R,P,P,P,P
+343,"Zhao, 2018",A Role-Dependent Data-Driven Approach for High-Den,simulation,B,,,,,,R,R,R,R,P
+345,"Zhao, 2021",An evacuation simulation method based on an improv,simulation,B,,,,,,R,P,P,R,R
+346,"Zheng, 2019",Improved Multi-Agent Deep Deterministic Policy Gra,simulation,B,,,,,,R,P,P,P,R
+347,"Zheng, 2020",Improved Social Force Model Based on Emotional Con,simulation,B,,,,,,R,P,N,P,R
+348,"Zheng, 2022",Multi-Robot-Assisted Human Crowd Evacuation using,simulation,B,,,,,,R,P,P,P,P
+349,"Zheng, 2024",Multirobot-Guided Crowd Evacuation Two-Scale Mode,simulation,B,,,,,,R,P,P,R,P
+350,"Zhou, 2018",Optimal number and location planning of evacuation,simulation,B,,,,,,R,P,P,R,P
+352,"Zhou, 2019",Optimization of Crowd Evacuation With Leaders in U,simulation,B,,,,,,R,P,P,R,P
+353,"Zhou, 2022",Multiagent evacuation framework for a virtual fire,simulation,B,,,,,,R,P,P,P,R
+354,"Zhou, 2022",Robot-Guided Crowd Evacuation in a Railway Hub Sta,simulation,B,,,,,,R,P,P,P,P
+355,"Zhou, 2023",Crowd Evacuation With Multi-Modal Cooperative Guid,simulation,B,,,,,,R,P,P,R,P
+356,"Zhu, 2016",Experimental Study on Choice Behavior of Pedestria,empirical,A,R,R,R,P,P,,,,,
+357,"Zhu, 2021",Optimal Feedback Control of Pedestrian Flow in Het,simulation,B,,,,,,R,R,P,R,P
+358,"Zou, 2020",Simulation of Crowd Evacuation under Toxic Gas Inc,simulation,B,,,,,,R,R,N,R,R
+401,"Wagner, 2021",Robot-Guided Evacuation as a Paradigm for Human-Robot Interaction Research,other,NA,,,,,,,,,,
+402,"Radianti, 2014",Comparing Different Crowd Emergency Evacuation Models Based on Human Centered Sensing Criteria,other,NA,,,,,,,,,,
+403,"Vihas, 2012",Follow-the-Leader Cellular Automata Based Model Directing Crowd Movement,simulation,B,,,,,,R,P,N,N,P

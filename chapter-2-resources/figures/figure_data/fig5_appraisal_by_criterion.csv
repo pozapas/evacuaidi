@@ -1,0 +1,11 @@
+criterion,reported,partially_reported,not_reported,not_applicable,studies_criterion_applies_to
+A1,51,1,0,2,52
+A2,33,19,0,2,52
+A3,49,3,0,2,52
+A4,18,34,0,2,52
+A5,10,41,1,2,52
+B1,179,7,0,3,186
+B2,49,130,7,3,186
+B3,40,55,91,3,186
+B4,124,50,12,3,186
+B5,23,163,0,3,186

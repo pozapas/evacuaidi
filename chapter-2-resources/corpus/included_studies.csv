@@ -1,0 +1,266 @@
+id,year,type,venue,doi,title
+101,2020,journal article,Transportation Research Interdisciplinary Perspectives,10.1016/j.trip.2020.100180,Modeling social network influence on hurricane eva
+102,2016,journal article,SIAM Journal on Applied Mathematics,10.1137/15M1017016,Invisible Control of Self-Organizing Agents Leavin
+103,2020,book chapter,"Crowd Dynamics, Volume 2",10.1007/978-3-030-50450-2_8,Mathematical models and methods for crowd dynamics
+104,2021,preprint,arXiv,,Optimized leaders strategies for crowd evacuation
+105,2021,journal article,Applied Sciences,10.3390/app11199009,Emergency Planning for UAV-Controlled Crowd Evacua
+106,2025,journal article,IEEE Access,10.1109/ACCESS.2024.3420068,Simulation of Crowd Evacuation in Asymmetrical Exi
+107,2015,book chapter,Advances in Artificial Transportation Systems and Simulation,,Crowd Simulation Applied to Emergency and Evacuati
+108,2021,journal article,Archives of Control Sciences,10.24425/acs.2021.138695,Evacuation by leader-follower model with bounded c
+109,2023,journal article,Safety Science,10.1016/j.ssci.2022.105967,Effect of trained evacuation leaders on victims
+110,2004,conference paper,Cellular Automata,10.1007/978-3-540-30479-1_62,Modeling the Effect of Leadership on Crowd Flow Dy
+113,2016,journal article,Physics of Life Reviews,10.1016/j.plrev.2016.05.014,Human behaviours in evacuation crowd dynamics Fro
+114,2014,journal article,Journal of The Royal Society Interface,10.1098/rsif.2013.0904,Human responses to multiple sources of directional
+115,2015,journal article,Royal Society Open Science,10.1098/rsos.140410,Information use by humans during dynamic route cho
+116,2014,journal article,PLoS Computational Biology,10.1371/journal.pcbi.1003541,Leadership in Moving Human Groups
+117,2015,journal article,IEEE Transactions on Automation Science and Engineering,10.1109/TASE.2014.2323175,Robot Guided Crowd Evacuation
+118,2014,conference paper,Proceedings of the 2012 International Conference on Cybernetics and Informatics,10.1007/978-1-4614-3872-4_305,Crowd Evacuation Simulation in Multi-Agent Based V
+119,2016,journal article,Physics Letters A,10.1016/j.physleta.2015.11.028,Modeling pedestrian evacuation with guiders based
+120,2021,journal article,Simulation Modelling Practice and Theory,10.1016/j.simpat.2021.102309,Simulation of competitive and cooperative egress m
+121,2024,journal article,IEEE Transactions on Intelligent Transportation Systems,10.1109/TITS.2024.3372994,Simulation of Crowd Evacuation in Subway Stations
+122,2014,conference paper,2014 IEEE International Conference on Imaging Systems and Techniques (IST) Proceedings,10.1109/IST.2014.6958512,Social mapping on RGB-D scenes
+123,2022,journal article,Entropy,10.3390/e24101479,An Entropy-Based Combined Behavior Model for Crowd
+124,2021,journal article,Physica A: Statistical Mechanics and its Applications,10.1016/j.physa.2021.125833,An extended model for crowd evacuation considering
+125,2023,journal article,Physica A: Statistical Mechanics and its Applications,10.1016/j.physa.2023.128740,An evacuation guidance model for heterogeneous pop
+126,2023,conference paper,2023 42nd Chinese Control Conference (CCC),10.23919/CCC58697.2023.10241113,Study on evacuation strategy of multi-exit room
+127,2019,conference paper,2019 5th International Conference on Optimization and Applications (ICOA),10.1109/ICOA.2019.8727705,Decision Making in Complex System
+128,2020,journal article,Intelligent Decision Technologies,10.3233/IDT-190092,Fuzzy controller and emotional model for evacuatio
+129,2019,journal article,Fire Technology,10.1007/s10694-018-0747-6,"Incorporating Individual Behavior, Knowledge, and"
+130,2017,conference paper,Proceedings of the 6th International Conference on Computational Methods in Structural Dynamics and Earthquake Engineering (COMPDYN 2015),10.7712/120117.5547.18175,Modeling Airport Evacuation Under Emergency Using
+131,2019,journal article,Computer-Aided Civil and Infrastructure Engineering,10.1111/mice.12364,Integrating a Human Behavior Model within an Agent
+132,2018,conference paper,2018 IEEE Conference on Decision and Control (CDC),10.1109/cdc.2018.8619480,
+134,2020,journal article,Fire Safety Journal,10.1016/j.firesaf.2020.103189,Experimental study of leader-and-follower behaviou
+135,2021,journal article,Journal of Safety Science and Resilience,10.1016/j.jnlssr.2021.09.002,Experiment and simulation study of emergency evacu
+137,2024,journal article,Applied Mathematics and Computation,10.1016/j.amc.2023.128448,A modified social force model for crowd evacuation
+138,2014,journal article,IFAC Proceedings Volumes,10.3182/20140824-6-ZA-1003.01879,Crowd Evacuation Optimization by Leader-follower M
+139,2022,journal article,Physica A: Statistical Mechanics and its Applications,10.1016/j.physa.2022.128221,An optimization method for evacuation guidance und
+140,2024,conference paper,2024 IEEE 18th International Conference on Control & Automation (ICCA),10.1109/ICCA62789.2024.10591884,An Entropy-Based Path Planning Method for Crowd Ev
+141,2009,journal article,Behavior Research Methods,10.3758/BRM.41.3.957,Cooperation versus competition in a mass emergency
+142,2018,conference paper,2018 9th International Conference on Information Technology in Medicine and Education (ITME),10.1109/ITME.2018.00226,Study of the Indoor Evacuation Based on the Groupi
+143,2023,journal article,International Journal of Disaster Risk Reduction,10.1016/j.ijdrr.2023.103916,Groups in pedestrian evacuation Survey data on at
+144,2017,conference paper,2017 4th International Conference on New Media Studies (CONMEDIA),10.1109/CONMEDIA.2017.8266037,Crowd evacuation using multi-agent system with lea
+145,2016,journal article,Safety Science,10.1016/j.ssci.2015.11.015,Leader-follower model for agent based simulation o
+146,2010,journal article,Animal Behaviour,10.1016/j.anbehav.2009.12.039,Leadership and social information use in human cro
+147,2013,conference paper,Proceedings of the 5th International Conference on Agents and Artificial Intelligence,10.5220/0004197003570364,Group Formation and Knowledge Sharing in Pedestria
+148,2021,journal article,Automation in Construction,10.1016/j.autcon.2021.103644,Do people follow neighbors An immersive virtual r
+149,2014,conference paper,2014 International Conference on Intelligent Networking and Collaborative Systems,10.1109/INCoS.2014.51,Necessary Condition for Self-Organized Follow-Me E
+151,2007,conference paper,19th IEEE International Conference on Tools with Artificial Intelligence(ICTAI 2007),10.1109/ICTAI.2007.67,An Intelligent Cellular Automata Model for Crowd
+152,2002,journal article,Prehospital and Disaster Medicine,10.1017/S1049023X0000011X,Interface between Hospital and Fire Authorities
+153,2019,journal article,Applied Mathematics and Computation,10.1016/j.amc.2018.11.003,Towards pedestrian room evacuation with a spatial
+154,2016,journal article,Physica A: Statistical Mechanics and its Applications,10.1016/j.physa.2016.05.062,A cellular Automata model for evacuation flow usi
+155,2024,journal article,"Computers, Materials & Continua",10.32604/cmc.2024.048289,A Game-Theoretic Approach to Safe Crowd Evacuation
+156,2012,journal article,Physica A: Statistical Mechanics and its Applications,10.1016/j.physa.2011.12.034,Agent-based modeling of a multi-room multi-floor b
+159,2017,journal article,Animal Behaviour,10.1016/j.anbehav.2016.11.024,Following the crowd or avoiding it Empirical inve
+160,2019,journal article,Safety Science,10.1016/j.ssci.2018.12.026,Imitative (herd) behaviour in direction decision-m
+161,2019,journal article,Transportation Research Part C: Emerging Technologies,10.1016/j.trc.2019.04.029,Dynamics of social groups decision-making in evac
+163,2017,journal article,Physica A: Statistical Mechanics and its Applications,10.1016/j.physa.2016.11.014,Modified social force model based on information t
+164,2010,journal article,Physica A: Statistical Mechanics and its Applications,10.1016/j.physa.2010.05.045,Microscopic information processing and communicati
+165,2014,journal article,Physica A: Statistical Mechanics and its Applications,10.1016/j.physa.2013.12.049,A social force evacuation model with the leadershi
+166,2022,journal article,Tunnelling and Underground Space Technology,10.1016/j.tust.2022.104485,Study on an emergency evacuation model considering
+167,2023,conference paper,Advances in Social Simulation,10.1007/978-3-031-34920-1_13,Impact of Leader-Follower Behavior
+168,2021,journal article,Artificial Life and Robotics,10.1007/s10015-020-00631-5,Evacuation support system to control emotional lev
+169,2021,journal article,Computers & Graphics,10.1016/j.cag.2021.08.005,A model for flexible representation of social grou
+170,2019,journal article,IOP Conference Series: Materials Science and Engineering,10.1088/1757-899X/700/1/012045,Survival in cold waters - learnings from participa
+171,2007,journal article,IJCSES International Journal of Computer Sciences and Engineering Systems,https://www.researchgate.net/publication/266472827_Simulating_Crowd_Evacuation_with_a_Leader-Follower_Model,Simulating crowd evacuation with a leader-follower model
+172,2018,journal article,Physica A: Statistical Mechanics and its Applications,10.1016/j.physa.2018.06.055,A cellular automata model for high-density crowd e
+173,2016,conference paper,2016 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS),10.1109/IROS.2016.7759145,Robot-assisted pedestrian regulation in an exit co
+174,2019,journal article,"IEEE Transactions on Systems, Man, and Cybernetics: Systems",10.1109/TSMC.2017.2725300,Learning Human Robot Interaction for Robot-Assiste
+175,2020,journal article,IEEE Transactions on Emerging Topics in Computational Intelligence,10.1109/TETCI.2019.2930249,Pedestrian Flow Optimization to Reduce the Risk of
+176,2021,journal article,Journal of Applied Science and Engineering,10.6180/jase.202108_24(4).0002,Study on a new simulation model of evacuation beha
+177,2013,conference paper,2013 Fourth International Conference on Intelligent Control and Information Processing (ICICIP),10.1109/ICICIP.2013.6568099,Multi agent with multi behavior based on particle
+178,2016,conference paper,2016 International Symposium on Electronics and Smart Devices (ISESD),10.1109/ISESD.2016.7886709,Crowd navigation using leader-follower algorithm
+179,2015,conference paper,ASME International Mechanical Engineering Congress and Exposition (IMECE2015),10.1115/imece2015-52954,Simulation and Experiment of Mass Evacuation to a
+180,2019,conference paper,Highlights of Practical Applications of Survivable Agents and Multi-Agent Systems. The PAAMS Collection,10.1007/978-3-030-24299-2_20,A Two-Phase Context-Aware Approach to Emergency Ev
+181,2020,journal article,"Chaos, Solitons & Fractals",10.1016/j.chaos.2019.109505,Optimized exit door locations for a safer emergenc
+182,2024,book chapter,Mass Gathering Medicine,10.1017/9781009105156.021,Crowd-Related Considerations at Mass Gathering Eve
+183,2017,conference paper,2017 Seventh International Conference on Information Science and Technology (ICIST),10.1109/ICIST.2017.7926787,Reinforcement learning approach for adapting compl
+184,2016,conference paper,Volume 14: Emerging Technologies; Materials: Genetics to Structures; Safety Engineering and Risk Analysis,10.1115/IMECE2016-66050,Decision-Making and Group Behaviors in a Building
+185,2019,journal article,Physica A: Statistical Mechanics and its Applications,10.1016/j.physa.2019.122068,Emergency evacuation with incomplete information i
+186,2019,journal article,EPL (Europhysics Letters),10.1209/0295-5075/124/68002,Group structures facilitate emergency evacuation
+187,2020,conference paper,Proceedings of the 4th International Conference on Computer Science and Application Engineering,10.1145/3424978.3425134,Research on Efficient Evacuation during Earthquake
+188,2020,journal article,Physica A: Statistical Mechanics and its Applications,10.1016/j.physa.2019.123518,Social Relation Network and group behavior based o
+189,2021,journal article,Computers & Industrial Engineering,10.1016/j.cie.2021.107621,Deep deterministic policy gradient algorithm for c
+190,2021,journal article,Simulation Modelling Practice and Theory,10.1016/j.simpat.2020.102150,Simulation of a pediatric hospital in evacuation c
+191,2022,journal article,Building Simulation,10.1007/s12273-021-0799-2,The effect of geometric layout of exit on escape m
+192,2023,journal article,Chinese Physics B,10.1088/1674-1056/ac9609,Pedestrian evacuation simulation in multi-exit cas
+193,2024,journal article,IEEE Sensors Journal,10.1109/JSEN.2024.3358326,Safety Indication Signs-Based Crowd Division and L
+194,2017,journal article,Applied Mathematical Modelling,10.1016/j.apm.2017.03.021,A cellular automata ant memory model of foraging i
+195,2018,journal article,Physical Review E,10.1103/PhysRevE.97.062303,Evacuation simulation with consideration of obstac
+196,2018,journal article,Physica A: Statistical Mechanics and its Applications,10.1016/j.physa.2018.02.136,A social force model for the crowd evacuation in a
+197,2018,journal article,Physica A: Statistical Mechanics and its Applications,10.1016/j.physa.2018.04.032,The effect of dedicated exit on the evacuation of
+198,2018,journal article,Applied Soft Computing,10.1016/j.asoc.2018.04.015,A path planning approach for crowd evacuation in b
+199,2018,journal article,Simulation Modelling Practice and Theory,10.1016/j.simpat.2018.02.007,A social force evacuation model driven by video da
+200,2018,journal article,Mathematical Problems in Engineering,10.1155/2018/5397071,An Evacuation Route Model of Crowd Based on Emotio
+201,2018,journal article,Information Sciences,10.1016/j.ins.2018.01.023,Crowd evacuation simulation approach based on navi
+202,2019,conference paper,Computer Supported Cooperative Work and Social Computing,10.1007/978-981-13-3044-5_19,A Relationship-Based Pedestrian Social Groups Mode
+204,2022,journal article,Physica A: Statistical Mechanics and its Applications,10.1016/j.physa.2021.126426,Modeling the dynamics of pedestrian evacuation in
+205,2020,journal article,Scientific Reports,10.1038/s41598-020-75551-2,Nonverbal leadership emergence in walking groups
+206,2020,journal article,IEEE Access,10.1109/ACCESS.2020.2983441,Simulation-Based Model of Emergency Evacuation Gui
+207,2021,journal article,Safety Science,10.1016/j.ssci.2021.105215,CellEVAC An adaptive guidance system for crowd ev
+208,2022,journal article,Transportation Research Part C: Emerging Technologies,10.1016/j.trc.2022.103699,Adaptive cell-based evacuation systems for leader-
+209,2017,journal article,Transportation Research Part C: Emerging Technologies,10.1016/j.trc.2016.08.018,A study of pedestrian group behaviors in crowd eva
+210,2021,journal article,"Chaos, Solitons & Fractals",10.1016/j.chaos.2021.111513,Multi-agent modeling of crowd dynamics under mass
+211,2021,journal article,Knowledge-Based Systems,10.1016/j.knosys.2020.106725,"Swarm intelligence, social force and multi-agent m"
+212,2024,journal article,IEEE Transactions on Intelligent Transportation Systems,10.1109/TITS.2023.3325424,Stochastic Optimal Intervention for Robot-Assisted
+213,2012,journal article,IEEE Transactions on Automation Science and Engineering,10.1109/TASE.2012.2200039,Modeling and Optimization of Building Emergency Ev
+214,2018,journal article,IEEE Latin America Transactions,10.1109/TLA.2018.8528222,A Fuzzy Speed Controller for a Guide Robot Using a
+215,2016,journal article,Physica A: Statistical Mechanics and its Applications,10.1016/j.physa.2015.12.103,Effective leadership for crowd evacuation
+216,2017,journal article,Physics Letters A,10.1016/j.physleta.2017.03.050,Dual effects of guide-based guidance on pedestrian
+217,2017,journal article,Physica A: Statistical Mechanics and its Applications,10.1016/j.physa.2017.01.032,Experimental study on small group behavior and cro
+218,2020,journal article,Personal and Ubiquitous Computing,10.1007/s00779-019-01256-7,Study on large-scale crowd evacuation method in cu
+219,2023,journal article,Modelling and Simulation in Engineering,10.1155/2023/1029883,A Pedestrian Evacuation Model with Leaders during the Smoke
+220,2019,journal article,IEEE Access,10.1109/ACCESS.2019.2943603,Modeling Group Structures With Emotion in Crowd Ev
+221,2020,journal article,Multimedia Tools and Applications,10.1007/s11042-018-6069-3,Personality trait and group emotion contagion base
+222,2024,journal article,International Journal of Industrial Ergonomics,10.1016/j.ergon.2024.103545,Simulated interventions based on virtual reality t
+223,2014,conference paper,Pedestrian and Evacuation Dynamics 2012,10.1007/978-3-319-02447-9_15,Crowd Guidance in Building Emergencies Using Virt
+224,2020,conference paper,2020 59th IEEE Conference on Decision and Control (CDC),10.1109/CDC42340.2020.9304111,Evolutionary Game Dynamics for Crowd Behavior in E
+225,2004,conference paper,"Sensors, and Command, Control, Communications, and Intelligence (C3I) Technologies for Homeland Security and Homeland Defense III",10.1117/12.540028,Crowd dynamics a paradigm for simulating and pred
+226,2020,journal article,Physica A: Statistical Mechanics and its Applications,10.1016/j.physa.2020.124376,Cellular Automata model with turning behavior in
+229,2018,journal article,Frontiers in Robotics and AI,10.3389/frobt.2018.00082,Virtual Sensing and Virtual Reality How New Techn
+230,2018,conference paper,2018 International Seminar on Intelligent Technology and Its Applications (ISITIA),10.1109/ISITIA.2018.8711117,Crowds Evacuation Simulation on Heterogeneous Agen
+231,2021,conference paper,2021 IEEE International Conference on Advanced Robotics and Its Social Impacts (ARSO),10.1109/ARSO51874.2021.9542834,Aiding Emergency Evacuations Using Obstacle-Aware
+232,2020,conference paper,Social Robotics,10.1007/978-3-030-62056-1_2,Exploring the Effect of Explanations During Robot-
+233,2023,conference paper,"2023 IEEE International Symposium on Safety, Security, and Rescue Robotics (SSRR)",10.1109/SSRR59696.2023.10499953,Characterizing Evacuee Behavior During a Robot-Gui
+235,2011,conference paper,"2011 IEEE International Symposium on Safety, Security, and Rescue Robotics",10.1109/SSRR.2011.6106753,Evacuation simulation with communication for anti-
+236,2006,journal article,IEEE Computer Graphics and Applications,10.1109/MCG.2006.133,Modeling Crowd and Trained Leader Behavior during
+237,2007,journal article,Prehospital and Disaster Medicine,10.1017/S1049023X00005367,Leadership as a Component of Crowd Control in a Ho
+238,2015,conference paper,Structures Congress 2015,10.1061/9780784479117.129,Agent-Based Model for Pedestrians Evacuation afte
+239,2024,journal article,Emergency Management Science and Technology,10.48130/emst-0024-0013,A simulation study of the influence of dedicated b
+240,2010,journal article,Simulation Modelling Practice and Theory,10.1016/j.simpat.2009.10.005,Modeling group structures in pedestrian crowd simu
+244,2009,conference paper,Complex Sciences,10.1007/978-3-642-02469-6_25,Agent-Based Modeling and Simulation on Emergency E
+245,2021,journal article,Applied Mathematics and Computation,10.1016/j.amc.2021.125965,Variable guiding strategies in multi-exits evacuat
+246,2022,journal article,International Journal of Disaster Risk Reduction,10.1016/j.ijdrr.2022.103228,Experimental study of crowd evacuation dynamics co
+247,2023,journal article,International Journal of Disaster Risk Reduction,10.1016/j.ijdrr.2023.103902,Modified social force model considering emotional
+248,2014,conference paper,Pedestrian and Evacuation Dynamics 2012,10.1007/978-3-319-02447-9_47,A Data-Driven Model of Pedestrian Following and Em
+249,2018,conference paper,"Virtual Humans and Crowds for Immersive Environments (VHCIE), IEEE",https://www.cs.upc.edu/~npelechano/VHCIE2018_Rios.pdf,Follower Behavior in a Virtual Environment
+250,2012,conference paper,2012 IEEE International Conference on Robotics and Automation,10.1109/ICRA.2012.6225122,Information propagation applied to robot-assisted
+251,2019,journal article,Physica A: Statistical Mechanics and its Applications,10.1016/j.physa.2019.121432,Human behavior modeling for simulating evacuation
+253,2016,conference paper,2016 8th Computer Science and Electronic Engineering (CEEC),10.1109/CEEC.2016.7835898,Robot assisted evacuation simulation
+255,2020,journal article,IEEE Access,10.1109/ACCESS.2020.2994652,Urban Navigation System With Multiple Sub-Maps and
+256,2015,journal article,Physica A: Statistical Mechanics and its Applications,10.1016/j.physa.2015.01.080,Effective strategies of collective evacuation from
+257,2009,conference paper,2009 WRI World Congress on Computer Science and Information Engineering,10.1109/CSIE.2009.450,Modeling Emergency Scenarios in Virtual Evacuation
+258,2011,conference paper,2011 16th International Conference on Computer Games (CGAMES),10.1109/CGAMES.2011.6000319,Crowd simulation in emergency aircraft evacuation
+259,2017,journal article,Electronic Imaging,10.2352/ISSN.2470-1173.2017.1.VDA-390,Megacity A Collaborative Virtual Reality Environm
+260,2011,conference paper,Ambient Intelligence - Software and Applications,10.1007/978-3-642-19937-0_30,Grouping Behaviour in AmI-Enabled Crowd Evacuation
+261,2005,journal article,Advanced Robotics,10.1163/1568553055011483,Insights toward robot-assisted evacuation
+262,2006,conference paper,Proceedings of the 2006 Winter Simulation Conference,10.1109/WSC.2006.323128,Crowd Simulation for Emergency Response using BDI
+263,2008,journal article,Simulation Modelling Practice and Theory,10.1016/j.simpat.2008.07.004,Crowd simulation for emergency response using BDI
+264,2014,journal article,Safety Science,10.1016/j.ssci.2014.01.010,Using non-human biological entities to understand
+265,2009,journal article,Applied Mathematical Modelling,10.1016/j.apm.2009.03.020,Modelling subgroup behaviour in crowd dynamics DEM
+266,2014,conference paper,Implementation and Application of Automata,10.1007/978-3-319-08846-4_4,Cellular Automata for Crowd Dynamics
+267,2015,journal article,International Journal of Foundations of Computer Science,10.1142/S0129054115400031,The Computational Paradigm of Cellular Automata in
+269,2023,journal article,Physica A: Statistical Mechanics and its Applications,10.1016/j.physa.2023.128824,Modelling and simulating the leader-follower behav
+270,2014,conference paper,Cellular Automata,10.1007/978-3-319-11520-7_50,CA Crowd Modeling for a Retirement House Evacuatio
+271,2023,journal article,Journal of Building Engineering,10.1016/j.jobe.2023.106512,Robot-aided human evacuation optimal path planning
+272,2017,journal article,Physica A: Statistical Mechanics and its Applications,10.1016/j.physa.2016.11.118,Pedestrian dynamics with explicit sharing of exit
+273,2018,conference paper,"Social, Cultural, and Behavioral Modeling",10.1007/978-3-319-93372-6_19,A Study of How Opinion Sharing Affects Emergency E
+274,2021,journal article,Sensors,10.3390/s21041353,Self-Organized Crowd Dynamics Research on Earthqu
+275,2018,journal article,International Journal of Disaster Resilience in the Built Environment,10.1108/IJDRBE-07-2017-0045,Pedestrian control measures for efficient emergenc
+276,2016,journal article,IEEE Transactions on Human-Machine Systems,10.1109/THMS.2016.2571269,Human Mobility Modeling for Robot-Assisted Evacuat
+277,2024,journal article,IEEE Transactions on Computational Social Systems,10.1109/TCSS.2023.3344172,NegEmotion Explore the Double-Edged Sword Effect
+278,2018,conference paper,2018 11th International Symposium on Computational Intelligence and Design (ISCID),10.1109/ISCID.2018.10155,Optimal Control on Crowd Evacuation with Leader-Fo
+279,2021,conference paper,2021 2nd International Conference for Emerging Technology (INCET),10.1109/INCET51464.2021.9456142,IoT based Smart Sensing and Alarming System with A
+280,2018,journal article,IEEE Transactions on Computational Social Systems,10.1109/TCSS.2017.2783332,Agent-Based Modeling of Emergency Evacuations Cons
+281,2016,conference paper,Cellular Automata,10.1007/978-3-319-44365-2_37,Enhanced Multi-parameterized Cellular Automata Mo
+282,2022,journal article,Fire and Materials,10.1002/fam.2978,Modeling pedestrian group behavior in crowd evacua
+283,2012,journal article,Leadership and Management in Engineering,10.1061/(ASCE)LM.1943-5630.0000205,Modeling the Cooperation Network Formation Process
+284,2020,journal article,Collective Dynamics,10.17815/CD.2020.111,Follower-Leader Concept in Microscopic Analysis
+285,2013,journal article,"International Journal of Scientific & Engineering Research,",,Agent Based Evacuation Simulation Using Leader-Follower Model
+287,2016,journal article,International Journal of Emergency Management,10.1504/IJEM.2016.076615,Hospital evacuation in disasters uncovering the s
+288,2020,book chapter,Living with Robots,10.1016/B978-0-12-815367-3.00008-6,Principles of evacuation robots
+290,2020,journal article,IEEE Transactions on Cybernetics,10.1109/TCYB.2018.2878977,Robot-Assisted Pedestrian Regulation Based on Deep
+291,2019,conference paper,2019 Chinese Automation Congress (CAC),10.1109/CAC48633.2019.8996398,Effects of Leaders in the Low-visibility Environment
+292,2019,journal article,Physics Letters A,10.1016/j.physleta.2018.12.017,Simulation of pedestrian evacuation strategies und
+293,2012,journal article,Physica A: Statistical Mechanics and its Applications,10.1016/j.physa.2011.11.051,Evacuation assistants An extended model for deter
+294,2015,journal article,Safety Science,10.1016/j.ssci.2014.12.007,Understanding the centripetal effect and evacuatio
+295,2017,journal article,SIMULATION,10.1177/0037549716678659,A utility threshold model of herding-panic behavio
+296,2017,conference paper,TMS/DEVS Symposium on Theory of Modeling and Simulation,10.22360/springsim.2017.tmsdevs.030,Social Interaction in Pedestrian Evacuation a Cel
+297,2018,conference paper,2018 9th International Conference on Information Technology in Medicine and Education (ITME),10.1109/ITME.2018.00227,Study on Post-Earthquake Evacuation Model by Fusin
+298,2019,journal article,IEEE Access,10.1109/ACCESS.2019.2920913,Improved Multi-Agent Reinforcement Learning for Pa
+300,2022,conference paper,2022 41st Chinese Control Conference (CCC),10.23919/CCC55666.2022.9902410,Simulating the leadership effect in crowd evacuation
+301,2022,journal article,Physica A: Statistical Mechanics and its Applications,10.1016/j.physa.2022.127638,Wall-following searching or area coverage searchin
+302,2011,conference paper,2011 IEEE 17th International Conference on Parallel and Distributed Systems,10.1109/ICPADS.2011.6,A Hybrid Simulation of Large Crowd Evacuation
+303,2017,journal article,Computational Visual Media,10.1007/s41095-017-0081-9,Optimized evacuation route based on crowd simulati
+304,2014,journal article,PLoS ONE,10.1371/journal.pone.0080680,"Computer Simulation of Leadership, Consensus Decis"
+305,2022,journal article,Computer Animation and Virtual Worlds,10.1002/cav.2115,Dynamic leader role modeling for self-organizing crowd evacuation simulation
+306,2024,journal article,IEEE Transactions on Intelligent Transportation Systems,10.1109/TITS.2024.3421626,A Vision-Driven Model Based on Cognitive Heuristic
+307,2024,journal article,IEEE Transactions on Automation Science and Engineering,10.1109/TASE.2024.3371102,An Unmanned System-Guided Crowd Evacuation Method
+308,2020,journal article,International Journal of Disaster Risk Reduction,10.1016/j.ijdrr.2020.101527,Evacuation performance of individuals and social g
+309,2021,journal article,Safety Science,10.1016/j.ssci.2020.105029,A study of group effects in pedestrian crowd evacu
+310,2022,journal article,IEEE Transactions on Intelligent Transportation Systems,10.1109/TITS.2022.3161813,Detecting Undeclared-Leader-Follower Structure in
+311,2022,journal article,Automation in Construction,10.1016/j.autcon.2021.104100,Simulation of spontaneous leader-follower behaviou
+312,2023,journal article,Journal of Safety Science and Resilience,10.1016/j.jnlssr.2022.09.007,Study on single-group dynamics in evacuation
+313,2021,journal article,Journal of Loss Prevention in the Process Industries,10.1016/j.jlp.2021.104556,System dynamics research of non-adaptive evacuatio
+314,2023,journal article,International Journal of Modern Physics C,10.1142/S0129183123500638,Pedestrian evacuation dynamics considering information guidance
+315,2024,journal article,Information Sciences,10.1016/j.ins.2024.121248,Transfer entropy on collective motion with undecla
+316,2014,journal article,Physica A: Statistical Mechanics and its Applications,10.1016/j.physa.2014.05.068,Guided crowd dynamics via modified social force mo
+317,2016,journal article,Physica A: Statistical Mechanics and its Applications,10.1016/j.physa.2015.08.020,Necessity of guides in pedestrian emergency evacua
+319,2020,journal article,Applied Mathematics and Computation,10.1016/j.amc.2019.124711,Guide optimization in pedestrian emergency evacuat
+320,2016,journal article,Adaptive Behavior,10.1177/1059712316672517,The dynamics of pedestrians evacuation during eme
+321,2022,journal article,Physica A: Statistical Mechanics and its Applications,10.1016/j.physa.2022.127658,An extended queueing model based on vision and mor
+322,2024,journal article,IEEE Transactions on Intelligent Transportation Systems,10.1109/TITS.2024.3433420,Phase Transitions in Pedestrian Evacuation A Dyna
+324,2023,journal article,Journal of Statistical Mechanics: Theory and Experiment,10.1088/1742-5468/acaf81,Modeling of crowd groups with an extended social f
+325,2022,journal article,Physica A: Statistical Mechanics and its Applications,10.1016/j.physa.2022.127989,An extended model for crowd evacuation considering
+326,2022,journal article,MDPI Mathematics,https://doi.org/10.3390/math10193693,DArteiclteermining Subway Emergency Evacuation Eff
+327,2024,journal article,Journal of Statistical Mechanics: Theory and Experiment,10.1088/1742-5468/ad5712,Integrated modeling of crowd groups based on spati
+328,2023,conference paper,2023 American Control Conference (ACC),10.23919/ACC55779.2023.10155799,Multi-robot-assisted human crowd control for emerg
+329,2013,conference paper,52nd IEEE Conference on Decision and Control,10.1109/CDC.2013.6760302,Optimal leader-follower control for crowd evacuati
+330,2019,journal article,Journal of Perinatal & Neonatal Nursing,10.1097/JPN.0000000000000430,Simulation Prepares an Interprofessional Team to E
+331,2013,conference paper,2013 10th IEEE International Conference on Control and Automation (ICCA),10.1109/icca.2013.6564911,
+332,2021,journal article,Applied Mathematical Modelling,10.1016/j.apm.2020.08.075,Optimal guidance strategy for crowd evacuation wit
+333,2018,journal article,Physica A: Statistical Mechanics and its Applications,10.1016/j.physa.2017.11.041,Modified two-layer social force model for emergenc
+334,2021,journal article,Journal of Statistical Mechanics: Theory and Experiment,10.1088/1742-5468/ac1f27,Experimental study on crowd following behavior und
+335,2021,journal article,IEEE Internet of Things Journal,10.1109/JIOT.2020.3009715,IoT-Based Positive Emotional Contagion for Crowd E
+336,2022,journal article,Safety Science,10.1016/j.ssci.2022.105865,Experimental study on evacuation behavior with gui
+337,2023,journal article,Physica A: Statistical Mechanics and its Applications,10.1016/j.physa.2023.128850,Experimental and modeling study on evacuation beha
+338,2023,preprint,SSRN,10.2139/ssrn.4676431,Pedestrian Evacuation Modelling and Simulation Und
+339,2023,journal article,Journal of Rail Transport Planning & Management,10.1016/j.jrtpm.2023.100387,Pedestrian small group behaviour and evacuation dy
+340,2023,journal article,IEEE Sensors Journal,10.1109/JSEN.2023.3276568,Sensor-Based Pedestrian Movement Simulation and Ev
+341,2024,journal article,Computer Animation and Virtual Worlds,10.1002/cav.2280,A double‐layer crowd evacuation simulation method based on deep reinforcement
+342,2024,journal article,IEEE Transactions on Computational Social Systems,10.1109/TCSS.2024.3381840,Multisource-Knowledge-Based Approach for Crowd Eva
+343,2018,journal article,ACM Transactions on Modeling and Computer Simulation,10.1145/3177776,A Role-Dependent Data-Driven Approach for High-Den
+345,2021,journal article,Applied Intelligence,10.1007/s10489-020-01711-6,An evacuation simulation method based on an improv
+346,2019,journal article,IEEE Access,10.1109/ACCESS.2019.2946659,Improved Multi-Agent Deep Deterministic Policy Gra
+347,2020,journal article,IEEE Access,10.1109/ACCESS.2020.3034348,Improved Social Force Model Based on Emotional Con
+348,2022,conference paper,2022 IEEE 61st Conference on Decision and Control (CDC),10.1109/CDC51059.2022.9993368,Multi-Robot-Assisted Human Crowd Evacuation using
+349,2024,journal article,IEEE Transactions on Control Systems Technology,10.1109/TCST.2024.3410138,Multirobot-Guided Crowd Evacuation Two-Scale Mode
+350,2018,journal article,IFAC-PapersOnLine,10.1016/j.ifacol.2018.07.067,Optimal number and location planning of evacuation
+352,2019,journal article,IEEE Transactions on Intelligent Transportation Systems,10.1109/TITS.2018.2886415,Optimization of Crowd Evacuation With Leaders in U
+353,2022,journal article,Computer Animation and Virtual Worlds,10.1002/cav.2035,Multiagent evacuation framework for a virtual fire
+354,2022,journal article,Journal of Intelligent & Robotic Systems,10.1007/s10846-022-01594-4,Robot-Guided Crowd Evacuation in a Railway Hub Sta
+355,2023,journal article,IEEE Transactions on Computational Social Systems,10.1109/TCSS.2022.3188135,Crowd Evacuation With Multi-Modal Cooperative Guid
+356,2016,journal article,Procedia Engineering,10.1016/j.proeng.2016.01.110,Experimental Study on Choice Behavior of Pedestria
+357,2021,journal article,IEEE Transactions on Automation Science and Engineering,10.1109/TASE.2020.2996018,Optimal Feedback Control of Pedestrian Flow in Het
+358,2020,journal article,Journal of Computing in Civil Engineering,10.1061/(ASCE)CP.1943-5487.0000889,Simulation of Crowd Evacuation under Toxic Gas Inc
+401,2021,journal article,Frontiers in Robotics and AI,10.3389/frobt.2021.701938,Robot-Guided Evacuation as a Paradigm for Human-Robot Interaction Research
+402,2014,journal article,International Journal of Information Systems for Crisis Response and Management,10.4018/IJISCRAM.2014070104,Comparing Different Crowd Emergency Evacuation Models Based on Human Centered Sensing Criteria
+403,2012,conference paper,Cellular Automata (ACRI 2012),10.1007/978-3-642-33350-7_78,Follow-the-Leader Cellular Automata Based Model Directing Crowd Movement
+501,2015,journal article,European Journal of Social Psychology,10.1002/ejsp.2108,Managing to avert disaster: Explaining collective resilience at an outdoor music event
+502,2011,doctoral dissertation,CU Scholar (University of Colorado Boulder),,"Terror Defeated: Occupant Sensemaking, Decision-Making and Protective Action in the 2001 World Trade Center Disaster"
+503,2008,journal article,British Journal of Social Psychology,10.1348/014466608x357893,Everyone for themselves? A comparative study of crowd solidarity among emergency survivors
+504,2018,journal article,Social Behavior and Personality An International Journal,10.2224/sbp.6946,Social attachment shapes emergency responses: Evidence from a postfire study
+505,2016,journal article,Safety Science,10.1016/j.ssci.2016.07.001,Modelling social identification and helping in evacuation simulation
+506,2023,journal article,International Journal of Disaster Risk Reduction,10.1016/j.ijdrr.2023.103713,Information sharing and support among residents in response to fire incidents in high-rise residential buildings
+507,2011,conference paper,"2011 IEEE International Symposium on Safety, Security, and Rescue Robotics",10.1109/ssrr.2011.6106783,Emergence of cooperation as the impact of evacuee's solidarity
+508,2014,journal article,Transportation research procedia,10.1016/j.trpro.2014.09.099,Humans do not Always Act Selfishly: Social Identity and Helping in Emergency Evacuation Simulation
+509,2001,preprint,"Library, Museums and Press - UDSpace (University of Delaware)",,"Collective Behavior In the September 11, 2001 Evacuation Of The World Trade Center"
+510,2023,journal article,Frontiers in Psychology,10.3389/fpsyg.2023.1146056,“Are we in this together?”: embedding social identity detection in drones improves emergency coordination
+511,2024,journal article,Collective Dynamics,10.17815/cd.2024.157,Understanding Crowd Responses to Perceived Hostile Threats: An Innovative Multidiscplinary Approach
+512,2009,journal article,The Irish Journal of Psychology,10.1080/03033910.2009.10446298,The psychology of crowd behaviour in emergency evacuations: Results from two interview studies and implications for the Fire and Rescue Services
+513,2012,journal article,SIMULATION,10.1177/0037549712456884,Qualitative simulation of the panic spread in large-scale evacuation
+514,2013,journal article,Journal of Applied Social Psychology,10.1111/jasp.12176,Psychological disaster myths in the perception and management of mass emergencies
+515,2014,journal article,Computer Animation and Virtual Worlds,10.1002/cav.1595,Modeling social behaviors in an evacuation simulator
+516,2016,journal article,Adaptive Behavior,10.1177/1059712316635719,Quantifying the interplay of emotions and rationality in herding: A game-theoretic simulation study
+517,2024,journal article,European Journal of Social Psychology,10.1002/ejsp.3105,Explaining a collective false alarm: Context and cognition in the Oxford Street crowd flight incident
+518,2009,conference paper,2009 13th IEEE/ACM International Symposium on Distributed Simulation and Real Time Applications,10.1109/ds-rt.2009.29,On the Efficiency of LifeBelt Based Crowd Evacuation
+519,2014,journal article,Transportation Research Record Journal of the Transportation Research Board,10.3141/2421-06,Group Dynamics in Pedestrian Crowds
+520,2017,journal article,International Journal of Pervasive Computing and Communications,10.1108/ijpcc-03-2017-0024,Modeling human factors influencing herding during evacuation
+521,2019,conference paper,Annals of Computer Science and Information Systems,10.15439/2019f35,A Social Bonds Integration Approach for Crowd Panic Simulation
+522,2015,doctoral dissertation,Deep Blue (University of Michigan),,Computational study of social interactions and collective behavior during human emergency egress
+523,2011,journal article,Fire and Materials,10.1002/fam.1080,The World Trade Center evacuation study: Factors associated with initiation and length of time for evacuation
+524,2016,conference paper,Procedia Engineering,10.1016/j.proeng.2016.01.091,Investigation of the Panic Psychology and Behaviors of Evacuation Crowds in Subway Emergencies
+525,2021,journal article,Sustainability,10.3390/su13094623,Examining Evacuee Response to Emergency Communications with Agent-Based Simulations
+526,2020,journal article,Collective Dynamics,10.17815/cd.2020.56,Measuring social influence and group formation during evacuation process
+527,2018,journal article,Policing A Journal of Policy and Practice,10.1093/police/pay013,Social Identity and Intergroup Relationships in the Management of Crowds during Mass Emergencies and Disasters: Recommendations for Emergency Planners and Responders1
+528,2021,journal article,Social Forces,10.1093/sf/soab036,Network Structure in Small Groups and Survival in Disasters
+529,2024,journal article,Transportation Research Record Journal of the Transportation Research Board,10.1177/03611981241230523,Cellular Automata Model for Helping Behavior in Pedestrian Evacuation Based on Fuzzy Theory

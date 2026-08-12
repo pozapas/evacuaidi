@@ -1,0 +1,203 @@
+label	replace by
+agent based model	agent-based model
+agents	agent
+behaviors	behavior
+behaviour	behavior
+behaviours	behavior
+cellular automaton	cellular automata
+collective behaviour	collective behavior
+crowd behaviour	crowd behavior
+crowds	crowd
+evacuation efciency	evacuation efficiency
+evacuation process	evacuation
+evacuees	evacuee
+exits	exit
+experiments	experiment
+followers	follower
+following behaviour	following behavior
+leaders	leader
+modelled	modeled
+participants	participant
+pedestrians	pedestrian
+robots	robot
+signage	sign
+signs	sign
+simulations	simulation
+ability	
+account	
+accuracy	
+action	
+addition	
+advantage	
+aim	
+aims	
+amount	
+analysis	
+application	
+applications	
+approach	
+approaches	
+article	
+aspect	
+aspects	
+author	
+authors	
+balance	
+basis	
+capability	
+case	
+cases	
+challenge	
+change	
+changes	
+characteristic	
+characteristics	
+combination	
+comparison	
+computer	
+concept	
+conclusions	
+condition	
+conditions	
+consideration	
+context	
+contrast	
+contribution	
+data	
+death	
+decrease	
+detail	
+development	
+difference	
+differences	
+efciency	
+effect	
+effectiveness	
+effects	
+efficiency	
+emergence	
+end	
+evacuation simulation result	
+evidence	
+example	
+experiment result	
+experimental result	
+factor	
+factors	
+features	
+findings	
+form	
+framework	
+front	
+future	
+goal	
+hand	
+help	
+human	
+impact	
+impacts	
+implementation	
+implications	
+importance	
+important role	
+improvement	
+increase	
+insight	
+issue	
+issues	
+large number	
+level	
+levels	
+literature	
+means	
+ment	
+method	
+methodology	
+methods	
+model	
+modeling	
+modelling	
+models	
+need	
+needs	
+negative effect	
+new insight	
+number	
+numbers	
+objective	
+order	
+paper	
+part	
+past	
+performance	
+perspective	
+phenomena	
+phenomenon	
+place	
+places	
+point	
+points	
+potential	
+present	
+problem	
+problems	
+process	
+processes	
+proportion	
+proposed method	
+public area	
+public place	
+purpose	
+range	
+rate	
+rates	
+reader	
+recommendations	
+relation	
+relations	
+relationship	
+relationships	
+research	
+researcher	
+researchers	
+respect	
+rest	
+result	
+results	
+series	
+set	
+side	
+significance	
+simulation result	
+situation	
+situations	
+size	
+solution	
+source	
+sources	
+stage	
+state	
+states	
+steps	
+strength	
+studies	
+study	
+technology	
+term	
+terms	
+time	
+times	
+total evacuation time	
+turn	
+type	
+types	
+use	
+user	
+uses	
+value	
+values	
+view	
+way	
+ways	
+work	
+years	
