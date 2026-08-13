@@ -1,8 +1,7 @@
 # Chapter 3 resources
 
 Supplementary materials for **"Causal-Knowledge-Guided AI for Evacuation Simulation: A
-Framework for Standards-Compliant Input Generation"**, Transportation Research Part D:
-Transport and Environment, manuscript TRD-D-26-02006.
+Framework for Standards-Compliant Input Generation"**, manuscript TRD-D-26-02006.
 
 Amir Rafe (Texas State University, Ingram School of Engineering) and Patrick A. Singleton
 (Utah State University, Department of Civil and Environmental Engineering).
@@ -69,19 +68,6 @@ numbers can be checked even though the geometry cannot be redistributed.
 
 Figures 11 and 12 of the paper are generated directly from the Evacuationz sheets. The
 plotting script and the figure style are given in the manuscript source package.
-
-## Citation
-
-```bibtex
-@article{rafe2026causal,
-  author  = {Rafe, Amir and Singleton, Patrick A.},
-  title   = {Causal-Knowledge-Guided {AI} for Evacuation Simulation:
-             A Framework for Standards-Compliant Input Generation},
-  journal = {Transportation Research Part D: Transport and Environment},
-  year    = {2026},
-  note    = {Manuscript TRD-D-26-02006}
-}
-```
 
 ## Licence
 
