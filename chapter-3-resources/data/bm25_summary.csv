@@ -1,0 +1,7 @@
+Cell,Value
+"Retrieval method (BM25, Elasticsearch, Neo4j full-text, other)","BM25 (Okapi) over 512-token chunks"
+"Top-k passages retrieved",5
+"F1, tabular data interpretation",0.72
+"F1, textual clause retrieval",0.78
+"F1, numerical sign and unit handling",0.70
+"F1, rule-based calculation",0.64

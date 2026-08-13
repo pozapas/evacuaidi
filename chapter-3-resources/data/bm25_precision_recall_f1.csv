@@ -1,0 +1,5 @@
+Category,Precision,Recall,F1
+"Tabular data interpretation",0.74,0.70,0.72
+"Textual clause retrieval",0.80,0.76,0.78
+"Numerical sign and unit handling",0.72,0.68,0.70
+"Rule-based calculation",0.66,0.62,0.64
