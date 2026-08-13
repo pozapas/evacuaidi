@@ -1,7 +1,7 @@
 # Chapter 3 resources
 
 Supplementary materials for **"Causal-Knowledge-Guided AI for Evacuation Simulation: A
-Framework for Standards-Compliant Input Generation"**, manuscript TRD-D-26-02006.
+Framework for Standards-Compliant Input Generation"**.
 
 Amir Rafe (Texas State University, Ingram School of Engineering) and Patrick A. Singleton
 (Utah State University, Department of Civil and Environmental Engineering).
